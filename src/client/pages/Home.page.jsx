@@ -7,6 +7,8 @@ export default class Home extends Component {
         return (
             <Helmet>
                 <title>Hello World from Home compoenent</title>
+                <style dangerouslySetInnerHTML={{ __html: `.body { background: #000 }` }}></style>
+
             </Helmet>
         );
     }

@@ -5,9 +5,13 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
-    "dev:build-server": "webpack --config webpack.server.js --watch",
-    "dev:build-client": "webpack --config webpack.client.js --watch",
-    "dev:server": "nodemon --watch build --exec \"node build/server.bundle.js\""
+    "dev:build-server": "webpack --config webpack/webpack.server.js --watch",
+    "dev:build-client": "webpack --config webpack/webpack.client.js --watch",
+    "dev:server": "nodemon --watch build --exec \"node build/server.bundle.js\"",
+    "prod": "npm-run-all prod:*",
+    "prod:build-server": "webpack -p --config webpack/webpack.server.js",
+    "prod:build-client": "webpack -p --config webpack/webpack.client.js",
+    "prod:server": "node build/server.bundle.js"
   },
   "author": "Stefan Lazarevic",
   "license": "ISC",
@@ -21,10 +25,13 @@
     "babel-preset-es2017": "6.24.1",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-0": "6.24.1",
+    "clean-webpack-plugin": "^0.1.19",
     "compression": "1.7.3",
     "concurrently": "3.5.0",
     "express": "4.16.3",
     "express-http-proxy": "1.0.6",
+    "html-minifier": "3.5.20",
+    "html-webpack-plugin": "3.2.0",
     "lodash": "4.17.11",
     "nodemon": "1.12.0",
     "npm-run-all": "4.1.1",
@@ -41,8 +48,6 @@
     "webpack": "3.5.6",
     "webpack-dev-server": "2.8.2",
     "webpack-merge": "4.1.0",
-    "webpack-node-externals": "1.6.0",
-    "html-minifier": "3.5.20",
-    "html-webpack-plugin": "3.2.0"
+    "webpack-node-externals": "1.6.0"
   }
 }

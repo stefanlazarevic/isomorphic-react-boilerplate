@@ -3,19 +3,29 @@ const path = require('path');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const baseConfig = require('./webpack.base.js');
+const root = path.resolve(__dirname, '../');
 
 const config = {
     // Inform webpack that we are building bundle for node.js
     target: 'web',
 
     // Tell webpack the root file of our server application
-    entry: './src/client/index.js',
+    entry: {
+        main: `${root}/src/client/index.js`,
+        vendor: [
+            'react',
+            'react-dom',
+            'react-router-dom',
+            'react-loadable',
+            'react-helmet'
+        ],
+    },
 
     // Tell webpack where to put the output file that is generated.
     output: {
         filename: '[name]-[chunkHash].js',
         chunkFilename: '[name]-[chunkHash].js',
-        path: path.resolve(__dirname, 'build/public'),
+        path: `${root}/build/public`,
         publicPath: '/', // Tell htmlWebpackPlugin from where to build bundle paths.
     },
 
@@ -25,12 +35,12 @@ const config = {
     },
 
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            minChunks: module => module.context && module.context.indexOf('node_modules') !== -1
+        new webpack.optimize.CommonsChunkPlugin('vendor'),
+        new webpack.EnvironmentPlugin({
+            NODE_ENV: process.env.NODE_ENV || 'development'
         }),
         new HtmlWebpackPlugin({
-            template: './src/server/index.html',
+            template: `${root}/src/server/index.html`,
             filename: '../index.html', // Since the output is build/public we need to step one directory out.
         }),
     ]

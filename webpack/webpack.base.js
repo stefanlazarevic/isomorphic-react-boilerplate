@@ -1,4 +1,8 @@
+const DEBUG = process.env.NODE_ENV !== 'production';
+
 module.exports = {
+    // Tell webpack to generate module source map if we are not in production mode.
+    devtool: DEBUG ? 'cheap-module-source-map' : 'hidden-source-map',
     // Tell webpack to run babel on every file it runs through
     module: {
         rules: [

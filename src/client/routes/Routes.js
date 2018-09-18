@@ -1,4 +1,3 @@
-import React from 'react';
 import Loadable from 'react-loadable';
 import PageLoader from '../components/Loaders/PageLoader';
 
@@ -8,10 +7,10 @@ export default [
         exact: true,
         component: Loadable({
             loader: () => import(
-                /* webpackChunkName: home.page */
+                /* webpackChunkName: "home.page" */
                 '../pages/Home.page'
             ),
-            loading: () => PageLoader()
+            loading: () => PageLoader(),
         }),
     },
     {
@@ -19,10 +18,10 @@ export default [
         exact: true,
         component: Loadable({
             loader: () => import(
-                /* webpackChunkName: about.page */
+                /* webpackChunkName: "about.page" */
                 '../pages/About.page'
             ),
-            loading: () => PageLoader()
+            loading: () => PageLoader(),
         }),
     },
 ];

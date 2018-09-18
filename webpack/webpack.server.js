@@ -2,6 +2,8 @@ const path = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const webpackNodeExternals = require('webpack-node-externals');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const root = path.resolve(__dirname, '../');
 
 const baseConfig = require('./webpack.base.js');
 
@@ -10,12 +12,12 @@ const config = {
     target: 'node',
 
     // Tell webpack the root file of our server application
-    entry: './src/server/index.js',
+    entry: `${root}/src/server/index.js`,
 
     // Tell webpack where to put the output file that is generated.
     output: {
         filename: 'server.bundle.js',
-        path: path.resolve(__dirname, 'build'),
+        path: `${root}/build`,
     },
 
     // Teach webpack which extensions to try to use for import.
@@ -28,6 +30,9 @@ const config = {
     externals: [webpackNodeExternals()],
 
     plugins: [
+        new CleanWebpackPlugin('build', {
+            root
+        }),
         // Tell webpack that it does not need to create chunks
         // for dynamic imports when building server code.
         new webpack.optimize.LimitChunkCountPlugin({
