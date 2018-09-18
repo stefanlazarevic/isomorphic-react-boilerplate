@@ -1,17 +1,28 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import Home from '../pages/Home.page';
-import About from '../pages/About.page';
+import PageLoader from '../components/Loaders/PageLoader';
 
 export default [
     {
         path: '/',
         exact: true,
-        component: Home,
+        component: Loadable({
+            loader: () => import(
+                /* webpackChunkName: home.page */
+                '../pages/Home.page'
+            ),
+            loading: () => PageLoader()
+        }),
     },
     {
         path: '/about',
         exact: true,
-        component: About,
+        component: Loadable({
+            loader: () => import(
+                /* webpackChunkName: about.page */
+                '../pages/About.page'
+            ),
+            loading: () => PageLoader()
+        }),
     },
 ];

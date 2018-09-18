@@ -4,9 +4,11 @@ import Helmet from 'react-helmet';
 
 export default class About extends Component {
     renderHelmet() {
-        <Helmet>
-            <title>Hello World from About compoenent</title>
-        </Helmet>
+        return (
+            <Helmet>
+                <title>Hello World from About compoenent</title>
+            </Helmet>
+        );
     }
 
     render() {

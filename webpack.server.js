@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const webpackNodeExternals = require('webpack-node-externals');
 
@@ -25,6 +26,14 @@ const config = {
     // Tell the webpack not to bundle any libraries into our final bundle if
     // they exists inside the node moduels.
     externals: [webpackNodeExternals()],
+
+    plugins: [
+        // Tell webpack that it does not need to create chunks
+        // for dynamic imports when building server code.
+        new webpack.optimize.LimitChunkCountPlugin({
+            maxChunks: 1,
+        }),
+    ]
 };
 
 module.exports = merge(baseConfig, config);
