@@ -1,17 +1,18 @@
+// Node import group.
 import express from 'express';
 import fs from 'fs';
 import compression from 'compression';
 import { minify } from 'html-minifier';
-
+// React import group.
 import React from 'react';
 import Helmet from 'react-helmet';
 import { StaticRouter, matchPath } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
-import AppRouter from '../client/components/router/Router.component';
-import Routes from '../client/routes/Routes';
-
 import { getLoadableState } from 'loadable-components/server'
-
+// Application import group.
+import AppRouter from '../client/components/router/router.component';
+import Routes from '../client/routes/routes';
+// Prepare HTML Template.
 const boilerplateHTML = fs.readFileSync('build/index.html', 'utf8');
 const minifiedBoilerplateHTML = minify(boilerplateHTML, {
     removeComments: true,
@@ -21,15 +22,18 @@ const minifiedBoilerplateHTML = minify(boilerplateHTML, {
     removeEmptyAttributes: true,
     minifyJS: true
 });
-
+// Create express application.
 const app = express();
 app.use(compression({ level: 8 }));
 app.use(express.static('build/public'));
-
+// Handle incoming requests.
 app.get('*', (request, response) => {
     let status = 200;
     const context = {};
     const activeRoute = Routes.find(route => matchPath(request.url.toLowerCase(), route));
+    if (!activeRoute) {
+        status = 404;
+    }
 
     const app = (
         <StaticRouter context={context} location={request.url}>
@@ -42,10 +46,6 @@ app.get('*', (request, response) => {
         const helmet = Helmet.renderStatic();
         const title = helmet.title.toString();
 
-        if (!activeRoute) {
-            status = 404;
-        }
-
         if (context.url) {
             return response.redirect(302, context.url);
         }
@@ -57,9 +57,8 @@ app.get('*', (request, response) => {
 
         response.status(status).send(responseHTML);
     });
-
 });
-
+// Expose server on port 3000.
 app.listen(3000, () => {
     console.log('Listening @ port 3000');
 });
