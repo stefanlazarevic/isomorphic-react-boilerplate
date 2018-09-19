@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 
-export default class HomePage extends Component {
+import styles from './home.page.scss';
+class HomePage extends Component {
     renderPageMeta() {
         return (
             <Helmet>
@@ -22,3 +23,5 @@ export default class HomePage extends Component {
         );
     }
 }
+
+export default HomePage;

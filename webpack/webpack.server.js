@@ -25,6 +25,31 @@ const config = {
         extensions: ['.js', '.jsx'],
     },
 
+    module: {
+        rules: [
+            {
+                test: /\.scss$/,
+                use: [
+                    {
+                        loader: 'isomorphic-style-loader',
+                    },
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                            importLoaders: 1,
+                            localIdentName: '[name]__[local]___[hash:base64:5]',
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'sass-loader'
+                    }
+                ]
+            }
+        ]
+    },
+
     // Tell the webpack not to bundle any libraries into our final bundle if
     // they exists inside the node moduels.
     externals: [webpackNodeExternals()],
