@@ -43,7 +43,19 @@ const config = {
                         }
                     },
                     {
-                        loader: 'sass-loader'
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: () => [
+                                require('autoprefixer')
+                            ],
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true
+                        }
                     }
                 ]
             }

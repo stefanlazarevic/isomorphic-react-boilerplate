@@ -39,31 +39,49 @@ const config = {
         rules: [
             {
                 test: /\.scss$/,
-                use: [
-                    {
-                        loader: 'style-loader',
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            importLoaders: 1,
-                            localIdentName: '[name]__[local]___[hash:base64:5]',
-                            sourceMap: true
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: true,
+                                importLoaders: 1,
+                                localIdentName: '[name]__[local]___[hash:base64:5]',
+                                sourceMap: true,
+                                camelCase: true,
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader',
+                            options: {
+                                plugins: () => [
+                                    require('cssnano'),
+                                    require('autoprefixer')
+                                ],
+                                sourceMap: true
+                            }
+                        },
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sourceMap: true
+                            }
                         }
-                    },
-                    {
-                        loader: 'sass-loader'
-                    }
-                ]
+                    ]
+                })
             }
         ]
     },
 
     plugins: [
+        new ExtractTextPlugin({
+            filename: 'css/styles.[chunkhash:6].css',
+            allChunks: true
+        }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
-            filename: 'vendor.bundle.js',
+            filename: 'js/vendor.bundle.js',
         }),
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify('production')

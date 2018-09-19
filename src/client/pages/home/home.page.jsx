@@ -17,7 +17,7 @@ class HomePage extends Component {
         return (
             <div>
                 {this.renderPageMeta()}
-                <h1>Welcome to the Home Page</h1>
+                <h1 className={styles.title}>Welcome to the Home Page</h1>
                 <p>From here you can visit <Link to="/about">About page</Link> or see how <Link to="/nonexistingpage">Non-Existing Page</Link> looks like.</p>
             </div>
         );
