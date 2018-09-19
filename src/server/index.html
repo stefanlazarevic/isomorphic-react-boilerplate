@@ -1,11 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html itemscope itemtype="http://schema.org/" lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- General metadata *Common to all pages.-->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="Stefan Lazarevic"/>
+    <meta name="name" content="FullStack React Boilerplate"/>
+    <meta name="short_name" content="FRB"/>
+    <meta name="theme-color" content="#000">
+    <meta name="msapplication-TileColor" content="#000">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- Title provided by page component over a Helmet HOC. -->
+    {{TITLE}}
+    <!-- Social Media Metadata. [Facebook] -->
+    <meta property="og:type" content="website"/>
+    <!-- Social Media Metadata [Twitter] -->
+    <meta name="twitter:card" content="summary"/>
 </head>
 <body>
     <div id="app">{{APP}}</div>
+    {{LOADABLE_STATE}}
 </body>
 </html>

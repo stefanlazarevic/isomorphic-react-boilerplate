@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 
-export default class About extends Component {
-    renderHelmet() {
+export default class PageNotFound extends Component {
+    renderPageMeta() {
         return (
             <Helmet>
-                <title>Hello World from About compoenent</title>
+                <title>Page not found</title>
             </Helmet>
         );
     }
@@ -14,9 +14,9 @@ export default class About extends Component {
     render() {
         return (
             <div>
-                { this.renderHelmet() }
-                <h1>About component</h1>
-                <Link to="/">Index</Link>
+                {this.renderPageMeta()}
+                <h1>404 Not Found</h1>
+                <p>You may be lost. Return back to <Link to="/">Home</Link>.</p>
             </div>
         );
     }

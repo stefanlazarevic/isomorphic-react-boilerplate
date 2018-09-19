@@ -16,8 +16,8 @@ const config = {
             'react',
             'react-dom',
             'react-router-dom',
-            'react-loadable',
-            'react-helmet'
+            'react-helmet',
+            'loadable-components',
         ],
     },
 
@@ -35,9 +35,12 @@ const config = {
     },
 
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin('vendor'),
-        new webpack.EnvironmentPlugin({
-            NODE_ENV: process.env.NODE_ENV || 'development'
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            filename: 'vendor.bundle.js',
+        }),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production')
         }),
         new HtmlWebpackPlugin({
             template: `${root}/src/server/index.html`,

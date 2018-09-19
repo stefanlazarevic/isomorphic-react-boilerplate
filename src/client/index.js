@@ -1,11 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { hydrate } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import Router from './components/Router.component';
+import Router from './components/router/Router.component';
+import { loadComponents } from 'loadable-components'
 
-ReactDOM.hydrate(
-    <BrowserRouter>
-        <Router />
-    </BrowserRouter>,
-    document.getElementById('app')
-);
+loadComponents().then(() => {
+    hydrate(
+        <BrowserRouter>
+            <Router />
+        </BrowserRouter>,
+        document.getElementById('app')
+    );
+});
