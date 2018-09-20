@@ -1,12 +1,12 @@
 import React from 'react';
-import loadable from 'loadable-components';
+import Loadable from 'loadable-components';
 import { Redirect } from 'react-router-dom';
 
 export default [
     {
         path: '/',
         exact: true,
-        component: loadable(() => import(
+        component: Loadable(() => import(
             /* webpackChunkName: "home.page" */
             '../pages/home/home.page'
         )),
@@ -19,13 +19,13 @@ export default [
     {
         path: '/about',
         exact: true,
-        component: loadable(() => import(
+        component: Loadable(() => import(
             /* webpackChunkName: "about.page" */
             '../pages/about/about.page'
         )),
     },
     {
-        component: loadable(() => import(
+        component: Loadable(() => import(
             /* webpackChunkName: "not-found.page" */
             '../pages/not-found/not-found.page'
         )),

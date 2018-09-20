@@ -9,6 +9,7 @@ import Helmet from 'react-helmet';
 import { StaticRouter, matchPath } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
 import { getLoadableState } from 'loadable-components/server'
+import critical from 'critical';
 // Application import group.
 import AppRouter from '../client/components/router/router.component';
 import Routes from '../client/routes/routes';
@@ -55,7 +56,26 @@ app.get('*', (request, response) => {
             .replace('{{TITLE}}', title)
             .replace('{{LOADABLE_STATE}}', loadableState.getScriptTag());
 
-        response.status(status).send(responseHTML);
+        let criticalCSS = null;
+
+        critical.generate({
+            width: 1920,
+            height: 1080,
+            minify: true,
+            html: html,
+            folder: 'build',
+            css: [
+                'build/public/css/styles.css'
+            ]
+        }, (err, output) => {
+            if (err) {
+                criticalCSS = err;
+            } else {
+                criticalCSS = output;
+            }
+        });
+
+        response.status(status).send(responseHTML.replace('{{CRITICAL_CSS}}', `<style>${criticalCSS}</style>`));
     });
 });
 // Expose server on port 3000.

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
-
+import { withStyles } from 'react-critical-css';
 import styles from './home.page.scss';
 class HomePage extends Component {
     renderPageMeta() {
@@ -24,4 +24,4 @@ class HomePage extends Component {
     }
 }
 
-export default HomePage;
+export default withStyles(styles)(HomePage);

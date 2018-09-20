@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 
+import { withStyles } from 'react-critical-css';
 import styles from './about.page.scss';
 class AboutPage extends Component {
     renderPageMeta() {
@@ -25,4 +26,4 @@ class AboutPage extends Component {
     }
 }
 
-export default AboutPage;
+export default withStyles(styles)(AboutPage);

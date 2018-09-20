@@ -31,7 +31,7 @@ const config = {
                 test: /\.scss$/,
                 use: [
                     {
-                        loader: 'isomorphic-style-loader',
+                        loader: 'isomorphic-style-loader'
                     },
                     {
                         loader: 'css-loader',
@@ -52,13 +52,13 @@ const config = {
                         }
                     },
                     {
-                        loader: 'sass-loader',
+                        loader: "sass-loader",
                         options: {
                             sourceMap: true
                         }
                     }
                 ]
-            }
+            },
         ]
     },
 
@@ -67,9 +67,9 @@ const config = {
     externals: [webpackNodeExternals()],
 
     plugins: [
-        new CleanWebpackPlugin('build', {
-            root
-        }),
+        // new CleanWebpackPlugin('build', {
+        //     root
+        // }),
         // Tell webpack that it does not need to create chunks
         // for dynamic imports when building server code.
         new webpack.optimize.LimitChunkCountPlugin({

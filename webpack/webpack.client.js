@@ -40,7 +40,7 @@ const config = {
             {
                 test: /\.scss$/,
                 use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
+                    fallback: 'isomorphic-style-loader',
                     use: [
                         {
                             loader: 'css-loader',
@@ -70,13 +70,13 @@ const config = {
                         }
                     ]
                 })
-            }
+            },
         ]
     },
 
     plugins: [
         new ExtractTextPlugin({
-            filename: 'css/styles.[chunkhash:6].css',
+            filename: 'css/styles.css',
             allChunks: true
         }),
         new webpack.optimize.CommonsChunkPlugin({
@@ -89,6 +89,7 @@ const config = {
         new HtmlWebpackPlugin({
             template: `${root}/src/server/index.html`,
             filename: '../index.html', // Since the output is build/public we need to step one directory out.
+            inject: 'body',
         }),
     ]
 };
