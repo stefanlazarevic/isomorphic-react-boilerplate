@@ -1,16 +1,22 @@
-// Node import group.
+/*
+ * Node import group.
+ */
 import express from 'express';
 import fs from 'fs';
 import compression from 'compression';
 import { minify } from 'html-minifier';
-// React import group.
+/*
+ * React import group.
+ */
 import React from 'react';
 import Helmet from 'react-helmet';
 import { StaticRouter, matchPath } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
 import { getLoadableState } from 'loadable-components/server'
 import critical from 'critical';
-// Application import group.
+/*
+ * Application import group.
+ */
 import AppRouter from '../client/components/router/router.component';
 import Routes from '../client/routes/routes';
 // Prepare HTML Template.
@@ -23,7 +29,9 @@ const minifiedBoilerplateHTML = minify(boilerplateHTML, {
     removeEmptyAttributes: true,
     minifyJS: true
 });
-// Create express application.
+/*
+ * Create express application.
+ */
 const app = express();
 app.use(compression({ level: 8 }));
 app.use(express.static('build/public'));
