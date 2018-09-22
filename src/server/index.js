@@ -1,10 +1,14 @@
-// Node import group.
+/**
+ * Node import group.
+ */
 import express from 'express';
 import fs from 'fs';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 
-// React import group.
+/**
+ * React import group.
+ */
 import React from 'react';
 import Helmet from 'react-helmet';
 import { StaticRouter, matchPath } from 'react-router-dom';
@@ -12,21 +16,29 @@ import { renderToString } from 'react-dom/server';
 import Loadable from 'react-loadable';
 import { getBundles } from 'react-loadable/webpack';
 
-// Application import group.
+/**
+ * Application import group.
+ */
 import AppRouter from '../client/components/router/router.component';
 import Routes from '../client/routes/routes';
 import stats from '../../react-loadable.json';
 
-// Prepare HTML Template.
+/**
+ * Prepare HTML Template.
+ */
 const templateHTML = fs.readFileSync('build/index.html', 'utf8');
 
-// Create express application.
+/**
+ * Create express application.
+ */
 const app = express();
 app.use(bodyParser.json());
 app.use(compression({ level: 8 }));
 app.use(express.static('build/public'));
 
-// Handle incoming requests.
+/**
+ * Handle incoming requests.
+ */
 app.get('*', (request, response) => {
     let status = 200;
     const context = {};
