@@ -1,34 +1,63 @@
-const path = require('path');
+/**
+ * Webpack core requirements.
+ */
 const webpack = require('webpack');
+const path = require('path');
 const merge = require('webpack-merge');
 const webpackNodeExternals = require('webpack-node-externals');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const root = path.resolve(__dirname, '../');
 
+/**
+ * Define application directory paths.
+ */
+const ROOT_PATH = path.resolve(__dirname, '../');
+const SRC_PATH = `${ROOT_PATH}/src`;
+const BUILD_PATH = `${ROOT_PATH}/build`;
+const CLIENT_ROOT = `${SRC_PATH}/client`;
+const SERVER_ROOT = `${SRC_PATH}/server`;
+
+/**
+ * Webpack additional requirements.
+ */
 const baseConfig = require('./webpack.base.js');
 
+/**
+ * Webpack server configuration.
+ */
 const config = {
-    // Inform webpack that we are building bundle for node.js
+    /**
+     * Configuration name.
+     */
+    name: 'server',
+
+    /**
+     * Inform webpack that we are building bundle for node.js.
+     */
     target: 'node',
 
-    // Tell webpack the root file of our server application
-    entry: `${root}/src/server/index.js`,
+    /**
+     * Tell webpack the root file of our web application
+     */
+    entry: `${SERVER_ROOT}/index.js`,
 
-    // Tell webpack where to put the output file that is generated.
+    /**
+     * Tell webpack where to put the output file that is generated.
+     */
     output: {
         filename: 'server.bundle.js',
-        path: `${root}/build`,
+        path: BUILD_PATH,
     },
 
-    // Teach webpack which extensions to try to use for import.
+    /**
+     *  Teach webpack which extensions to try to use for import.
+     */
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.js', '.jsx', '.json'],
     },
 
     module: {
         rules: [
             {
-                test: /\.scss$/,
+                test: /\.css$/,
                 use: [
                     {
                         loader: 'isomorphic-style-loader'
@@ -38,8 +67,7 @@ const config = {
                         options: {
                             modules: true,
                             importLoaders: 1,
-                            localIdentName: '[name]__[local]___[hash:base64:5]',
-                            sourceMap: true
+                            localIdentName: '[name]__[local]',
                         }
                     },
                     {
@@ -48,30 +76,28 @@ const config = {
                             plugins: () => [
                                 require('autoprefixer')
                             ],
-                            sourceMap: true
                         }
                     },
-                    {
-                        loader: "sass-loader",
-                        options: {
-                            sourceMap: true
-                        }
-                    }
                 ]
             },
         ]
     },
 
-    // Tell the webpack not to bundle any libraries into our final bundle if
-    // they exists inside the node moduels.
+    /**
+     * Tell the webpack not to bundle any libraries into our final bundle if
+     * they exists inside the node moduels.
+     */
     externals: [webpackNodeExternals()],
 
     plugins: [
-        // new CleanWebpackPlugin('build', {
-        //     root
-        // }),
-        // Tell webpack that it does not need to create chunks
-        // for dynamic imports when building server code.
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('production')
+        }),
+
+        /**
+         * Tell webpack that it does not need to create chunks
+         * for dynamic imports when building server code.
+         */
         new webpack.optimize.LimitChunkCountPlugin({
             maxChunks: 1,
         }),

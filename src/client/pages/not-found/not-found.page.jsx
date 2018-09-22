@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
-import { withStyles } from 'react-critical-css';
-import styles from './not-found.page.scss';
+
+import './not-found.page.css';
+
 class PageNotFound extends Component {
     renderPageMeta() {
         return (
@@ -23,4 +24,4 @@ class PageNotFound extends Component {
     }
 }
 
-export default withStyles(styles)(PageNotFound);
+export default PageNotFound;

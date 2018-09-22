@@ -1,15 +1,18 @@
 import React from 'react';
-import Loadable from 'loadable-components';
+import Loadable from 'react-loadable';
 import { Redirect } from 'react-router-dom';
 
 export default [
     {
         path: '/',
         exact: true,
-        component: Loadable(() => import(
-            /* webpackChunkName: "home.page" */
-            '../pages/home/home.page'
-        )),
+        component: Loadable({
+            loader: () => import(
+                /* webpackChunkName: "home-page" */
+                '../pages/home/home.page'
+            ),
+            loading: () => <div>Loading...</div>
+        }),
     },
     {
         path: '/index',
@@ -19,15 +22,21 @@ export default [
     {
         path: '/about',
         exact: true,
-        component: Loadable(() => import(
-            /* webpackChunkName: "about.page" */
-            '../pages/about/about.page'
-        )),
+        component: Loadable({
+            loader: () => import(
+                /* webpackChunkName: "about-page" */
+                '../pages/about/about.page'
+            ),
+            loading: () => <div>Loading...</div>
+        })
     },
     {
-        component: Loadable(() => import(
-            /* webpackChunkName: "not-found.page" */
-            '../pages/not-found/not-found.page'
-        )),
+        component: Loadable({
+            loader: () => import(
+                /* webpackChunkName: "not-found-page" */
+                '../pages/not-found/not-found.page'
+            ),
+            loading: () => <div>Loading...</div>
+        })
     }
 ];

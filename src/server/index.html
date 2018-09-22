@@ -13,8 +13,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <!-- Title provided by page component over a Helmet HOC. -->
     {{TITLE}}
-    <!-- Placeholder for server generated critical inline css. -->
-    {{CRITICAL_CSS}}
+    {{SEO_CRITICAL_METADATA}}
     <!-- Social Media Metadata. [Facebook] -->
     <meta property="og:type" content="website"/>
     <!-- Social Media Metadata [Twitter] -->
@@ -22,6 +21,6 @@
 </head>
 <body>
     <div id="app">{{APP}}</div>
-    {{LOADABLE_STATE}}
+    {{LOADABLE_CHUNKS}}
 </body>
 </html>

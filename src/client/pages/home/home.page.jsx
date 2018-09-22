@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
-import { withStyles } from 'react-critical-css';
-import styles from './home.page.scss';
+
+import './home.page.css';
+
 class HomePage extends Component {
     renderPageMeta() {
         return (
             <Helmet>
                 <title>Hello World from Home compoenent</title>
                 <meta name="description" content="Welcome to the Home page."/>
+                <meta name="keywords" content="react, demo, keywords" />
             </Helmet>
         );
     }
@@ -17,11 +19,11 @@ class HomePage extends Component {
         return (
             <div>
                 {this.renderPageMeta()}
-                <h1 className={styles.title}>Welcome to the Home Page</h1>
+                <h1 styleName="title">Welcome to the Home Page</h1>
                 <p>From here you can visit <Link to="/about">About page</Link> or see how <Link to="/nonexistingpage">Non-Existing Page</Link> looks like.</p>
             </div>
         );
     }
 }
 
-export default withStyles(styles)(HomePage);
+export default HomePage;

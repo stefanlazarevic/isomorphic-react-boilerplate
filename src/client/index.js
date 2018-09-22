@@ -1,10 +1,11 @@
 import React from 'react';
 import { hydrate } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import Router from './components/router/router.component';
-import { loadComponents } from 'loadable-components'
+import Loadable from 'react-loadable';
 
-loadComponents().then(() => {
+import Router from './components/router/router.component';
+
+Loadable.preloadReady().then(() => {
     hydrate(
         <BrowserRouter>
             <Router />

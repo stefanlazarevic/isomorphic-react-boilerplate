@@ -2,83 +2,86 @@
 import express from 'express';
 import fs from 'fs';
 import compression from 'compression';
-import { minify } from 'html-minifier';
+import bodyParser from 'body-parser';
+
 // React import group.
 import React from 'react';
 import Helmet from 'react-helmet';
 import { StaticRouter, matchPath } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
-import { getLoadableState } from 'loadable-components/server'
-import critical from 'critical';
+import Loadable from 'react-loadable';
+import { getBundles } from 'react-loadable/webpack';
+
 // Application import group.
 import AppRouter from '../client/components/router/router.component';
 import Routes from '../client/routes/routes';
+import stats from '../../react-loadable.json';
+
 // Prepare HTML Template.
-const boilerplateHTML = fs.readFileSync('build/index.html', 'utf8');
-const minifiedBoilerplateHTML = minify(boilerplateHTML, {
-    removeComments: true,
-    collapseWhitespace: true,
-    collapseBooleanAttributes: true,
-    removeAttributeQuotes: true,
-    removeEmptyAttributes: true,
-    minifyJS: true
-});
+const templateHTML = fs.readFileSync('build/index.html', 'utf8');
+
 // Create express application.
 const app = express();
+app.use(bodyParser.json());
 app.use(compression({ level: 8 }));
 app.use(express.static('build/public'));
+
 // Handle incoming requests.
 app.get('*', (request, response) => {
     let status = 200;
     const context = {};
+    const modules = [];
+
     const activeRoute = Routes.find(route => matchPath(request.url.toLowerCase(), route));
+
     if (!activeRoute) {
         status = 404;
     }
 
     const app = (
-        <StaticRouter context={context} location={request.url}>
-            <AppRouter />
-        </StaticRouter>
+        <Loadable.Capture report={moduleName => modules.push(moduleName)}>
+            <StaticRouter context={context} location={request.url}>
+                <AppRouter />
+            </StaticRouter>
+        </Loadable.Capture>
     );
 
-    getLoadableState(app).then(loadableState => {
-        const html = renderToString(app);
-        const helmet = Helmet.renderStatic();
-        const title = helmet.title.toString();
 
-        if (context.url) {
-            return response.redirect(302, context.url);
-        }
+    const body = renderToString(app);
+    const bundles = getBundles(stats, modules);
 
-        const responseHTML = minifiedBoilerplateHTML
-            .replace('{{APP}}', html)
-            .replace('{{TITLE}}', title)
-            .replace('{{LOADABLE_STATE}}', loadableState.getScriptTag());
+    if (context.url) {
+        return response.redirect(302, context.url);
+    }
 
-        let criticalCSS = null;
+    /**
+     * Extract page data from React Helmet.
+     */
+    const helmet = Helmet.renderStatic();
+    const pageTitle = helmet.title.toString();
+    const seoMetadata = helmet.meta.toString();
 
-        critical.generate({
-            width: 1920,
-            height: 1080,
-            minify: true,
-            html: html,
-            folder: 'build',
-            css: [
-                'build/public/css/styles.css'
-            ]
-        }, (err, output) => {
-            if (err) {
-                criticalCSS = err;
-            } else {
-                criticalCSS = output;
-            }
-        });
+    /**
+     * Extract used chunks to render page from react-loadable library.
+     * [IMPORTANT] Use defer in order to load chunk last and prevent undefined webpackJsonp issue.
+     */
+    const bundleScripts = bundles.map(bundle => `<script defer src="${bundle.publicPath}"></script>`).join('');
 
-        response.status(status).send(responseHTML.replace('{{CRITICAL_CSS}}', `<style>${criticalCSS}</style>`));
-    });
+    const responseHTML = templateHTML
+        .replace('{{TITLE}}', pageTitle)
+        .replace('{{SEO_CRITICAL_METADATA}}', seoMetadata)
+        .replace('{{APP}}', body)
+        .replace('{{LOADABLE_CHUNKS}}', bundleScripts)
+
+    response.status(status).send(responseHTML);
 });
-// Expose server on port 3000.
-app.listen(3000, () => {
-    console.log('Listening @ port 3000');
+
+/*
+ * Preload all loadable components.
+ * Expose server on port 3000.
+ */
+Loadable.preloadAll().then(() => {
+    app.listen(3000, () => {
+        console.log('Listening @ port 3000');
+    });
 });
