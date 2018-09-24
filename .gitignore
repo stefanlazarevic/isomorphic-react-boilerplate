@@ -3,3 +3,4 @@ node_modules
 build
 package-lock.json
 react-loadable.json
+docs

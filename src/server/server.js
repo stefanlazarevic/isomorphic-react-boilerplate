@@ -59,12 +59,41 @@ app.get('*', (request, response) => {
             .map(route => route.component.preload())
     );
 
-
     loadedComponents.then(components => {
-        const componentsPromise =
-            components.map(component => component.default)
-                .filter(component => component.serverFetch)
-                .map(component => store.dispatch(component.serverFetch()));
+        const loadedComponents = components.map(loadablePageComponent => loadablePageComponent.default);
+
+        /**
+         * Filter components which contains server fetching.
+         */
+        const serverFetchingComponents = loadedComponents.filter(component => component.fetchPageIntitialData);
+
+        /**
+         * Get component fetch methods.
+         */
+        const toFetchMethods = serverFetchingComponents.map(component => component.fetchPageIntitialData);
+
+        /**
+         * Merge all fetch functions.
+         */
+        const mergedFetchFunctions = toFetchMethods.reduce((prev, curr) => prev.concat(curr));
+
+        /**
+         * Access merged functions.
+         */
+        const componentsPromise = mergedFetchFunctions.map(f => store.dispatch(f()));
+
+        // const componentsPromise =
+            // components.map(loadablePageComponent => loadablePageComponent.default)
+            //     .filter(pageComponent => pageComponent.fetchPageIntitialData)
+            //     .map(pageComponent => pageComponent.fetchPageIntitialData)
+            //     .map(f => f.slice(1))
+            //     .map(f => console.log(f));
+
+                // .map(fetchComponentData => store.dispatch(fetchComponentData()))
+            // components.map(component => component.default)
+            //     .filter(component => component.fetchPageIntitialData)
+            //     // .reduce((pre, current) => pre.concat(current))
+            //     .map(component => store.dispatch(component.serverFetch()));
 
         Promise.all(componentsPromise).then(() => {
             const jsx = (

@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
-import { connect } from "react-redux";
 import { fetchUsersAction } from "../../redux/actions/users.actions";
 
 import './home.page.css';
 
-class HomePage extends Component {
-    componentDidMount() {
-        if (this.props.users.length <= 0) {
-            this.props.fetchUsersAction();
-        }
-    }
+import UsersTable from '../../components/users/users-table.component';
+import PostsTable from '../../components/posts/posts-table.component';
 
+class HomePage extends Component {
     renderPageMeta() {
         return (
             <Helmet>
@@ -24,31 +20,22 @@ class HomePage extends Component {
     }
 
     render() {
-        const { users } = this.props;
-
         return (
             <div>
                 {this.renderPageMeta()}
                 <h1 styleName="title">Welcome to the Home Page</h1>
                 <p>From here you can visit <Link to="/about">About page</Link> or see how <Link to="/nonexistingpage">Non-Existing Page</Link> looks like.</p>
                 <hr/>
-
-                <ul>
-                    {users.map(user => <li key={user.id}>{user.name}</li>)}
-                </ul>
+                <UsersTable />
+                <PostsTable />
             </div>
         );
     }
 }
 
-HomePage.serverFetch = fetchUsersAction;
+HomePage.fetchPageIntitialData = [
+    UsersTable.serverFetch,
+    PostsTable.serverFetch
+];
 
-const mapStateToProps = (state) => ({
-    users: state.users,
-});
-
-const mapDispatchToProps = {
-    fetchUsersAction,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default HomePage;
