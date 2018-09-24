@@ -14,6 +14,7 @@ const ReactLoadablePlugin = require('react-loadable/webpack').ReactLoadablePlugi
 const ROOT_PATH = path.resolve(__dirname, '../');
 const SRC_PATH = `${ROOT_PATH}/src`;
 const BUILD_PATH = `${ROOT_PATH}/build`;
+const APP_PATH = `${SRC_PATH}/app`;
 const CLIENT_ROOT = `${SRC_PATH}/client`;
 const SERVER_ROOT = `${SRC_PATH}/server`;
 const PUBLIC_PATH = '/'; // Tell htmlWebpackPlugin from where to build bundle paths.
@@ -42,7 +43,7 @@ const config = {
      * Tell webpack the root file of our web application
      */
     entry: {
-        main: `${CLIENT_ROOT}/index.js`,
+        main: `${CLIENT_ROOT}/client.jsx`,
         vendor: Object.keys(package.dependencies),
     },
 
@@ -97,7 +98,8 @@ const config = {
 
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production')
+            'process.env.NODE_ENV': JSON.stringify('production'),
+            __isBrowser__: "true",
         }),
         new ExtractTextPlugin({
             filename: 'css/styles.css',

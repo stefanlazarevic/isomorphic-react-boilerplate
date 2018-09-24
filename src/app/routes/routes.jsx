@@ -17,7 +17,7 @@ export default [
     {
         path: '/index',
         exact: true,
-        render: () => <Redirect to="/"></ Redirect>
+        component: () => <Redirect to="/"></ Redirect>
     },
     {
         path: '/about',
@@ -31,6 +31,7 @@ export default [
         })
     },
     {
+        path: '**',
         component: Loadable({
             loader: () => import(
                 /* webpackChunkName: "not-found-page" */

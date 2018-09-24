@@ -12,6 +12,7 @@ const webpackNodeExternals = require('webpack-node-externals');
 const ROOT_PATH = path.resolve(__dirname, '../');
 const SRC_PATH = `${ROOT_PATH}/src`;
 const BUILD_PATH = `${ROOT_PATH}/build`;
+const APP_PATH = `${SRC_PATH}/app`;
 const CLIENT_ROOT = `${SRC_PATH}/client`;
 const SERVER_ROOT = `${SRC_PATH}/server`;
 
@@ -37,7 +38,7 @@ const config = {
     /**
      * Tell webpack the root file of our web application
      */
-    entry: `${SERVER_ROOT}/index.js`,
+    entry: `${SERVER_ROOT}/server.js`,
 
     /**
      * Tell webpack where to put the output file that is generated.
@@ -91,7 +92,8 @@ const config = {
 
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production')
+            'process.env.NODE_ENV': JSON.stringify('production'),
+            __isBrowser__: "false",
         }),
 
         /**
