@@ -9,12 +9,12 @@ My goal with this experimental repository:
 - Use code linter to keep code maintainable and consistent. (TSLint or ESLint)
 - Use .editorconfig so everyone in the team can write code using the same style.
 - Use .env to store all environment variables.
-- Use Nodemon in development environment to watch all server related files.
+- Use Nodemon in development environment to watch all server related files. ✔
 - Use Webpack watch and support for Hot Module Replacement. [HMR]
 
 2. Give users only what they asked for. 
 
-- Use React Router with dynamic page import.
+- Use React Router with dynamic page import. ✔
 - Use page loading component to prevent blank page while loading script chunk.
 - Use React Lazyload to support component load on scroll.
 - Deliver css based on device media.
@@ -26,29 +26,29 @@ My goal with this experimental repository:
 
 4. Application is SEO friendly.
 
-- Use Node.js for Server Side Rendering [SSR]
+- Use Node.js for Server Side Rendering [SSR] ✔
 - Server supports HTTPS.
-- Server supports GZIP compression.
+- Server supports GZIP compression. ✔
 - Server generate inline critical css style.
-- Use React Helmet to provide page specific metadata.
+- Use React Helmet to provide page specific metadata. ✔
 
 5. Deliver optimized resources.
 
 - Minify css.
 - Minify js.
-- Minify HTML.
+- Minify HTML. ✔
 - Support webp image format.
 - Reduce image sizes.
 
 6. Application supports Google Analytics [GA].
 
-- Use React GA for Google Analytics support.
+- Use React GA for Google Analytics support. ✔
 
 7. Application supports offline mode.
 
 8. Application supports global state management.
 
-- Use Redux for global state management.
+- Use Redux for global state management. ✔
 
 9. Application supports Unit Tests.
 
