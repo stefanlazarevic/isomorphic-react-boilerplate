@@ -22,7 +22,7 @@ import { getBundles } from 'react-loadable/webpack';
  * Redux import group.
  */
 import { Provider as ReduxProvider } from "react-redux";
-import createStore, { initializeSession } from "../app/redux/store";
+import createStore from "../app/redux/store";
 
 /**
  * Application import group.
@@ -52,13 +52,13 @@ app.get('*', (request, response) => {
     const context = {};
     const modules = [];
     const store = createStore();
-    store.dispatch(initializeSession());
 
     const loadedComponents = Promise.all(
         Routes
             .filter(route => matchPath(request.url.toLowerCase(), route))
             .map(route => route.component.preload())
     );
+
 
     loadedComponents.then(components => {
         const componentsPromise =

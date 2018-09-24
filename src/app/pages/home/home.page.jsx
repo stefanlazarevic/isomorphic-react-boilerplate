@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import { connect } from "react-redux";
-import { fetchData } from "../../redux/store";
+import { fetchUsersAction } from "../../redux/actions/users.actions";
 
 import './home.page.css';
 
 class HomePage extends Component {
     componentDidMount() {
-        if (this.props.circuits.length <= 0) {
-            this.props.fetchData();
+        if (this.props.users.length <= 0) {
+            this.props.fetchUsersAction();
         }
     }
 
@@ -24,7 +24,7 @@ class HomePage extends Component {
     }
 
     render() {
-        const { circuits } = this.props;
+        const { users } = this.props;
 
         return (
             <div>
@@ -34,23 +34,21 @@ class HomePage extends Component {
                 <hr/>
 
                 <ul>
-                    {circuits.map(({ circuitId, circuitName, Location }) => (
-                        <li key={circuitId} >{circuitName} - {Location.locality}, {Location.country}</li>
-                    ))}
+                    {users.map(user => <li key={user.id}>{user.name}</li>)}
                 </ul>
             </div>
         );
     }
 }
 
-HomePage.serverFetch = fetchData;
+HomePage.serverFetch = fetchUsersAction;
 
 const mapStateToProps = (state) => ({
-    circuits: state.data,
+    users: state.users,
 });
 
 const mapDispatchToProps = {
-    fetchData,
+    fetchUsersAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
