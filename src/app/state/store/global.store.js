@@ -7,8 +7,7 @@ import thunk from 'redux-thunk';
 /**
  * Import Redux reducers.
  */
-import UsersReducer from './reducers/users.reducer';
-import PostsReducer from './reducers/posts.reducer';
+import UsersReducer from '../reducers/users.reducers';
 
 /**
  * Define Redux middlewares.
@@ -21,14 +20,13 @@ const middleware = compose(applyMiddleware(...thunkMiddleware), reduxDevToolsMid
  * Defined Redux reducers.
  */
 const combinedReducers = combineReducers({
-    users: UsersReducer,
-    posts: PostsReducer,
+    users: UsersReducer
 });
 
 const store = initialState => createStore(
     combinedReducers,
     initialState,
     middleware,
-)
+);
 
 export default store;

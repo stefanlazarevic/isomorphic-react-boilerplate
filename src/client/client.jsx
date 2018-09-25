@@ -3,9 +3,9 @@ import { hydrate } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import { Provider as ReduxProvider } from "react-redux";
-import createStore from "../app/redux/store";
+import createStore from "../app/state/store/global.store";
 
-import Router from '../app/components/router/router.component';
+import Router from '../app/routes/app-router';
 
 const store = createStore(window.REDUX_DATA);
 

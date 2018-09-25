@@ -21,7 +21,10 @@
 </head>
 <body>
     <div id="app">{{APP}}</div>
+    <script src=<%= [htmlWebpackPlugin.options.PUBLIC_PATH, 'js/manifest.js'].join('') %>></script>
+    <script src=<%= [htmlWebpackPlugin.options.PUBLIC_PATH, 'js/vendor.js'].join('') %>></script>
     <script>window.REDUX_DATA = {{REDUX_DATA}}</script>
     {{LOADABLE_CHUNKS}}
+    <script src=<%= [htmlWebpackPlugin.options.PUBLIC_PATH, 'main.js'].join('') %>></script>
 </body>
 </html>

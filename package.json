@@ -5,12 +5,12 @@
   "main": "index.js",
   "scripts": {
     "dev": "npm-run-all --parallel dev:*",
-    "dev:build-server": "webpack --config webpack/webpack.server.js --watch",
-    "dev:build-client": "webpack --config webpack/webpack.client.js --watch",
+    "dev:build-server": "NODE_ENV=development && webpack --config webpack/webpack.server.js --watch",
+    "dev:build-client": "NODE_ENV=development && webpack --config webpack/webpack.client.js --watch",
     "dev:server": "nodemon --watch build --exec \"node build/server.bundle.js\"",
     "prod": "npm-run-all prod:*",
-    "prod:build-server": "webpack -p --config webpack/webpack.server.js",
-    "prod:build-client": "webpack -p --config webpack/webpack.client.js",
+    "prod:build-server": "NODE_ENV=production && webpack --config webpack/webpack.server.js",
+    "prod:build-client": "NODE_ENV=production webpack -p --config webpack/webpack.client.js",
     "prod:server": "node build/server.bundle.js"
   },
   "author": "Stefan Lazarevic",
@@ -18,6 +18,7 @@
   "dependencies": {
     "react": "16.5.2",
     "react-dom": "16.5.2",
+    "react-ga": "^2.5.3",
     "react-helmet": "5.2.0",
     "react-loadable": "5.5.0",
     "react-redux": "5.0.7",

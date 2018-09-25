@@ -22,13 +22,13 @@ import { getBundles } from 'react-loadable/webpack';
  * Redux import group.
  */
 import { Provider as ReduxProvider } from "react-redux";
-import createStore from "../app/redux/store";
+import createStore from "../app/state/store/global.store";
 
 /**
  * Application import group.
  */
-import AppRouter from '../app/components/router/router.component';
-import Routes from '../app/routes/routes';
+import AppRouter from '../app/routes/app-router';
+import Routes from '../app/routes/app-routes';
 import stats from '../../react-loadable.json';
 
 /**
@@ -47,10 +47,28 @@ app.use(express.static('build/public'));
 /**
  * Handle incoming requests.
  */
-app.get('*', (request, response) => {
+app.get('*', (request, response, next) => {
+    /**
+     * Initial response status.
+     * 200 = OK.
+     */
     let status = 200;
+
+    /**
+     * Determine which component should be loaded for current request.
+     */
+    const activeRoute = Routes.find(route => matchPath(request.url.toLowerCase(), route));
+
+    /**
+     * Extract information from activeRoute.
+     */
+    const { path } = activeRoute;
+
+    if (path === '**') {
+        status = 404;
+    }
+
     const context = {};
-    const modules = [];
     const store = createStore();
 
     const loadedComponents = Promise.all(
@@ -60,42 +78,34 @@ app.get('*', (request, response) => {
     );
 
     loadedComponents.then(components => {
-        const loadedComponents = components.map(loadablePageComponent => loadablePageComponent.default);
+        const FType = '[object Function]';
+        const AType = '[object Array]';
 
-        /**
-         * Filter components which contains server fetching.
-         */
-        const serverFetchingComponents = loadedComponents.filter(component => component.fetchPageIntitialData);
+        const componentsPromise =
+            components
+                .map(loadableComponent => loadableComponent.default)
+                .filter(pageComponent => {
+                    const SFT = Object.prototype.toString.apply(pageComponent.serverFetchInitialData);
+                    return pageComponent.serverFetchInitialData && (SFT === FType || SFT === AType);
+                })
+                .map(pageComponent => {
+                    const SFT = Object.prototype.toString.apply(pageComponent.serverFetchInitialData);
 
-        /**
-         * Get component fetch methods.
-         */
-        const toFetchMethods = serverFetchingComponents.map(component => component.fetchPageIntitialData);
-
-        /**
-         * Merge all fetch functions.
-         */
-        const mergedFetchFunctions = toFetchMethods.reduce((prev, curr) => prev.concat(curr));
-
-        /**
-         * Access merged functions.
-         */
-        const componentsPromise = mergedFetchFunctions.map(f => store.dispatch(f()));
-
-        // const componentsPromise =
-            // components.map(loadablePageComponent => loadablePageComponent.default)
-            //     .filter(pageComponent => pageComponent.fetchPageIntitialData)
-            //     .map(pageComponent => pageComponent.fetchPageIntitialData)
-            //     .map(f => f.slice(1))
-            //     .map(f => console.log(f));
-
-                // .map(fetchComponentData => store.dispatch(fetchComponentData()))
-            // components.map(component => component.default)
-            //     .filter(component => component.fetchPageIntitialData)
-            //     // .reduce((pre, current) => pre.concat(current))
-            //     .map(component => store.dispatch(component.serverFetch()));
+                    if (SFT === FType) {
+                        return store.dispatch(pageComponent.serverFetchInitialData());
+                    } else {
+                        // Handle array of actions.
+                        return Promise.all(
+                            pageComponent.serverFetchInitialData
+                                .filter(action => typeof action === 'function')
+                                .map(action => store.dispatch(action()))
+                        );
+                    }
+                });
 
         Promise.all(componentsPromise).then(() => {
+            const modules = [];
+
             const jsx = (
                 <Loadable.Capture report={moduleName => modules.push(moduleName)}>
                     <ReduxProvider store={store}>
@@ -122,11 +132,13 @@ app.get('*', (request, response) => {
             const pageTitle = helmet.title.toString();
             const seoMetadata = helmet.meta.toString();
 
+            Helmet.rewind();
+
             /**
              * Extract used chunks to render page from react-loadable library.
              * [IMPORTANT] Use defer in order to load chunk last and prevent undefined webpackJsonp issue.
              */
-            const bundleScripts = bundles.map(bundle => `<script defer src="${bundle.publicPath}"></script>`).join('');
+            const bundleScripts = bundles.map(bundle => `<script src="${bundle.publicPath}"></script>`).join('');
 
             const responseHTML = templateHTML
                 .replace('{{TITLE}}', pageTitle)
@@ -136,7 +148,7 @@ app.get('*', (request, response) => {
                 .replace('{{REDUX_DATA}}', serialize(reduxState));
 
             response.status(status).send(responseHTML);
-        });
+        }).catch(next);
     });
 });
 

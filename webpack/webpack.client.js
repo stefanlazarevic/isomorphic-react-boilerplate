@@ -18,6 +18,7 @@ const APP_PATH = `${SRC_PATH}/app`;
 const CLIENT_ROOT = `${SRC_PATH}/client`;
 const SERVER_ROOT = `${SRC_PATH}/server`;
 const PUBLIC_PATH = '/'; // Tell htmlWebpackPlugin from where to build bundle paths.
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 /**
  * Webpack additional requirements.
@@ -39,6 +40,8 @@ const config = {
      */
     target: 'web',
 
+    // mode: IS_PRODUCTION ? 'production' : 'development',
+
     /**
      * Tell webpack the root file of our web application
      */
@@ -51,8 +54,8 @@ const config = {
      * Tell webpack where to put the output file that is generated.
      */
     output: {
-        filename: '[name]-[chunkHash:5].js',
-        chunkFilename: '[name]-[chunkHash:5].js',
+        filename: '[name].js',
+        chunkFilename: '[name].js',
         path: `${BUILD_PATH}/public`,
         publicPath: PUBLIC_PATH,
     },
@@ -69,7 +72,7 @@ const config = {
             {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
-                    fallback: 'isomorphic-style-loader',
+                    fallback: 'style-loader',
                     use: [
                         {
                             loader: 'css-loader',
@@ -97,27 +100,10 @@ const config = {
     },
 
     plugins: [
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production'),
-            __isBrowser__: "true",
-        }),
-        new ExtractTextPlugin({
-            filename: 'css/styles.css',
-            allChunks: true
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            filename: 'vendor.[chunkhash:5].js'
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'manifest',
-        }),
-        new webpack.HashedModuleIdsPlugin(),
-        new webpack.NamedModulesPlugin(),
         new HtmlWebpackPlugin({
             template: `${SERVER_ROOT}/index.html`,
             filename: '../index.html', // Since the output is build/public we need to step one directory out.
-            inject:  'body',
+            inject: 'body',
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,
@@ -126,10 +112,30 @@ const config = {
                 removeEmptyAttributes: true,
                 minifyJS: true,
                 xhtml: true,
-            }
+            },
+            excludeChunks: ['manifest', 'vendor', 'main'],
+            PUBLIC_PATH: PUBLIC_PATH,
         }),
         new ReactLoadablePlugin({
             filename: 'react-loadable.json',
+        }),
+        new ExtractTextPlugin({
+            filename: 'css/[name].css',
+            allChunks: true
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            filename: 'js/vendor.js'
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'manifest',
+            filename: 'js/manifest.js'
+        }),
+        new webpack.HashedModuleIdsPlugin(),
+        new webpack.NamedModulesPlugin(),
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify(IS_PRODUCTION ? 'production' : 'development'),
+            __isBrowser__: "true",
         }),
     ]
 };

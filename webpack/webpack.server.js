@@ -15,6 +15,8 @@ const BUILD_PATH = `${ROOT_PATH}/build`;
 const APP_PATH = `${SRC_PATH}/app`;
 const CLIENT_ROOT = `${SRC_PATH}/client`;
 const SERVER_ROOT = `${SRC_PATH}/server`;
+const PUBLIC_PATH = '/';
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 /**
  * Webpack additional requirements.
@@ -35,6 +37,8 @@ const config = {
      */
     target: 'node',
 
+    // mode: IS_PRODUCTION ? 'production' : 'development',
+
     /**
      * Tell webpack the root file of our web application
      */
@@ -46,6 +50,7 @@ const config = {
     output: {
         filename: 'server.bundle.js',
         path: BUILD_PATH,
+        publicPath: PUBLIC_PATH
     },
 
     /**
@@ -55,7 +60,7 @@ const config = {
         extensions: ['.js', '.jsx', '.json'],
     },
 
-    devtool: 'source-map',
+    devtool: IS_PRODUCTION ? null : 'source-map',
 
     module: {
         rules: [
@@ -94,7 +99,7 @@ const config = {
 
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify('production'),
+            'process.env.NODE_ENV': JSON.stringify(IS_PRODUCTION ? 'production' : 'development'),
             __isBrowser__: "false",
         }),
 

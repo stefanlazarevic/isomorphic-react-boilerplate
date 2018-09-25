@@ -1,8 +1,15 @@
-import React, { Component } from 'react';
+/**
+ * React required imports.
+ */
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
+import { pageview } from 'react-ga';
 
-import styles from './about.page.css';
+/**
+ * Import page styles.
+ */
+import './style/about-page.style.css';
 
 class AboutPage extends Component {
     renderPageMeta() {
@@ -15,16 +22,25 @@ class AboutPage extends Component {
         );
     }
 
+    componentDidMount() {
+        pageview('/about');
+    }
+
     render() {
         return (
-            <div>
+            <Fragment>
                 {this.renderPageMeta()}
-                <h1 styleName="title">This is an About page</h1>
+                <h1>This is an About page</h1>
                 <p>Nothing else to see here...</p>
                 <Link to="/">Back to Index</Link>
-            </div>
+            </Fragment>
         );
     }
 }
+
+/**
+ * Initialize required actions to load data before rendering on server.
+ */
+AboutPage.serverFetchInitialData = [];
 
 export default AboutPage;
