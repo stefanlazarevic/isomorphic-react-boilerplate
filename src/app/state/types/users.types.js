@@ -1,1 +1,2 @@
-export const FETCH_USERS = 'FETCH_USERS';
+// @flow
+export const FETCH_USERS: string = 'FETCH_USERS';

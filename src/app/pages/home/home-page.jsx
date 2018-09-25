@@ -1,6 +1,3 @@
-/**
- * React required imports.
- */
 import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
@@ -8,9 +5,6 @@ import { pageview } from 'react-ga';
 
 import { fetchUsersAction } from '../../state/actions/users.actions';
 
-/**
- * Import page styles.
- */
 import './style/home-page.style.css';
 
 class HomePage extends Component {

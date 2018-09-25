@@ -1,16 +1,8 @@
-/**
- * Import Reducer Types.
- */
+// @flow
 import { FETCH_USERS } from '../types/users.types';
 
-/**
- * Define Reducer initial data.
- */
 const initialState = [];
 
-/**
- * Export users reducer.
- */
 export default (state = initialState, action) => {
     switch (action.type) {
         case FETCH_USERS: {
