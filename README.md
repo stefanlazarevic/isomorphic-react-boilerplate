@@ -5,14 +5,14 @@ My goal with this experimental repository:
 
 1. Make building React application much faster and prevent common mistakes.
 
-- Use React with static type checker. (Typescript or Flow)
+- Use React with static type checker. (Typescript or **Flow**) ✔
 - Use code linter to keep code maintainable and consistent. (TSLint or ESLint)
-- Use .editorconfig so everyone in the team can write code using the same style.
+- Use .editorconfig so everyone in the team can write code using the same style. ✔
 - Use .env to store all environment variables.
 - Use Nodemon in development environment to watch all server related files. ✔
 - Use Webpack watch and support for Hot Module Replacement. [HMR]
 
-2. Give users only what they asked for. 
+2. Give users only what they asked for.
 
 - Use React Router with dynamic page import. ✔
 - Use page loading component to prevent blank page while loading script chunk.
@@ -34,8 +34,8 @@ My goal with this experimental repository:
 
 5. Deliver optimized resources.
 
-- Minify css.
-- Minify js.
+- Minify css. ✔
+- Minify js. ✔
 - Minify HTML. ✔
 - Support webp image format.
 - Reduce image sizes.
