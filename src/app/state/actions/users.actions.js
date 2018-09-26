@@ -16,4 +16,4 @@ export const fetchUsersAction = () => dispatch => {
         type: FETCH_USERS,
         data
     }));
-}
+};

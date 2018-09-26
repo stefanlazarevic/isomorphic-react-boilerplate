@@ -1,5 +1,9 @@
 [ignore]
+./build
+./docs
 ./node_modules
+./src/app/components
+./src/app/public
 [include]
 
 [libs]

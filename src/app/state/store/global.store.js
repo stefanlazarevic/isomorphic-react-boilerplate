@@ -1,4 +1,6 @@
 // @flow
+declare var __isBrowser__:string;
+
 import { compose, combineReducers, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 

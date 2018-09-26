@@ -21,8 +21,8 @@ import { getBundles } from 'react-loadable/webpack';
 /**
  * Redux import group.
  */
-import { Provider as ReduxProvider } from "react-redux";
-import createStore from "../app/state/store/global.store";
+import { Provider as ReduxProvider } from 'react-redux';
+import createStore from '../app/state/store/global.store';
 
 /**
  * Application import group.
@@ -158,6 +158,7 @@ app.get('*', (request, response, next) => {
  */
 Loadable.preloadAll().then(() => {
     app.listen(3000, () => {
+        // eslint-disable-next-line
         console.log('Listening @ port 3000');
     });
 });
