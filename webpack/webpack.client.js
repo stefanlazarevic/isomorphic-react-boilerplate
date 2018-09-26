@@ -71,8 +71,9 @@ const config = {
         rules: [
             {
                 test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
+                use:
+                ExtractTextPlugin.extract({
+                    fallback: 'isomorphic-style-loader',
                     use: [
                         {
                             loader: 'css-loader',

@@ -30,7 +30,7 @@ class AboutPage extends Component {
         return (
             <Fragment>
                 {this.renderPageMeta()}
-                <h1>This is an About page</h1>
+                <h1 styleName="title">This is an About page</h1>
                 <p>Nothing else to see here...</p>
                 <Link to="/">Back to Index</Link>
             </Fragment>

@@ -14,6 +14,7 @@
     <!-- Title provided by page component over a Helmet HOC. -->
     {{TITLE}}
     {{SEO_CRITICAL_METADATA}}
+    <style>{{CRITICAL_CSS}}</style>
     <!-- Social Media Metadata. [Facebook] -->
     <meta property="og:type" content="website"/>
     <!-- Social Media Metadata [Twitter] -->
@@ -21,6 +22,7 @@
 </head>
 <body>
     <div id="app">{{APP}}</div>
+    <link rel="stylesheet" href=<%= [htmlWebpackPlugin.options.PUBLIC_PATH, 'css/main.css'].join('') %>>
     <script src=<%= [htmlWebpackPlugin.options.PUBLIC_PATH, 'js/manifest.js'].join('') %>></script>
     <script src=<%= [htmlWebpackPlugin.options.PUBLIC_PATH, 'js/vendor.js'].join('') %>></script>
     <script>window.REDUX_DATA = {{REDUX_DATA}}</script>

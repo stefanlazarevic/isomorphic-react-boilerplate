@@ -13,10 +13,10 @@ module.exports = {
                         'flow',
                     ],
                     plugins: [
-                        ["babel-plugin-react-css-modules",{
-                            "generateScopedName": "[name]__[local]"
+                        ['babel-plugin-react-css-modules',{
+                            'generateScopedName': '[name]__[local]'
                         }],
-                        "react-loadable/babel"
+                        'react-loadable/babel'
                     ],
                 }
             }

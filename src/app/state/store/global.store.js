@@ -7,7 +7,13 @@ import thunk from 'redux-thunk';
 import UsersReducer from '../reducers/users.reducers';
 
 const thunkMiddleware = [thunk];
-const reduxDevToolsMiddleware = __isBrowser__ ? window.devToolsExtension && window.devToolsExtension() : f => f;
+
+let reduxDevToolsMiddleware = f => f;
+
+if (__isBrowser__) {
+    reduxDevToolsMiddleware = window.devToolsExtension ? window.devToolsExtension() : f => f;
+}
+
 const middleware = compose(applyMiddleware(...thunkMiddleware), reduxDevToolsMiddleware);
 
 const combinedReducers = combineReducers({

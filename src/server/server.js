@@ -17,6 +17,7 @@ import { StaticRouter, matchPath } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
 import Loadable from 'react-loadable';
 import { getBundles } from 'react-loadable/webpack';
+import minifyCssString from 'minify-css-string';
 
 /**
  * Redux import group.
@@ -27,9 +28,9 @@ import createStore from '../app/state/store/global.store';
 /**
  * Application import group.
  */
-import AppRouter from '../app/routes/app-router';
 import Routes from '../app/routes/app-routes';
 import stats from '../../react-loadable.json';
+import ContextProvider from '../contextProvider/ContextProvider';
 
 /**
  * Prepare HTML Template.
@@ -106,11 +107,21 @@ app.get('*', (request, response, next) => {
         Promise.all(componentsPromise).then(() => {
             const modules = [];
 
+            const css = new Set();
+
+            // Enables critical path CSS rendering
+            // https://github.com/kriasoft/isomorphic-style-loader
+            const insertCss = (...styles) => {
+                styles.forEach(style => css.add(style._getCss()));
+            };
+
+            context.insertCss = insertCss;
+
             const jsx = (
                 <Loadable.Capture report={moduleName => modules.push(moduleName)}>
                     <ReduxProvider store={store}>
                         <StaticRouter context={context} location={request.url}>
-                            <AppRouter />
+                            <ContextProvider context={context} />
                         </StaticRouter>
                     </ReduxProvider>
                 </Loadable.Capture>
@@ -119,6 +130,7 @@ app.get('*', (request, response, next) => {
             const reduxState = store.getState();
 
             const body = renderToString(jsx);
+
             const bundles = getBundles(stats, modules);
 
             if (context.url) {
@@ -143,6 +155,7 @@ app.get('*', (request, response, next) => {
             const responseHTML = templateHTML
                 .replace('{{TITLE}}', pageTitle)
                 .replace('{{SEO_CRITICAL_METADATA}}', seoMetadata)
+                .replace('{{CRITICAL_CSS}}', minifyCssString([...css].join('')))
                 .replace('{{APP}}', body)
                 .replace('{{LOADABLE_CHUNKS}}', bundleScripts)
                 .replace('{{REDUX_DATA}}', serialize(reduxState));
