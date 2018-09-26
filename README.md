@@ -6,7 +6,7 @@ My goal with this experimental repository:
 1. Make building React application much faster and prevent common mistakes.
 
 - Use React with static type checker. (Typescript or **Flow**) ✔
-- Use code linter to keep code maintainable and consistent. (TSLint or ESLint)
+- Use code linter to keep code maintainable and consistent. (TSLint or **ESLint**) ✔
 - Use .editorconfig so everyone in the team can write code using the same style. ✔
 - Use .env to store all environment variables.
 - Use Nodemon in development environment to watch all server related files. ✔
@@ -21,15 +21,15 @@ My goal with this experimental repository:
 
 3. Support Sass for component styling.
 
-- Use sass loader to compile sass/scss to css.
-- Use autoprefixer to support css from IE9 forwards.
+- Use sass loader to compile sass/scss to css. ✔
+- Use autoprefixer to support css from IE9 forwards. ✔
 
 4. Application is SEO friendly.
 
 - Use Node.js for Server Side Rendering [SSR] ✔
 - Server supports HTTPS.
 - Server supports GZIP compression. ✔
-- Server generate inline critical css style.
+- Server generate inline critical css style. ✔
 - Use React Helmet to provide page specific metadata. ✔
 
 5. Deliver optimized resources.
