@@ -5,11 +5,13 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import { pageview } from 'react-ga';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import classnames from 'classnames';
 
 /**
  * Import page styles.
  */
-import './style/about-page.style.css';
+import styles from './style/about-page.style.scss';
 
 class AboutPage extends Component {
     renderPageMeta() {
@@ -30,7 +32,7 @@ class AboutPage extends Component {
         return (
             <Fragment>
                 {this.renderPageMeta()}
-                <h1 styleName="title">This is an About page</h1>
+                <h1 className={classnames(styles.title)}>This is an About page</h1>
                 <p>Nothing else to see here...</p>
                 <Link to="/">Back to Index</Link>
             </Fragment>
@@ -43,4 +45,4 @@ class AboutPage extends Component {
  */
 AboutPage.serverFetchInitialData = [];
 
-export default AboutPage;
+export default withStyles(styles)(AboutPage);

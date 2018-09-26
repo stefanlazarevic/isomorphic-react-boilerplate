@@ -6,7 +6,7 @@ import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 import { fetchUsersAction } from '../../state/actions/users.actions';
 
-import styles from './style/home-page.style.css';
+import styles from './style/home-page.style.scss';
 
 class HomePage extends Component {
     constructor(props, context) {

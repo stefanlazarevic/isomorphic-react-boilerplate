@@ -22,11 +22,11 @@
 </head>
 <body>
     <div id="app">{{APP}}</div>
-    <link rel="stylesheet" href=<%= [htmlWebpackPlugin.options.PUBLIC_PATH, 'css/main.css'].join('') %>>
-    <script src=<%= [htmlWebpackPlugin.options.PUBLIC_PATH, 'js/manifest.js'].join('') %>></script>
-    <script src=<%= [htmlWebpackPlugin.options.PUBLIC_PATH, 'js/vendor.js'].join('') %>></script>
+    <link rel="stylesheet" href=<%= htmlWebpackPlugin.files.chunks.main.css %>>
+    <script src=<%= htmlWebpackPlugin.files.chunks.runtime.entry %>></script>
+    <script src=<%= htmlWebpackPlugin.files.chunks.vendor.entry %>></script>
     <script>window.REDUX_DATA = {{REDUX_DATA}}</script>
     {{LOADABLE_CHUNKS}}
-    <script src=<%= [htmlWebpackPlugin.options.PUBLIC_PATH, 'main.js'].join('') %>></script>
+    <script src=<%= htmlWebpackPlugin.files.chunks.main.entry %>></script>
 </body>
 </html>

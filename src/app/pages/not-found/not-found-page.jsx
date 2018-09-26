@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 
-import './style/not-found-page.style.css';
+import './style/not-found-page.style.scss';
 
 class PageNotFound extends Component {
     renderPageMeta() {

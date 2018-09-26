@@ -65,7 +65,7 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.css$/,
+                test: /\.scss$/,
                 use: [
                     {
                         loader: 'isomorphic-style-loader'
@@ -86,6 +86,9 @@ const config = {
                             ],
                         }
                     },
+                    {
+                        loader: 'sass-loader',
+                    }
                 ]
             },
         ]
