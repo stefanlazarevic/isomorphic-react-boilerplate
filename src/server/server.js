@@ -1,3 +1,5 @@
+import dotenv from 'dotenv';
+
 /**
  * Node import group.
  */
@@ -7,6 +9,7 @@ import compression from 'compression';
 import bodyParser from 'body-parser';
 import 'isomorphic-fetch';
 import serialize from 'serialize-javascript';
+import minifyCssString from 'minify-css-string';
 
 /**
  * React import group.
@@ -17,7 +20,6 @@ import { StaticRouter, matchPath } from 'react-router-dom';
 import { renderToString } from 'react-dom/server';
 import Loadable from 'react-loadable';
 import { getBundles } from 'react-loadable/webpack';
-import minifyCssString from 'minify-css-string';
 
 /**
  * Redux import group.
@@ -38,12 +40,24 @@ import ContextProvider from '../contextProvider/ContextProvider';
 const templateHTML = fs.readFileSync('build/index.html', 'utf8');
 
 /**
+ * Load all configuration variables.
+ */
+dotenv.config();
+
+const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+
+/**
  * Create express application.
  */
 const app = express();
 app.use(bodyParser.json());
-app.use(compression({ level: 8 }));
-app.use(express.static('build/public'));
+app.use(compression({ level: process.env.COMPRESSION_LEVEL || 6 }));
+
+const cacheStaticAssets = IS_PRODUCTION ? {
+    maxage: '31557600'
+} : {};
+
+app.use(express.static('build/public', cacheStaticAssets));
 
 /**
  * Handle incoming requests.
@@ -160,6 +174,9 @@ app.get('*', (request, response, next) => {
                 .replace('{{LOADABLE_CHUNKS}}', bundleScripts)
                 .replace('{{REDUX_DATA}}', serialize(reduxState));
 
+            if (process.env.NODE_ENV === 'production') {
+                response.set('Cache-Control', 'public, max-age=31557600');
+            }
             response.status(status).send(responseHTML);
         }).catch(next);
     });
@@ -169,9 +186,11 @@ app.get('*', (request, response, next) => {
  * Preload all loadable components.
  * Expose server on port 3000.
  */
+const PORT = process.env.HTTP_PORT || 80;
+
 Loadable.preloadAll().then(() => {
-    app.listen(3000, () => {
+    app.listen(PORT, () => {
         // eslint-disable-next-line
-        console.log('Listening @ port 3000');
+        console.log(`HTTP Server is listening @ port ${PORT}`);
     });
 });

@@ -22,8 +22,8 @@
 </head>
 <body>
     <div id="app">{{APP}}</div>
-    <link rel="stylesheet" href=<%= htmlWebpackPlugin.files.chunks.main.css %>>
     <script src=<%= htmlWebpackPlugin.files.chunks.runtime.entry %>></script>
+    <link rel="stylesheet" href=<%= htmlWebpackPlugin.files.chunks.main.css %>>
     <script src=<%= htmlWebpackPlugin.files.chunks.vendor.entry %>></script>
     <script>window.REDUX_DATA = {{REDUX_DATA}}</script>
     {{LOADABLE_CHUNKS}}

@@ -1,6 +1,7 @@
 /**
  * Webpack core requirements.
  */
+require('dotenv').config();
 const webpack = require('webpack');
 const path = require('path');
 const merge = require('webpack-merge');
@@ -60,7 +61,7 @@ const config = {
         extensions: ['.js', '.jsx', '.json'],
     },
 
-    devtool: IS_PRODUCTION ? null : 'source-map',
+    devtool: IS_PRODUCTION ? false : 'source-map',
 
     module: {
         rules: [
@@ -103,7 +104,7 @@ const config = {
     plugins: [
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': JSON.stringify(IS_PRODUCTION ? 'production' : 'development'),
-            __isBrowser__: "false",
+            __isBrowser__: 'false',
         }),
 
         /**

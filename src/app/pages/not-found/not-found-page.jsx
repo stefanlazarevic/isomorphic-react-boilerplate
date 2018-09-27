@@ -8,10 +8,10 @@ class PageNotFound extends Component {
     renderPageMeta() {
         return (
             <Helmet>
-                <title>Page not found</title>
+                <title>Page not found 2</title>
             </Helmet>
         );
-    };
+    }
 
     render() {
         return (

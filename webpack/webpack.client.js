@@ -1,12 +1,14 @@
 /**
  * Webpack core requirements.
  */
+require('dotenv').config();
 const webpack = require('webpack');
 const path = require('path');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ReactLoadablePlugin = require('react-loadable/webpack').ReactLoadablePlugin;
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 /**
  * Define application directory paths.
@@ -52,8 +54,8 @@ const config = {
      * Tell webpack where to put the output file that is generated.
      */
     output: {
-        filename: IS_PRODUCTION ? '[name].[chunkhash].js' : '[name].js',
-        chunkFilename: IS_PRODUCTION ? '[name].[chunkhash].js' : '[name].js',
+        filename: IS_PRODUCTION ? '[name].[chunkhash].js' : '[name].dev.js',
+        chunkFilename: IS_PRODUCTION ? '[name].[chunkhash].js' : '[name].dev.js',
         path: `${BUILD_PATH}/public`,
         publicPath: PUBLIC_PATH,
     },
@@ -108,16 +110,16 @@ const config = {
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
-            filename: IS_PRODUCTION ? 'js/[name].[chunkhash].js' : 'js/[name].js',
+            filename: IS_PRODUCTION ? 'js/[name].[chunkhash].js' : 'js/[name].dev.js',
             minChunks: module => module.context && module.context.indexOf('node_modules') !== -1
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'runtime',
-            filename: IS_PRODUCTION ? 'js/[name].[chunkhash].js' : 'js/[name].js',
+            filename: IS_PRODUCTION ? 'js/[name].[chunkhash].js' : 'js/[name].dev.js',
             minChunks: Infinity,
         }),
-        new webpack.HashedModuleIdsPlugin(),
         new webpack.NamedModulesPlugin(),
+        new webpack.HashedModuleIdsPlugin(),
         new HtmlWebpackPlugin({
             template: `${SERVER_ROOT}/index.html`,
             filename: '../index.html', // Since the output is build/public we need to step one directory out.
@@ -134,11 +136,23 @@ const config = {
             PUBLIC_PATH: PUBLIC_PATH,
         }),
         new ExtractTextPlugin({
-            filename: IS_PRODUCTION ? 'css/[name].[chunkhash].css' : 'css/[name].css',
+            filename: IS_PRODUCTION ? 'css/[name].[contenthash].css' : 'css/[name].dev.css',
             allChunks: true
         }),
         new ReactLoadablePlugin({
             filename: 'react-loadable.json',
+        }),
+    ]
+};
+
+/**
+ * If we are in production mode, remove build public folder.
+ */
+if (IS_PRODUCTION) {
+    config.plugins.concat([
+        new CleanWebpackPlugin('public', {
+            root: BUILD_PATH,
+            verbose: true,
         }),
         new webpack.optimize.UglifyJsPlugin({
             compress: {
@@ -158,8 +172,7 @@ const config = {
                 comments: false
             }
         }),
-
-    ]
-};
+    ]);
+}
 
 module.exports = merge(baseConfig, config);

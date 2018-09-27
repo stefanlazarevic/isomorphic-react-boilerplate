@@ -5,3 +5,4 @@ package-lock.json
 react-loadable.json
 docs
 src/app/old
+.env
