@@ -41,7 +41,12 @@ const config = {
      */
     target: 'web',
 
-    // mode: IS_PRODUCTION ? 'production' : 'development',
+    watch: !IS_PRODUCTION,
+
+    watchOptions: {
+        aggregateTimeout: 300,
+        poll: 1000
+    },
 
     /**
      * Tell webpack the root file of our web application
@@ -140,7 +145,7 @@ const config = {
             allChunks: true
         }),
         new ReactLoadablePlugin({
-            filename: 'react-loadable.json',
+            filename: 'build/public/react-loadable.json',
         }),
     ]
 };
@@ -149,9 +154,9 @@ const config = {
  * If we are in production mode, remove build public folder.
  */
 if (IS_PRODUCTION) {
-    config.plugins.concat([
-        new CleanWebpackPlugin('public', {
-            root: BUILD_PATH,
+    config.plugins = [
+        new CleanWebpackPlugin('build/*.*', {
+            root: ROOT_PATH,
             verbose: true,
         }),
         new webpack.optimize.UglifyJsPlugin({
@@ -172,7 +177,7 @@ if (IS_PRODUCTION) {
                 comments: false
             }
         }),
-    ]);
+    ].concat(config.plugins);
 }
 
 module.exports = merge(baseConfig, config);

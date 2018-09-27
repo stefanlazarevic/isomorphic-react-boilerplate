@@ -31,7 +31,7 @@ import createStore from '../app/state/store/global.store';
  * Application import group.
  */
 import Routes from '../app/routes/app-routes';
-import stats from '../../react-loadable.json';
+import stats from '../../build/public/react-loadable.json';
 import ContextProvider from '../contextProvider/ContextProvider';
 
 /**

@@ -1,8 +1,8 @@
 .vscode
 node_modules
-build
+build/*
 package-lock.json
 react-loadable.json
-docs
+docs/*
 src/app/old
 .env

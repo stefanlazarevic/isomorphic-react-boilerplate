@@ -63,6 +63,13 @@ const config = {
 
     devtool: IS_PRODUCTION ? false : 'source-map',
 
+    watch: !IS_PRODUCTION,
+
+    watchOptions: {
+        aggregateTimeout: 300,
+        poll: 1000
+    },
+
     module: {
         rules: [
             {
