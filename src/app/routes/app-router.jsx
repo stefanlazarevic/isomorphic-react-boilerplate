@@ -29,6 +29,6 @@ class AppRouter extends Component {
             </Switch>
         );
     }
-};
+}
 
 export default AppRouter;

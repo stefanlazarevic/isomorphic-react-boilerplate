@@ -5,7 +5,7 @@ import { preloadReady } from 'react-loadable';
 import { Provider as ReduxProvider } from 'react-redux';
 import createStore from '../app/state/store/global.store';
 
-import ContextProvider from '../contextProvider/ContextProvider';
+import App from '../app/App';
 
 const store = createStore(window.REDUX_DATA);
 
@@ -15,7 +15,7 @@ preloadReady().then(() => {
     hydrate(
         <ReduxProvider store={store}>
             <BrowserRouter>
-                <ContextProvider context={context} />
+                <App context={context} />
             </BrowserRouter>
         </ReduxProvider>,
         document.getElementById('app')

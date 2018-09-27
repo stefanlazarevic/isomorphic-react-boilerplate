@@ -1,4 +1,6 @@
 module.exports = {
+    stats: 'errors-only',
+
     module: {
         rules: [
             {

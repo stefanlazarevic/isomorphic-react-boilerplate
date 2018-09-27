@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import AppRouter from '../app/routes/app-router';
+import AppRouter from './routes/app-router';
 
-class ContextProvider extends Component {
+import './assets/scss/index.scss';
+
+class App extends Component {
     static childContextTypes = {
         insertCss: PropTypes.func,
     }
@@ -16,4 +18,4 @@ class ContextProvider extends Component {
     }
 }
 
-export default ContextProvider;
+export default App;

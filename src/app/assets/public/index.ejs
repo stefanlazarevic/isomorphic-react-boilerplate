@@ -5,16 +5,21 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="author" content="Stefan Lazarevic"/>
-    <meta name="name" content="FullStack React Boilerplate"/>
-    <meta name="short_name" content="FRB"/>
-    <meta name="theme-color" content="#000">
-    <meta name="msapplication-TileColor" content="#000">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Standard favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!-- Recommended favicon format -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
     <!-- Title provided by page component over a Helmet HOC. -->
     {{TITLE}}
     {{SEO_CRITICAL_METADATA}}
-    <style>{{CRITICAL_CSS}}</style>
+    {{CRITICAL_CSS}}
+
+    <% if (htmlWebpackPlugin.files.chunks.main.css.length) { %>
+        <link rel="stylesheet" href=<%= htmlWebpackPlugin.files.chunks.main.css %>>
+    <% } %>
+
     <!-- Social Media Metadata. [Facebook] -->
     <meta property="og:type" content="website"/>
     <!-- Social Media Metadata [Twitter] -->
@@ -22,11 +27,20 @@
 </head>
 <body>
     <div id="app">{{APP}}</div>
+
+    <% if (htmlWebpackPlugin.files.chunks.runtime.entry.length) { %>
     <script src=<%= htmlWebpackPlugin.files.chunks.runtime.entry %>></script>
-    <link rel="stylesheet" href=<%= htmlWebpackPlugin.files.chunks.main.css %>>
-    <script src=<%= htmlWebpackPlugin.files.chunks.vendor.entry %>></script>
+    <% } %>
+
+    <% if (htmlWebpackPlugin.files.chunks.vendor.entry.length) { %>
+        <script src=<%= htmlWebpackPlugin.files.chunks.vendor.entry %>></script>
+    <% } %>
+
     <script>window.REDUX_DATA = {{REDUX_DATA}}</script>
     {{LOADABLE_CHUNKS}}
-    <script src=<%= htmlWebpackPlugin.files.chunks.main.entry %>></script>
+
+    <% if (htmlWebpackPlugin.files.chunks.main.entry.length) { %>
+        <script src=<%= htmlWebpackPlugin.files.chunks.main.entry %>></script>
+    <% } %>
 </body>
 </html>

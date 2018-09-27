@@ -16,8 +16,8 @@ class HomePage extends Component {
     renderPageMeta() {
         return (
             <Helmet>
-                <title>Hello World from Home compoenent</title>
-                <meta name="description" content="Welcome to the Home page." />
+                <title>Page Title less than 55 characters</title>
+                <meta name="description" content="Description of the page less than 150 characters" />
                 <meta name="keywords" content="react, demo, keywords" />
             </Helmet>
         );

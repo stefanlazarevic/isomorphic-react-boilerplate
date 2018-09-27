@@ -8,7 +8,7 @@ class PageNotFound extends Component {
     renderPageMeta() {
         return (
             <Helmet>
-                <title>Page not found 2</title>
+                <title>Page Title less than 55 characters</title>
             </Helmet>
         );
     }
