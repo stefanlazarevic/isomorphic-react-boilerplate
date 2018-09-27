@@ -1,0 +1,31 @@
+@import './commons/text';
+
+:global {
+    .textWhite {
+        @extend %textWhite;
+    }
+
+    .textBlack {
+        @extend %textBlack;
+    }
+
+    .textRed {
+        @extend %textRed;
+    }
+
+    .textSuccess {
+        @extend %textSuccess;
+    }
+
+    .textDanger {
+        @extend %textDanger;
+    }
+
+    .textWarning {
+        @extend %textWarning;
+    }
+
+    .textInfo {
+        @extend %textInfo;
+    }
+}

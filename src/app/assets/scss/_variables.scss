@@ -1,8 +1,17 @@
+// Defaults.
+$white: #fff;
+$black: #000;
+$red: #f00;
+
 // Information colors.
 $success: #0AB3A0;
-$error: #FF585B;
+$danger: #FF585B;
 $warning: #FFB209;
 $info: #41A5DF;
+
+// Theme typography.
+$theme-font-size: 16px;
+$theme-font-family: 'Open Sans', sans-serif;
 
 // Theme colors.
 $theme-primary: #3d3d57;
@@ -11,7 +20,3 @@ $theme-selection-color: #fff;
 $theme-selection-background: #3D3D57;
 $theme-orange: #f09f44;
 $theme-background: #f5f5f5;
-
-// Theme typography.
-$theme-font-size: 16px;
-$theme-font-family: 'Open Sans', sans-serif;
