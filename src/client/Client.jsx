@@ -3,7 +3,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { preloadReady } from 'react-loadable';
 import { Provider as ReduxProvider } from 'react-redux';
-import createStore from '../app/state/store/global.store';
+import createStore from '../app/redux/store/global.store';
 
 import App from '../app/App';
 

@@ -5,13 +5,13 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import { pageview } from 'react-ga';
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import classnames from 'classnames';
 
 /**
  * Import page styles.
  */
-import styles from './style/about-page.style.scss';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import classnames from 'classnames';
+import styles from './AboutPage.scss';
 
 class AboutPage extends Component {
     renderPageMeta() {

@@ -2,9 +2,12 @@ import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 
-import './style/not-found-page.style.scss';
+/**
+ * Import page styles.
+ */
+import './UnknownPage.scss';
 
-class PageNotFound extends Component {
+class UnknownPage extends Component {
     renderPageMeta() {
         return (
             <Helmet>
@@ -24,4 +27,4 @@ class PageNotFound extends Component {
     }
 }
 
-export default PageNotFound;
+export default UnknownPage;

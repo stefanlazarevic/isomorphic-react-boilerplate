@@ -42,6 +42,10 @@
     "settings": {
         "flowtype": {
             "onlyFilesWithFlowAnnotation": true
+        },
+        "react": {
+            "version": "16.5.2",
+            "flowVersion": "0.81.0"
         }
     },
     "globals": {

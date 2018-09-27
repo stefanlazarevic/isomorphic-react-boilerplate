@@ -8,7 +8,7 @@ import { initialize as initGoogleAnalytics } from 'react-ga';
 /**
  * Application route map import.
  */
-import Routes from './app-routes';
+import AppRoutes from './Routes';
 
 /**
  * Isomorphic React Router used to handle requests
@@ -25,7 +25,7 @@ class AppRouter extends Component {
     render() {
         return (
             <Switch>
-                {Routes.map((route, index) => <Route key={index} {...route} />)}
+                {AppRoutes.map((route, index) => <Route key={index} {...route} />)}
             </Switch>
         );
     }

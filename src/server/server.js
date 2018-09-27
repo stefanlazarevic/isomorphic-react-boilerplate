@@ -25,12 +25,12 @@ import { getBundles } from 'react-loadable/webpack';
  * Redux import group.
  */
 import { Provider as ReduxProvider } from 'react-redux';
-import createStore from '../app/state/store/global.store';
+import createStore from '../app/redux/store/global.store';
 
 /**
  * Application import group.
  */
-import AppRoutes from '../app/routes/app-routes';
+import AppRoutes from '../app/routes/Routes';
 import stats from '../../build/public/react-loadable.json';
 import App from '../app/App';
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import AppRouter from './routes/app-router';
+import AppRouter from './routes/AppRouter';
 
 import './assets/scss/index.scss';
 

@@ -17,7 +17,7 @@ export default [
         component: Loadable({
             loader: () => import(
                 /* webpackChunkName: "js/chunks/home-page" */
-                '../pages/home/home-page'
+                '../pages/home/HomePage'
             ),
             loading: () => <div>Loading...</div>
         }),
@@ -33,7 +33,7 @@ export default [
         component: Loadable({
             loader: () => import(
                 /* webpackChunkName: "js/chunks/about-page" */
-                '../pages/about/about-page'
+                '../pages/about/AboutPage'
             ),
             loading: () => <div>Loading...</div>
         })
@@ -43,7 +43,7 @@ export default [
         component: Loadable({
             loader: () => import(
                 /* webpackChunkName: "js/chunks/not-found-page" */
-                '../pages/not-found/not-found-page'
+                '../pages/not-found/UnknownPage'
             ),
             loading: () => <div>Loading...</div>
         })
