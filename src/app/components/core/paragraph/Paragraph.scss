@@ -1,0 +1,83 @@
+/*
+ * Align property classes.
+ */
+.center {
+  text-align: center;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.justify {
+  text-align: justify;
+}
+
+/*
+ * Density property classes..
+ */
+.default {
+  line-height: 1.5rem;
+}
+
+.comfortable {
+  line-height: 1.25rem;
+}
+
+.compact {
+  line-height: 1rem;
+}
+
+/*
+ * Size property classes..
+ */
+.small {
+  font-size: 0.9rem;
+}
+
+.medium {
+  font-size: 1rem;
+}
+
+.large {
+  font-size: 1.15rem;
+}
+
+/*
+ * Weight property classes.
+ */
+.thin {
+  font-weight: 100;
+}
+
+.light {
+  font-weight: 300;
+}
+
+.regular {
+  font-weight: 400;
+}
+
+.semiBold {
+  font-weight: 600;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.extraBold {
+  font-weight: 800;
+}
+
+/*
+ * Always applied classes..
+ */
+.wordBreak {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}

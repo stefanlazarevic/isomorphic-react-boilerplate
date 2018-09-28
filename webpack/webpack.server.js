@@ -28,100 +28,100 @@ const baseConfig = require('./webpack.base.js');
  * Webpack server configuration.
  */
 const config = {
-    /**
-     * Configuration name.
-     */
-    name: 'server',
+  /**
+   * Configuration name.
+   */
+  name: 'server',
 
-    /**
-     * Inform webpack that we are building bundle for node.js.
-     */
-    target: 'node',
+  /**
+   * Inform webpack that we are building bundle for node.js.
+   */
+  target: 'node',
 
-    // mode: IS_PRODUCTION ? 'production' : 'development',
+  // mode: IS_PRODUCTION ? 'production' : 'development',
 
-    /**
-     * Tell webpack the root file of our web application
-     */
-    entry: `${SERVER_ROOT}/server.js`,
+  /**
+   * Tell webpack the root file of our web application
+   */
+  entry: `${SERVER_ROOT}/server.js`,
 
-    /**
-     * Tell webpack where to put the output file that is generated.
-     */
-    output: {
-        filename: 'server.bundle.js',
-        path: BUILD_PATH,
-        publicPath: PUBLIC_PATH
-    },
+  /**
+   * Tell webpack where to put the output file that is generated.
+   */
+  output: {
+    filename: 'server.bundle.js',
+    path: BUILD_PATH,
+    publicPath: PUBLIC_PATH
+  },
 
-    /**
-     *  Teach webpack which extensions to try to use for import.
-     */
-    resolve: {
-        extensions: ['.js', '.jsx', '.json'],
-    },
+  /**
+   *  Teach webpack which extensions to try to use for import.
+   */
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'],
+  },
 
-    devtool: IS_PRODUCTION ? false : 'source-map',
+  devtool: IS_PRODUCTION ? false : 'source-map',
 
-    watch: !IS_PRODUCTION,
+  watch: !IS_PRODUCTION,
 
-    watchOptions: {
-        aggregateTimeout: 300,
-        poll: 1000
-    },
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: 1000
+  },
 
-    module: {
-        rules: [
-            {
-                test: /\.scss$/,
-                use: [
-                    {
-                        loader: 'isomorphic-style-loader'
-                    },
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            modules: true,
-                            importLoaders: 1,
-                            localIdentName: '[name]__[local]',
-                        }
-                    },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: () => [
-                                require('autoprefixer')
-                            ],
-                        }
-                    },
-                    {
-                        loader: 'sass-loader',
-                    }
-                ]
-            },
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: 'isomorphic-style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[name]__[local]',
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [
+                require('autoprefixer')
+              ],
+            }
+          },
+          {
+            loader: 'sass-loader',
+          }
         ]
-    },
+      },
+    ]
+  },
+
+  /**
+   * Tell the webpack not to bundle any libraries into our final bundle if
+   * they exists inside the node moduels.
+   */
+  externals: [webpackNodeExternals()],
+
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(IS_PRODUCTION ? 'production' : 'development'),
+      __isBrowser__: 'false',
+    }),
 
     /**
-     * Tell the webpack not to bundle any libraries into our final bundle if
-     * they exists inside the node moduels.
+     * Tell webpack that it does not need to create chunks
+     * for dynamic imports when building server code.
      */
-    externals: [webpackNodeExternals()],
-
-    plugins: [
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV': JSON.stringify(IS_PRODUCTION ? 'production' : 'development'),
-            __isBrowser__: 'false',
-        }),
-
-        /**
-         * Tell webpack that it does not need to create chunks
-         * for dynamic imports when building server code.
-         */
-        new webpack.optimize.LimitChunkCountPlugin({
-            maxChunks: 1,
-        }),
-    ]
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1,
+    }),
+  ]
 };
 
 module.exports = merge(baseConfig, config);

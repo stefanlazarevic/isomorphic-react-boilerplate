@@ -10,14 +10,14 @@ import App from '../app/App';
 const store = createStore(window.REDUX_DATA);
 
 preloadReady().then(() => {
-    const context = { insertCss: () => null};
+  const context = { insertCss: () => null};
 
-    hydrate(
-        <ReduxProvider store={store}>
-            <BrowserRouter>
-                <App context={context} />
-            </BrowserRouter>
-        </ReduxProvider>,
-        document.getElementById('app')
-    );
+  hydrate(
+    <ReduxProvider store={store}>
+      <BrowserRouter>
+        <App context={context} />
+      </BrowserRouter>
+    </ReduxProvider>,
+    document.getElementById('app')
+  );
 });

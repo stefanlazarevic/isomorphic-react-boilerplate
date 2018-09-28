@@ -11,19 +11,19 @@ const thunkMiddleware = [thunk];
 let reduxDevToolsMiddleware = f => f;
 
 if (__isBrowser__) {
-    reduxDevToolsMiddleware = window.devToolsExtension ? window.devToolsExtension() : f => f;
+  reduxDevToolsMiddleware = window.devToolsExtension ? window.devToolsExtension() : f => f;
 }
 
 const middleware = compose(applyMiddleware(...thunkMiddleware), reduxDevToolsMiddleware);
 
 const combinedReducers = combineReducers({
-    users: UsersReducer
+  users: UsersReducer
 });
 
 const store = (initialState: any) => createStore(
-    combinedReducers,
-    initialState,
-    middleware,
+  combinedReducers,
+  initialState,
+  middleware,
 );
 
 export default store;

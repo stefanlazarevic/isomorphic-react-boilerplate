@@ -14,30 +14,30 @@ import classnames from 'classnames';
 import styles from './AboutPage.scss';
 
 class AboutPage extends Component {
-    renderPageMeta() {
-        return (
-            <Helmet>
-                <title>Page Title less than 55 characters</title>
-                <meta name="description" content="Description of the page less than 150 characters" />
-                <meta name="keywords" content="react, demo, keywords" />
-            </Helmet>
-        );
-    }
+  renderPageMeta() {
+    return (
+      <Helmet>
+        <title>Page Title less than 55 characters</title>
+        <meta name="description" content="Description of the page less than 150 characters" />
+        <meta name="keywords" content="react, demo, keywords" />
+      </Helmet>
+    );
+  }
 
-    componentDidMount() {
-        pageview('/about');
-    }
+  componentDidMount() {
+    pageview('/about');
+  }
 
-    render() {
-        return (
-            <Fragment>
-                {this.renderPageMeta()}
-                <h1 className={classnames(styles.title)}>This is an About page</h1>
-                <p>Nothing else to see here...</p>
-                <Link to="/">Back to Index</Link>
-            </Fragment>
-        );
-    }
+  render() {
+    return (
+      <Fragment>
+        {this.renderPageMeta()}
+        <h1 className={classnames(styles.title)}>This is an About page</h1>
+        <p>Nothing else to see here...</p>
+        <Link to="/">Back to Index</Link>
+      </Fragment>
+    );
+  }
 }
 
 /**

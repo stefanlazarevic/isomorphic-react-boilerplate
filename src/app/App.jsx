@@ -5,17 +5,17 @@ import AppRouter from './routes/AppRouter';
 import './assets/scss/index.scss';
 
 class App extends Component {
-    static childContextTypes = {
-        insertCss: PropTypes.func,
-    }
+  static childContextTypes = {
+    insertCss: PropTypes.func,
+  }
 
-    getChildContext() {
-        return { ...this.props.context };
-    }
+  getChildContext() {
+    return {...this.props.context};
+  }
 
-    render() {
-        return <AppRouter {...this.props} />;
-    }
+  render() {
+    return <AppRouter {...this.props} />;
+  }
 }
 
 export default App;

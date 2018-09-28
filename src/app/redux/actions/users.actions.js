@@ -12,8 +12,8 @@ import fetchUsers from '../../routes/api/users';
  * Export fetch users action.
  */
 export const fetchUsersAction = () => dispatch => {
-    return fetchUsers().then(data => dispatch({
-        type: FETCH_USERS,
-        data
-    }));
+  return fetchUsers().then(data => dispatch({
+    type: FETCH_USERS,
+    data
+  }));
 };

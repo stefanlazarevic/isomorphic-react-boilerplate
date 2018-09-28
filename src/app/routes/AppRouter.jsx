@@ -17,18 +17,18 @@ import AppRoutes from './Routes';
  * @requires - Google Analytics ID.
  */
 class AppRouter extends Component {
-    constructor() {
-        super();
-        initGoogleAnalytics('');
-    }
+  constructor() {
+    super();
+    initGoogleAnalytics('');
+  }
 
-    render() {
-        return (
-            <Switch>
-                {AppRoutes.map((route, index) => <Route key={index} {...route} />)}
-            </Switch>
-        );
-    }
+  render() {
+    return (
+      <Switch>
+        {AppRoutes.map((route, index) => <Route key={index} {...route} />)}
+      </Switch>
+    );
+  }
 }
 
 export default AppRouter;

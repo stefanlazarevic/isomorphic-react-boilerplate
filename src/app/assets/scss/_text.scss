@@ -1,31 +1,31 @@
 @import './commons/text';
 
 :global {
-    .textWhite {
-        @extend %textWhite;
-    }
+  .textWhite {
+    @extend %textWhite;
+  }
 
-    .textBlack {
-        @extend %textBlack;
-    }
+  .textBlack {
+    @extend %textBlack;
+  }
 
-    .textRed {
-        @extend %textRed;
-    }
+  .textRed {
+    @extend %textRed;
+  }
 
-    .textSuccess {
-        @extend %textSuccess;
-    }
+  .textSuccess {
+    @extend %textSuccess;
+  }
 
-    .textDanger {
-        @extend %textDanger;
-    }
+  .textDanger {
+    @extend %textDanger;
+  }
 
-    .textWarning {
-        @extend %textWarning;
-    }
+  .textWarning {
+    @extend %textWarning;
+  }
 
-    .textInfo {
-        @extend %textInfo;
-    }
+  .textInfo {
+    @extend %textInfo;
+  }
 }
