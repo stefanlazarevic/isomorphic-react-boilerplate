@@ -3,11 +3,6 @@
   outline: 0;
 }
 
-.disabled {
-  opacity: 0.8;
-  cursor: not-allowed;
-}
-
 .button:focus {
   border-color: rgb(97, 157, 215);
 }
@@ -24,4 +19,9 @@
 .button > * + * {
   margin-left: 0.5em;
   display: inline-block;
+}
+
+.disabled {
+  opacity: 0.8;
+  cursor: not-allowed;
 }

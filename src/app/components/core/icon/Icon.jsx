@@ -1,30 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import classes from './Icon.scss';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
-class Icon extends Component {
-  constructor(props) {
-    super(props);
-  }
+const Icon = props => {
+  const { icon, className, ...rest } = props;
 
-  render() {
-    const { props } = this;
-    const { icon, className } = props;
-
-    return icon ? (
-      <i
-        aria-hidden="true"
-        className={classnames(icon, classes[icon], className)}
-        {...props}
-      />
-    ) : null;
-  }
-}
+  return icon ? (
+    <i
+      aria-hidden="true"
+      className={classnames(icon, classes[icon], className)}
+      {...rest}
+    />
+  ) : null;
+};
 
 Icon.propTypes = {
   icon: PropTypes.string.isRequired
 };
 
-export default Icon;
+export default withStyles(classes)(Icon);

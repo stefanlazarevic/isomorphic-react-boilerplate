@@ -1,44 +1,41 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import classes from './Button.scss';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
-class Button extends Component {
-  constructor(props) {
-    super(props);
-  }
+const Button = props => {
+  const {
+    children,
+    text,
+    icon,
+    iconRight,
+    className,
+    round,
+    disabled,
+    onClick,
+    type,
+    ...rest
+  } = props;
 
-  render() {
-    const {
-      children,
-      text,
-      icon,
-      iconRight,
-      className,
-      round,
-      disabled,
-      onClick,
-      type
-    } = this.props;
+  const roundClass = round ? classes.round : undefined;
+  const disabledClass = disabled ? classes.disabled : undefined;
 
-    const roundClass = round ? classes.round : undefined;
-    const disabledClass = disabled ? classes.disabled : undefined;
-
-    return (
-      <button
-        type={type}
-        disabled={disabled}
-        onClick={onClick}
-        className={classnames(classes.button, className, roundClass, disabledClass)}
-      >
-        {icon && !iconRight && <i className={icon} />}
-        <span>{text || children}</span>
-        {icon && iconRight && <i className={icon} />}
-      </button>
-    );
-  }
-}
+  return (
+    <button
+      type={type}
+      disabled={disabled}
+      onClick={onClick}
+      className={classnames(classes.button, className, roundClass, disabledClass)}
+      {...rest}
+    >
+      {icon && !iconRight && <i className={icon} />}
+      <span>{text || children}</span>
+      {icon && iconRight && <i className={icon} />}
+    </button>
+  );
+};
 
 Button.propTypes = {
   text: PropTypes.string,
@@ -57,5 +54,4 @@ Button.defaultProps = {
   onClick: () => undefined
 };
 
-
-export default Button;
+export default withStyles(classes)(Button);

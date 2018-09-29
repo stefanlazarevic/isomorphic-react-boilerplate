@@ -13,6 +13,8 @@ import classes from './HomePage.scss';
 
 import Heading from '../../components/core/heading/Heading';
 import Paragraph from '../../components/core/paragraph/Paragraph';
+import Section from '../../components/core/section/Section';
+
 class HomePage extends Component {
   constructor(props, context) {
     super(props, context);
@@ -34,13 +36,13 @@ class HomePage extends Component {
 
   render() {
     return (
-      <div>
+      <Section>
         {this.renderPageMeta()}
-        <Heading text="Welcome to the Home Page" align="center"/>
+        <Heading text="Welcome to the Home Page" align="center" weight="light"/>
         <Paragraph align="center">
           From here you can visit <Link to="/about">About page</Link> or see how <Link to="/nonexistingpage">Non-Existing Page</Link> looks like.
         </Paragraph>
-      </div>
+      </Section>
     );
   }
 

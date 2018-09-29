@@ -1,0 +1,49 @@
+// Base colors.
+$white: #fff;
+$black: #000;
+
+// Base component weight class map.
+// Based on google guideline.
+$fontWeightMap: (
+    thin: 100,
+    light: 300,
+    regular: 400,
+    semiBold: 600,
+    bold: 700,
+    extraBold: 800,
+);
+
+// Body Configuration variables.
+$body-background-color: $white;
+$body-font-color: #444;
+$body-font-size: 16px;
+$body-font-line-height: 1.5;
+$body-font-family: 'Open Sans', sans-serif;
+$body-font-weight: 400;
+
+// External Link Styles.
+$link-color: #0084ff;
+$link-focus-color: #365899;
+$link-hover-color: #365899;
+
+// Section styles.
+$section-padding: 30px 0;
+
+// Core heading styles.
+$headingFontSizes: (
+    h1: 2.5rem,
+    h2: 2rem,
+    h3: 1.75rem,
+    h4: 1.5rem,
+    h5: 1.25rem,
+    h6: 1rem,
+);
+
+$headingMarginBottom: (
+    h1: 1rem,
+    h2: 1rem,
+    h3: 1rem,
+    h4: 0.5rem,
+    h5: 0.5rem,
+    h6: 0.5rem,
+)

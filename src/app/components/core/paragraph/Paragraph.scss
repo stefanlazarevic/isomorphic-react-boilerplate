@@ -1,3 +1,5 @@
+@import '../../../assets/scss/config';
+
 /*
  * Align property classes.
  */
@@ -50,28 +52,10 @@
 /*
  * Weight property classes.
  */
-.thin {
-  font-weight: 100;
-}
-
-.light {
-  font-weight: 300;
-}
-
-.regular {
-  font-weight: 400;
-}
-
-.semiBold {
-  font-weight: 600;
-}
-
-.bold {
-  font-weight: 700;
-}
-
-.extraBold {
-  font-weight: 800;
+@each $className, $value in $fontWeightMap {
+  .#{$className} {
+    font-weight: $value;
+  }
 }
 
 /*

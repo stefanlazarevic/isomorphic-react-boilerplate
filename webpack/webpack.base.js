@@ -16,7 +16,7 @@ module.exports = {
           ],
           plugins: [
             ['babel-plugin-react-css-modules',{
-              'generateScopedName': '[name]__[local]'
+              'generateScopedName': '[name]_[local]'
             }],
             'react-loadable/babel'
           ],

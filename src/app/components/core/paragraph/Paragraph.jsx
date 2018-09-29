@@ -1,41 +1,35 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import classes from'./Paragraph.scss';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
-class Paragraph extends Component {
-  constructor(props) {
-    super(props);
-  }
+const Paragraph = props => {
+  const { children, text, align, density, size, reverse, weight, className, ...rest } = props;
 
-  render() {
-    const { props } = this;
-    const { text, align, density, size, reverse, weight, className } = props;
+  const content = text
+    ? reverse
+      ? [...text].reverse().join('')
+      : text
+    : void 0;
 
-    const content = text
-      ? reverse
-        ? [...text].reverse().join('')
-        : text
-      : void 0;
-
-    return (
-      <p
-        className={classnames(
-          classes['wordBreak'],
-          classes[align],
-          classes[density],
-          classes[size],
-          classes[weight],
-          classes[className]
-        )}
-        {...props}
-      >
-        {content || props.children}
-      </p>
-    );
-  }
-}
+  return (
+    <p
+      className={classnames(
+        classes['wordBreak'],
+        classes[align],
+        classes[density],
+        classes[size],
+        classes[weight],
+        classes[className]
+      )}
+      {...rest}
+    >
+      {content || children}
+    </p>
+  );
+};
 
 Paragraph.propTypes = {
   text: PropTypes.string,
@@ -61,4 +55,4 @@ Paragraph.defaultProps = {
   weight: 'regular'
 };
 
-export default Paragraph;
+export default withStyles(classes)(Paragraph);

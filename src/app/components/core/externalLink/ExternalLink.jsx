@@ -1,36 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
-import './ExternalLink.css';
+import classes from './ExternalLink.scss';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
 /**
  * Since React Router uses 'Link' component to
  * navigate internal pages, we can use ExternalLink
  * for navigating outside of application.
  */
-class ExternalLink extends Component {
-  constructor(props) {
-    super(props);
-  }
+const ExternalLink = props => {
+  const { children, text, href, target, rel, className, ...rest } = props;
 
-  render() {
-    const { props } = this;
-    const { text, href, target, rel, className } = props;
-
-    return (
-      <a
-        href={href}
-        target={target}
-        rel={rel}
-        className={classnames(className)}
-        {...props}
-      >
-        {text || props.children}
-      </a>
-    );
-  }
-}
+  return (
+    <a
+      href={href}
+      target={target}
+      rel={rel}
+      className={classnames(classes.link, className)}
+      {...rest}
+    >
+      {text || children}
+    </a>
+  );
+};
 
 ExternalLink.propTypes = {
   text: PropTypes.string,
@@ -44,4 +38,4 @@ ExternalLink.defaultProps = {
   rel: 'noopener'
 };
 
-export default ExternalLink;
+export default withStyles(classes)(ExternalLink);

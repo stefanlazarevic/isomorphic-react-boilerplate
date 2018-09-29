@@ -86,7 +86,7 @@ const config = {
               options: {
                 modules: true,
                 importLoaders: 1,
-                localIdentName: '[name]__[local]',
+                localIdentName: '[name]_[local]',
                 camelCase: true,
               }
             },

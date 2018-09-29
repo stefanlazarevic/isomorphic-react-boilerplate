@@ -1,36 +1,51 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import classes from './Heading.scss';
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
 
-class Heading extends Component {
-  constructor(props) {
-    super(props);
-  }
+const Heading = props => {
+  const {
+    children,
+    text,
+    align,
+    weight,
+    level,
+    showLevel,
+    className,
+    ...rest
+  } = props;
 
-  render() {
-    const { props } = this;
-    const { text, align, level, className } = props;
+  const Tag = level ? `h${level}` : 'h1';
+  const styleTag = showLevel && `h${showLevel}`;
 
-    const Tag = level ? `h${level}` : 'h1';
+  return (
+    <Tag className={classnames(classes[align], classes[styleTag || Tag], classes[weight], className)} {...rest}>
+      {text || children}
+    </Tag>
+  );
+};
 
-    return (
-      <Tag className={classnames(classes[align], classes[Tag], className)} {...props}>
-        {text || props.children}
-      </Tag>
-    );
-  }
-}
 
 Heading.propTypes = {
   level: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
-  align: PropTypes.oneOf(['left', 'center', 'right'])
+  showLevel: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
+  align: PropTypes.oneOf(['left', 'center', 'right']),
+  weight: PropTypes.oneOf([
+    'thin',
+    'light',
+    'regular',
+    'semiBold',
+    'bold',
+    'extraBold'
+  ]),
 };
 
 Heading.defaultProps = {
   level: 1,
-  align: 'left'
+  align: 'left',
+  weight: 'regular',
 };
 
-export default Heading;
+export default withStyles(classes)(Heading);
