@@ -5,7 +5,10 @@ import React from 'react';
 import Loadable from 'react-loadable';
 import { Redirect } from 'react-router-dom';
 
-const Loading = () => <div>Loading...</div>;
+import AboutLoadingPage from '../pages/about/AboutPage.loading';
+import HomePageLoading from '../pages/home/HomePage.loading';
+
+import NotFoundPage from '../pages/not-found/UnknownPage';
 
 /**
  * Application route map.
@@ -21,7 +24,8 @@ export default [
         /* webpackChunkName: "js/chunks/home-page" */
         '../pages/home/HomePage'
       ),
-      loading: Loading
+      loading: HomePageLoading,
+      delay: 300,
     }),
   },
   {
@@ -37,17 +41,12 @@ export default [
         /* webpackChunkName: "js/chunks/about-page" */
         '../pages/about/AboutPage'
       ),
-      loading: Loading
+      loading: AboutLoadingPage,
+      delay: 300,
     })
   },
   {
     path: '**',
-    component: Loadable({
-      loader: () => import(
-        /* webpackChunkName: "js/chunks/not-found-page" */
-        '../pages/not-found/UnknownPage'
-      ),
-      loading: Loading
-    })
+    component: NotFoundPage
   }
 ];

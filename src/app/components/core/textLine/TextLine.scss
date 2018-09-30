@@ -1,0 +1,47 @@
+@import '../../../assets/scss/config';
+
+.line {
+    animation: pulse 1s infinite ease-in-out;
+    margin-bottom: 0.5rem;
+}
+
+@each $tag, $fontSize in $headingFontSizes {
+    .#{$tag} {
+        height: $fontSize;
+        margin-bottom: map-get($headingMarginBottom, $tag);
+    }
+}
+
+.p {
+    height: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.left {
+    margin-right: auto;
+}
+
+.center {
+    margin: {
+        left: auto;
+        right: auto;
+    }
+}
+
+.right {
+    margin-left: auto;
+}
+
+@keyframes pulse {
+    0% {
+        background-color: rgba(165, 165, 165, .1);
+    }
+
+    50% {
+        background-color: rgba(165, 165, 165, .3);
+    }
+
+    100% {
+        background-color: rgba(165, 165, 165, .1);
+    }
+}

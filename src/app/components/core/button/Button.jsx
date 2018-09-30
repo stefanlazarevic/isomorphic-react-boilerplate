@@ -44,7 +44,7 @@ Button.propTypes = {
   round: PropTypes.bool,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
-  type: PropTypes.oneOf(['button', 'submit']),
+  type: PropTypes.oneOf(['button', 'submit', 'reset']),
   className: PropTypes.string,
   children: PropTypes.any
 };

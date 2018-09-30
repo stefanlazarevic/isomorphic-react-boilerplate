@@ -2,6 +2,9 @@
 $white: #fff;
 $black: #000;
 
+// Text
+$default-text-align: left;
+
 // Base component weight class map.
 // Based on google guideline.
 $fontWeightMap: (
@@ -23,11 +26,20 @@ $body-font-weight: 400;
 
 // External Link Styles.
 $link-color: #0084ff;
-$link-focus-color: #365899;
+$link-decoration: none;
+
 $link-hover-color: #365899;
+$link-hover-decoration: underline;
+
+$link-focus-color: #365899;
+$link-focus-decoration: underline;
 
 // Section styles.
 $section-padding: 30px 0;
+
+// <hr> Element style.
+$hr-default-margin: 1rem 0;
+$hr-color: #eee;
 
 // Core heading styles.
 $headingFontSizes: (
@@ -46,4 +58,7 @@ $headingMarginBottom: (
     h4: 0.5rem,
     h5: 0.5rem,
     h6: 0.5rem,
-)
+);
+
+// <small> Element style.
+$small-font-size: 0.85rem;

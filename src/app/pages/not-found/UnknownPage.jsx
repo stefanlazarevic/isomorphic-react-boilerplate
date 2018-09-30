@@ -7,6 +7,10 @@ import Helmet from 'react-helmet';
  */
 import './UnknownPage.scss';
 
+import Heading from '../../components/core/heading/Heading';
+import Paragraph from '../../components/core/paragraph/Paragraph';
+import Section from '../../components/core/section/Section';
+
 class UnknownPage extends Component {
   renderPageMeta() {
     return (
@@ -18,11 +22,13 @@ class UnknownPage extends Component {
 
   render() {
     return (
-      <Fragment>
+      <Section>
         {this.renderPageMeta()}
-        <h1>404 Not Found</h1>
-        <p>You may be lost. Return back to <Link to="/">Home</Link>.</p>
-      </Fragment>
+        <Heading align="center" weight="light">404 Not Found</Heading>
+        <Paragraph align="center">
+          You may be lost. Return back to <Link to="/">Home</Link>.
+        </Paragraph>
+      </Section>
     );
   }
 }

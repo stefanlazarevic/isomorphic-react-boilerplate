@@ -54,7 +54,7 @@ app.use(bodyParser.json());
 app.use(compression({ level: process.env.COMPRESSION_LEVEL || 6 }));
 
 const cacheStaticAssets = IS_PRODUCTION ? {
-    maxage: '31557600'
+  maxage: '31557600'
 } : {};
 
 app.use(express.static('build/public', cacheStaticAssets));
@@ -63,129 +63,130 @@ app.use(express.static('build/public', cacheStaticAssets));
  * Handle incoming requests.
  */
 app.get('*', (request, response, next) => {
-    /**
-     * Initial response status.
-     * 200 = OK.
-     */
-    let status = 200;
+  /**
+   * Initial response status.
+   * 200 = OK.
+   */
+  let status = 200;
 
-    /**
-     * Determine which component should be loaded for current request.
-     */
-    const activeRoute = AppRoutes.find(route => matchPath(request.url.toLowerCase(), route));
+  /**
+   * Determine which component should be loaded for current request.
+   */
+  const activeRoute = AppRoutes.find(route => matchPath(request.url.toLowerCase(), route));
 
-    /**
-     * Extract information from activeRoute.
-     */
-    if (activeRoute) {
-        const { path } = activeRoute;
+  /**
+   * Extract information from activeRoute.
+   */
+  if (activeRoute) {
+    const { path } = activeRoute;
 
-        if (path === '**') {
-            status = 404;
-        }
-    } else {
-        status = 404;
+    if (path === '**') {
+      status = 404;
     }
+  } else {
+    status = 404;
+  }
 
-    const context = {};
-    const store = createStore();
+  const context = {};
+  const store = createStore();
 
-    const loadedComponents = Promise.all(
-        AppRoutes
-            .filter(route => matchPath(request.url.toLowerCase(), route))
-            .map(route => route.component.preload())
-    );
+  const loadedComponents = Promise.all(
+    AppRoutes
+      .filter(route => matchPath(request.url.toLowerCase(), route))
+      .filter(route => route.component.preload)
+      .map(route => route.component.preload())
+  );
 
-    loadedComponents.then(components => {
-        const FType = '[object Function]';
-        const AType = '[object Array]';
+  loadedComponents.then(components => {
+    const FType = '[object Function]';
+    const AType = '[object Array]';
 
-        const componentsPromise =
-            components
-                .map(loadableComponent => loadableComponent.default)
-                .filter(pageComponent => {
-                    const SFT = Object.prototype.toString.apply(pageComponent.serverFetchInitialData);
-                    return pageComponent.serverFetchInitialData && (SFT === FType || SFT === AType);
-                })
-                .map(pageComponent => {
-                    const SFT = Object.prototype.toString.apply(pageComponent.serverFetchInitialData);
+    const componentsPromise =
+      components
+        .map(loadableComponent => loadableComponent.default)
+        .filter(pageComponent => {
+          const SFT = Object.prototype.toString.apply(pageComponent.serverFetchInitialData);
+          return pageComponent.serverFetchInitialData && (SFT === FType || SFT === AType);
+        })
+        .map(pageComponent => {
+          const SFT = Object.prototype.toString.apply(pageComponent.serverFetchInitialData);
 
-                    if (SFT === FType) {
-                        return store.dispatch(pageComponent.serverFetchInitialData());
-                    } else {
-                        // Handle array of actions.
-                        return Promise.all(
-                            pageComponent.serverFetchInitialData
-                                .filter(action => typeof action === 'function')
-                                .map(action => store.dispatch(action()))
-                        );
-                    }
-                });
-
-        Promise.all(componentsPromise).then(() => {
-            const modules = [];
-
-            const css = new Set();
-
-            // Enables critical path CSS rendering
-            // https://github.com/kriasoft/isomorphic-style-loader
-            const insertCss = (...styles) => {
-                styles.forEach(style => css.add(style._getCss()));
-            };
-
-            context.insertCss = insertCss;
-
-            const jsx = (
-                <Loadable.Capture report={moduleName => modules.push(moduleName)}>
-                    <ReduxProvider store={store}>
-                        <StaticRouter context={context} location={request.url}>
-                            <App context={context} />
-                        </StaticRouter>
-                    </ReduxProvider>
-                </Loadable.Capture>
+          if (SFT === FType) {
+            return store.dispatch(pageComponent.serverFetchInitialData());
+          } else {
+            // Handle array of actions.
+            return Promise.all(
+              pageComponent.serverFetchInitialData
+                .filter(action => typeof action === 'function')
+                .map(action => store.dispatch(action()))
             );
+          }
+        });
 
-            const reduxState = store.getState();
+    Promise.all(componentsPromise).then(() => {
+      const modules = [];
 
-            const body = renderToString(jsx);
+      const css = new Set();
 
-            const bundles = getBundles(stats, modules);
+      // Enables critical path CSS rendering
+      // https://github.com/kriasoft/isomorphic-style-loader
+      const insertCss = (...styles) => {
+        styles.forEach(style => css.add(style._getCss()));
+      };
 
-            if (context.url) {
-                return response.redirect(302, context.url);
-            }
+      context.insertCss = insertCss;
 
-            /**
-             * Extract page data from React Helmet.
-             */
-            const helmet = Helmet.renderStatic();
-            const pageTitle = helmet.title.toString();
-            const seoMetadata = helmet.meta.toString();
+      const jsx = (
+        <Loadable.Capture report={moduleName => modules.push(moduleName)}>
+          <ReduxProvider store={store}>
+            <StaticRouter context={context} location={request.url}>
+              <App context={context} />
+            </StaticRouter>
+          </ReduxProvider>
+        </Loadable.Capture>
+      );
 
-            Helmet.rewind();
+      const reduxState = store.getState();
 
-            /**
-             * Extract used chunks to render page from react-loadable library.
-             * [IMPORTANT] Use defer in order to load chunk last and prevent undefined webpackJsonp issue.
-             */
-            const bundleScripts = bundles.map(bundle => `<script src="${bundle.publicPath}"></script>`).join('');
+      const body = renderToString(jsx);
 
-            const responseHTML = templateHTML
-                .replace('{{TITLE}}', pageTitle)
-                .replace('{{SEO_CRITICAL_METADATA}}', seoMetadata)
-                .replace('{{CRITICAL_CSS}}',
-                    [...css].length ? minifyCssString(`<style>${[...css].join('')}</style>`) : ''
-                )
-                .replace('{{APP}}', body)
-                .replace('{{LOADABLE_CHUNKS}}', bundleScripts)
-                .replace('{{REDUX_DATA}}', serialize(reduxState));
+      const bundles = getBundles(stats, modules);
 
-            if (process.env.NODE_ENV === 'production') {
-                response.set('Cache-Control', 'public, max-age=31557600');
-            }
-            response.status(status).send(responseHTML);
-        }).catch(next);
-    });
+      if (context.url) {
+        return response.redirect(302, context.url);
+      }
+
+      /**
+       * Extract page data from React Helmet.
+       */
+      const helmet = Helmet.renderStatic();
+      const pageTitle = helmet.title.toString();
+      const seoMetadata = helmet.meta.toString();
+
+      Helmet.rewind();
+
+      /**
+       * Extract used chunks to render page from react-loadable library.
+       * [IMPORTANT] Use defer in order to load chunk last and prevent undefined webpackJsonp issue.
+       */
+      const bundleScripts = bundles.map(bundle => `<script src="${bundle.publicPath}"></script>`).join('');
+
+      const responseHTML = templateHTML
+        .replace('{{TITLE}}', pageTitle)
+        .replace('{{SEO_CRITICAL_METADATA}}', seoMetadata)
+        .replace('{{CRITICAL_CSS}}',
+          [...css].length ? minifyCssString(`<style>${[...css].join('')}</style>`) : ''
+        )
+        .replace('{{APP}}', body)
+        .replace('{{LOADABLE_CHUNKS}}', bundleScripts)
+        .replace('{{REDUX_DATA}}', serialize(reduxState));
+
+      if (process.env.NODE_ENV === 'production') {
+        response.set('Cache-Control', 'public, max-age=31557600');
+      }
+      response.status(status).send(responseHTML);
+    }).catch(next);
+  });
 });
 
 /*

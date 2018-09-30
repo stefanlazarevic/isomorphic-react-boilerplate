@@ -1,40 +1,38 @@
-// This reset file is a combination of normalize css and Bootstrap reboot.
-// If you don't like reseting feel free to remove content from this file
-// in your next project.
-//
-// Normalize is licensed MIT. https://github.com/necolas/normalize.css
-// Bootstrap Reboot: https://getbootstrap.com/docs/4.1/content/reboot/
 @import './config';
 
-// Document
+/*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */
+/*! reboot | MIT | https://getbootstrap.com/docs/4.1/content/reboot/
+
+/* Document
+ *
+ * 1. Change from `box-sizing: content-box` so that `width` is not affected by `padding` or `border`.
+ * 2. Change the fallback font family in all browsers.
+ * 3. Correct the line height in all browsers.
+ * 4. Prevent adjustments of font size after orientation changes in IE on Windows Phone and in iOS.
+ * 5. Setting @viewport causes scrollbars to overlap content in IE11 and Edge, so
+ *    we force a non-overlapping, non-auto-hiding scrollbar to counteract.
+ * 6. Change the default tap highlight to be completely transparent in iOS.
+========================================================================== */
 
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+  box-sizing: border-box; // 1
 }
 
 html {
-    line-height: $body-font-line-height;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    -ms-overflow-style: scrollbar;
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+  font-family: sans-serif; // 2
+  line-height: 1.15; // 3
+  -webkit-text-size-adjust: 100%; // 4
+  -ms-text-size-adjust: 100%; // 4
+  -ms-overflow-style: scrollbar; // 5
+  -webkit-tap-highlight-color: rgba(0,0,0,0); // 6
 }
 
-body {
-    margin: 0;
-    text-align: left;
-    background-color: $body-background-color;
-    color: $body-font-color;
-    font: {
-        family: $body-font-family;
-        size: $body-font-size;
-        weight: $body-font-weight;
-    }
-    line-height: $body-font-line-height;
+// Shim for "new" HTML5 structural elements to display correctly (IE10, older browsers)
+article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {
+  display: block;
 }
-
 
 // IE10+ doesn't honor `<meta name="viewport">` in some cases.
 @at-root {
@@ -43,47 +41,258 @@ body {
   }
 }
 
-// Shim for "new" HTML5 structural elements to display correctly (IE10, older browsers)
-article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {
-  display: block;
+// Suppress the focus outline on elements that cannot be accessed via keyboard.
+// This prevents an unwanted focus outline from appearing around elements that
+// might still respond to pointer events.
+//
+// Credit: https://github.com/suitcss/base
+[tabindex="-1"]:focus {
+  outline: none !important;
 }
 
-// Headings and paragraphs.
-h1, h2, h3, h4, h5, h6, p {
-    margin-top: 0;
+/* Body
+ *
+ * 1. Remove the margin in all browsers.
+ * 2. As a best practice, apply a default `background-color`.
+ * 3. Set an explicit initial text-align value so that we can later use the
+ *    the `inherit` value on things like `<th>` elements.
+ * 4. Set base font style.
+ * 5. Set the line height in all browsers.
+========================================================================== */
+body {
+  margin: 0; // 1
+  background-color: $body-background-color; // 2
+  text-align: $default-text-align; // 3
+  font: {
+    family: $body-font-family; // 4
+    size: $body-font-size; // 4
+    weight: $body-font-weight; // 4
+  }
+  line-height: $body-font-line-height; // 5
 }
 
-// Lists
-ol,
-ul,
-dl {
-  margin-top: 0;
-  margin-bottom: 1rem;
+/* Grouping content
+ *
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
+ * 3. Correct the inheritance and scaling of font size in all browsers.
+ * 4. Correct the odd `em` font sizing in all browsers.
+ * 5. Remove browser default top margin
+ * 6. Don't allow content to break outside
+ * 7. We have @viewport set which causes scrollbars to overlap content in IE11 and Edge, so
+ *    we force a non-overlapping, non-auto-hiding scrollbar to counteract.
+ * 8. Add default top and bottom margin for content separation.
+========================================================================== */
+hr {
+  display:block;
+  box-sizing: content-box; // 1
+  height:1px;
+  border:0;
+  border-top:1px solid $hr-color;
+  margin: $hr-default-margin; // 8
+  overflow: visible; // 2
 }
 
-ol ol,
-ul ul,
-ol ul,
-ul ol {
-  margin-bottom: 0;
+pre {
+  font-family: monospace, monospace; // 3
+  font-size: 1rem; // 4
+  margin-top: 0; // 5
+  overflow: auto; // 6
+  -ms-overflow-style: scrollbar; // 7
 }
 
-// Typography.
+/* Text-level semantics
+ *
+ * 1. Remove the gray background on active links in IE 10.
+ * 2. Remove gaps in links underline in iOS 8+ and Safari 8+.
+ * 3. Set default link color for all browsers.
+ * 4. Set default link decoration for all browsers.
+ * 5. Remove the bottom border in Chrome 57-
+ * 6. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
+ * 7. Add explicit cursor to indicate changed behavior.
+ * 8. Add the correct font style in Android 4.3-
+ * 9. Add the correct font weight in Chrome, Edge, and Safari.
+ * 10. Add the correct font size in all browsers
+ * 11. Correct the inheritance and scaling of font size in all browsers.
+ * 12. Correct the odd `em` font sizing in all browsers.
+ * 13. Prevent `sub` and `sup` elements from affecting the line height in
+ *     all browsers.
+========================================================================== */
+a {
+  background-color: transparent; // 1
+  -webkit-text-decoration-skip: objects; // 2
+  color: $link-color; // 3
+  text-decoration: $link-decoration; // 4
+  vertical-align: baseline;
+
+  &:hover {
+    color: $link-hover-color; // 3
+    text-decoration: $link-hover-decoration; // 4
+  }
+
+  &:focus {
+    color: $link-focus-color; // 3
+    text-decoration: $link-focus-decoration; // 4
+  }
+}
+
+// And undo these styles for placeholder links/named anchors (without href)
+// which have not been made explicitly keyboard-focusable (without tabindex).
+// It would be more straightforward to just use a[href] in previous block, but that
+// causes specificity issues in many other styles that are too complex to fix.
+// See https://github.com/twbs/bootstrap/issues/19402
+a:not([href]):not([tabindex]) {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+abbr[title],
+dfn[title] {
+  border-bottom: 0; // 5
+  text-decoration: underline; // 6
+  text-decoration: underline dotted; // 6
+  cursor: help; // 7
+}
+
+dfn {
+  font-style: italic; // 8
+}
+
 b,
 strong {
-  font-weight: bolder; // Add the correct font weight in Chrome, Edge, and Safari
+  font-weight: bolder; // 9
 }
 
-a {
-    color: $link-color;
-    text-decoration: none;
-    &:hover {
-        color: $link-hover-color;
-    }
-    &:focus {
-        color: $link-focus-color;
-    }
-    &:hover, &:focus {
-        text-decoration: underline;
-    }
+small {
+  font-size: 80%; // 10
+}
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; // 11
+  font-size: 1em; // 12
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub { bottom: -.25em; }
+sup { top: -.5em; }
+
+h1, h2, h3, h4, h5, h6, p {
+  margin-top: 0;
+}
+
+/* Embedded content
+ *
+ * 1. Remove the border on images inside links in IE 10-.
+ * 2. Hide the overflow in IE
+========================================================================== */
+img {
+  border-style: none; // 1
+  vertical-align: middle;
+}
+
+svg:not(:root) {
+  overflow: hidden; // 2
+}
+
+/* Forms
+ *
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ * 3. Remove the default `border-radius` that macOS Chrome adds. (https://github.com/twbs/bootstrap/issues/24093)
+ * 4. Work around a Firefox/IE bug where the transparent `button` background
+ *    results in a loss of the default `button` focus styles.
+ *    Credit: (https://github.com/suitcss/base/)
+ * 5. Show the overflow in Edge.
+ * 6. Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 7. Correct the inability to style clickable types in iOS and Safari.
+ * 8. Remove the inner border and padding in Firefox.
+ * 9. Add the correct box sizing in IE 10-
+ * 10. Remove the padding in IE 10-
+ * 11. Correct the cursor style of increment and decrement buttons in Chrome.
+ * 12. Remove the inner padding in Chrome and Safari on macOS.
+ * 13. Correct the odd appearance in Chrome and Safari.
+ * 14. Correct the outline style in Safari.
+========================================================================== */
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; // 1
+  font-size: 100%; // 1
+  line-height: 1.15; // 1
+  margin: 0; // 2
+}
+
+button {
+  border-radius: 0; // 3
+}
+
+button:focus {
+  outline: 1px dotted; // 4
+  outline: 5px auto -webkit-focus-ring-color; // 4
+}
+
+button,
+input {
+  overflow: visible; // 5
+}
+
+button,
+select {
+  text-transform: none; // 6
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button; // 7
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none; // 8
+  padding: 0; // 8
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  box-sizing: border-box; // 9
+  padding: 0; // 10
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto; // 11
+}
+
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; // 12
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield; // 13
+  outline-offset: -2px; // 14
 }
