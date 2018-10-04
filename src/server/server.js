@@ -34,6 +34,8 @@ import AppRoutes from '../app/routes/Routes';
 import stats from '../../build/public/react-loadable.json';
 import App from '../app/App';
 
+import { ServerStyleSheet } from 'styled-components';
+
 /**
  * Prepare HTML Template.
  */
@@ -54,7 +56,7 @@ app.use(bodyParser.json());
 app.use(compression({ level: process.env.COMPRESSION_LEVEL || 6 }));
 
 const cacheStaticAssets = IS_PRODUCTION ? {
-  maxage: '31557600'
+  maxage: '31557600h'
 } : {};
 
 app.use(express.static('build/public', cacheStaticAssets));
@@ -128,6 +130,8 @@ app.get('*', (request, response, next) => {
 
       const css = new Set();
 
+      const sheet = new ServerStyleSheet();
+
       // Enables critical path CSS rendering
       // https://github.com/kriasoft/isomorphic-style-loader
       const insertCss = (...styles) => {
@@ -148,7 +152,11 @@ app.get('*', (request, response, next) => {
 
       const reduxState = store.getState();
 
-      const body = renderToString(jsx);
+      const body = renderToString(sheet.collectStyles(jsx));
+
+      const styleTags = sheet.getStyleTags();
+
+      console.log(styleTags);
 
       const bundles = getBundles(stats, modules);
 
@@ -174,15 +182,13 @@ app.get('*', (request, response, next) => {
       const responseHTML = templateHTML
         .replace('{{TITLE}}', pageTitle)
         .replace('{{SEO_CRITICAL_METADATA}}', seoMetadata)
-        .replace('{{CRITICAL_CSS}}',
-          [...css].length ? minifyCssString(`<style>${[...css].join('')}</style>`) : ''
-        )
+        .replace('{{CRITICAL_CSS}}', minifyCssString(styleTags))
         .replace('{{APP}}', body)
         .replace('{{LOADABLE_CHUNKS}}', bundleScripts)
         .replace('{{REDUX_DATA}}', serialize(reduxState));
 
       if (process.env.NODE_ENV === 'production') {
-        response.set('Cache-Control', 'public, max-age=31557600');
+        response.set('Cache-Control', 'public, max-age=31557600h');
       }
       response.status(status).send(responseHTML);
     }).catch(next);

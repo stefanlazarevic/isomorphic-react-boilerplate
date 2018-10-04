@@ -15,9 +15,10 @@ module.exports = {
             'flow',
           ],
           plugins: [
-            ['babel-plugin-react-css-modules',{
-              'generateScopedName': '[name]_[local]'
-            }],
+            // ['babel-plugin-react-css-modules',{
+            //   'generateScopedName': '[name]_[local]'
+            // }],
+            'styled-components',
             'react-loadable/babel'
           ],
         }

@@ -1,7 +1,7 @@
 /**
  * React required imports.
  */
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import { pageview } from 'react-ga';
@@ -9,7 +9,6 @@ import { pageview } from 'react-ga';
 /**
  * Import page styles.
  */
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
 import styles from './AboutPage.scss';
 
 import Heading from '../../components/core/heading/Heading';
@@ -53,4 +52,4 @@ class AboutPage extends Component {
  */
 AboutPage.serverFetchInitialData = [];
 
-export default withStyles(styles)(AboutPage);
+export default AboutPage;

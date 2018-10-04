@@ -8,12 +8,17 @@ import { fetchUsersAction } from '../../redux/actions/users.actions';
 /**
  * Import page styles.
  */
-import withStyles from 'isomorphic-style-loader/lib/withStyles';
-import classes from './HomePage.scss';
-
-import Heading from '../../components/core/heading/Heading';
-import Paragraph from '../../components/core/paragraph/Paragraph';
 import Section from '../../components/core/section/Section';
+
+
+import styled from 'styled-components';
+
+const Title = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+  color: palevioletred;
+  display: flex;
+`;
 
 class HomePage extends Component {
   constructor(props, context) {
@@ -38,10 +43,11 @@ class HomePage extends Component {
     return (
       <Section>
         {this.renderPageMeta()}
-        <Heading text="Welcome to the Home Page" align="center" weight="light"/>
+        <Title>Experimental Title</Title>
+        {/* <Heading text="Welcome to the Home Page" align="center" weight="light"/>
         <Paragraph align="center">
           From here you can visit <Link to="/about">About page</Link> or see how <Link to="/nonexistingpage">Non-Existing Page</Link> looks like.
-        </Paragraph>
+        </Paragraph> */}
       </Section>
     );
   }
@@ -51,6 +57,8 @@ class HomePage extends Component {
 /**
  * Initialize required actions to load data before rendering on server.
  */
-HomePage.serverFetchInitialData = [fetchUsersAction];
+HomePage.serverFetchInitialData = [
+  // fetchUsersAction];
+];
 
 export default withStyles(classes)(HomePage);
