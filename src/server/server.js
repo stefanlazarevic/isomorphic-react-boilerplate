@@ -156,8 +156,6 @@ app.get('*', (request, response, next) => {
 
       const styleTags = sheet.getStyleTags();
 
-      console.log(styleTags);
-
       const bundles = getBundles(stats, modules);
 
       if (context.url) {

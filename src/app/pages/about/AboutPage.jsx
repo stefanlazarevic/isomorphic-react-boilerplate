@@ -1,15 +1,9 @@
-/**
- * React required imports.
- */
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import { pageview } from 'react-ga';
-
-/**
- * Import page styles.
- */
-import styles from './AboutPage.scss';
+// import styled from 'styled-components';
+import { Container, Row, Column } from 'ls-react-grid';
 
 import Heading from '../../components/core/heading/Heading';
 import Paragraph from '../../components/core/paragraph/Paragraph';
@@ -32,17 +26,25 @@ class AboutPage extends Component {
 
   render() {
     return (
-      <Section>
+      <Fragment>
         {this.renderPageMeta()}
-        <Heading align="center" weight="light">This is an About page</Heading>
-        <Paragraph align="center">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt magnam, aliquid molestiae sit quae aspernatur quibusdam? Aliquam quibusdam iste, debitis magnam atque asperiores praesentium dolorem ab possimus cupiditate recusandae optio.
-          Eligendi beatae, laborum incidunt voluptas, fugiat officiis, natus suscipit eveniet enim impedit expedita! Eligendi rerum debitis accusamus unde nostrum asperiores aut quia eaque cupiditate? Impedit non dicta maiores ipsum atque?
-          Expedita obcaecati fugiat voluptas, officia similique quia et odit labore ab consectetur vero earum porro itaque pariatur tenetur nostrum laborum in doloremque laudantium. Optio modi aliquid, totam atque quis pariatur.
-          <br/>
-          <Link to="/">Back to Index</Link>
-        </Paragraph>
-      </Section>
+        <Section>
+          <Container>
+            <Row>
+              <Column>
+                <Heading align="center" weight="light">This is an About page</Heading>
+                <Paragraph align="center">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt magnam, aliquid molestiae sit quae aspernatur quibusdam? Aliquam quibusdam iste, debitis magnam atque asperiores praesentium dolorem ab possimus cupiditate recusandae optio.
+                  Eligendi beatae, laborum incidunt voluptas, fugiat officiis, natus suscipit eveniet enim impedit expedita! Eligendi rerum debitis accusamus unde nostrum asperiores aut quia eaque cupiditate? Impedit non dicta maiores ipsum atque?
+                  Expedita obcaecati fugiat voluptas, officia similique quia et odit labore ab consectetur vero earum porro itaque pariatur tenetur nostrum laborum in doloremque laudantium. Optio modi aliquid, totam atque quis pariatur.
+                  <br />
+                  <Link to="/">Back to Index</Link>
+                </Paragraph>
+              </Column>
+            </Row>
+          </Container>
+        </Section>
+      </Fragment>
     );
   }
 }

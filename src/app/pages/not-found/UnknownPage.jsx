@@ -1,11 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
-
-/**
- * Import page styles.
- */
-import './UnknownPage.scss';
+import { Container, Row, Column } from 'ls-react-grid';
 
 import Heading from '../../components/core/heading/Heading';
 import Paragraph from '../../components/core/paragraph/Paragraph';
@@ -22,13 +18,21 @@ class UnknownPage extends Component {
 
   render() {
     return (
-      <Section>
+      <Fragment>
         {this.renderPageMeta()}
-        <Heading align="center" weight="light">404 Not Found</Heading>
-        <Paragraph align="center">
-          You may be lost. Return back to <Link to="/">Home</Link>.
-        </Paragraph>
-      </Section>
+        <Section>
+          <Container>
+            <Row>
+              <Column>
+                <Heading align="center" weight="light">404 Not Found</Heading>
+                <Paragraph align="center">
+                  You may be lost. Return back to <Link to="/">Home</Link>.
+                </Paragraph>
+              </Column>
+            </Row>
+          </Container>
+        </Section>
+      </Fragment>
     );
   }
 }

@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import { pageview } from 'react-ga';
+// import styled from 'styled-components';
+import { Container, Row, Column } from 'ls-react-grid';
 
 import { fetchUsersAction } from '../../redux/actions/users.actions';
 
@@ -9,16 +11,8 @@ import { fetchUsersAction } from '../../redux/actions/users.actions';
  * Import page styles.
  */
 import Section from '../../components/core/section/Section';
-
-
-import styled from 'styled-components';
-
-const Title = styled.h1`
-  font-size: 1.5em;
-  text-align: center;
-  color: palevioletred;
-  display: flex;
-`;
+import Heading from '../../components/core/heading/Heading';
+import Paragraph from '../../components/core/paragraph/Paragraph';
 
 class HomePage extends Component {
   constructor(props, context) {
@@ -41,14 +35,21 @@ class HomePage extends Component {
 
   render() {
     return (
-      <Section>
+      <Fragment>
         {this.renderPageMeta()}
-        <Title>Experimental Title</Title>
-        {/* <Heading text="Welcome to the Home Page" align="center" weight="light"/>
-        <Paragraph align="center">
-          From here you can visit <Link to="/about">About page</Link> or see how <Link to="/nonexistingpage">Non-Existing Page</Link> looks like.
-        </Paragraph> */}
-      </Section>
+        <Section>
+          <Container>
+            <Row>
+              <Column>
+                <Heading text="Welcome to the Home Page" align="center" weight="light" />
+                <Paragraph align="center">
+                  From here you can visit <Link to="/about">About page</Link> or see how <Link to="/nonexistingpage">Non-Existing Page</Link> looks like.
+                </Paragraph>
+              </Column>
+            </Row>
+          </Container>
+        </Section>
+      </Fragment>
     );
   }
 
@@ -61,4 +62,4 @@ HomePage.serverFetchInitialData = [
   // fetchUsersAction];
 ];
 
-export default withStyles(classes)(HomePage);
+export default HomePage;
