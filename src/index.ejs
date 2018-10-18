@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/" lang="en" dir="ltr">
+
+<head>
+  <!-- General metadata *Common to all pages.-->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Standard favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- Title provided by page component over a Helmet HOC. -->
+  {{TITLE}}
+  {{SEO_CRITICAL_METADATA}}
+  {{CRITICAL_CSS}}
+
+  <!-- Social Media Metadata. [Facebook] -->
+  <meta property="og:type" content="website" />
+  <!-- Social Media Metadata [Twitter] -->
+  <meta name="twitter:card" content="summary" />
+</head>
+  <body>
+    <div id="root">{{APP}}</div>
+
+    <% if (htmlWebpackPlugin.files.chunks.runtime.entry.length) { %>
+      <script src=<%= htmlWebpackPlugin.files.chunks.runtime.entry %>></script>
+    <% } %>
+
+    <% if (htmlWebpackPlugin.files.chunks.vendor.entry.length) { %>
+      <script src=<%= htmlWebpackPlugin.files.chunks.vendor.entry %>></script>
+    <% } %>
+
+    <script type="text/javascript">window.REDUX_DATA = {{REDUX_DATA}}</script>
+
+    {{LOADABLE_CHUNKS}}
+
+    <% if (htmlWebpackPlugin.files.chunks.app.entry.length) { %>
+      <script src=<%= htmlWebpackPlugin.files.chunks.app.entry %>></script>
+    <% } %>
+
+  </body>
+</html>
