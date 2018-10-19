@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 
 module.exports = {
   entry: {
@@ -51,11 +52,13 @@ module.exports = {
       },
       { reload: false }
     ),
+    new DashboardPlugin(),
   ],
   devServer: {
     host: '0.0.0.0',
     port: 3001,
     hot: true,
+    clientLogLevel: 'info',
     historyApiFallback: true,
     watchContentBase: true,
   },

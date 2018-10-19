@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --config webpack.dev.js",
+    "start": "webpack-dashboard -- webpack-dev-server --mode development --config webpack.dev.js",
     "build": "npm-run-all build:client build:server",
     "server": "node dist/server.js",
     "server:watch": "nodemon --watch server --exec \"node dist/server.js\"",
@@ -67,6 +67,7 @@
     "serialize-javascript": "1.5.0",
     "webpack": "4.20.2",
     "webpack-cli": "3.1.2",
+    "webpack-dashboard": "^2.0.0",
     "webpack-dev-server": "3.1.9",
     "webpack-node-externals": "1.7.2"
   },
