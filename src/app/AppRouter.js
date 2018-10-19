@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-
 import routes from './routes/index';
 
 class AppRouter extends Component {

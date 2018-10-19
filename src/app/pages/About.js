@@ -17,7 +17,7 @@ class About extends Component {
   render = () => (
     <Fragment>
       {this.injectPageMetadata()}
-      <h1>About Page blldkflakf</h1>
+      <h1>About Page</h1>
 
       <Link to="/">Home</Link>
     </Fragment>

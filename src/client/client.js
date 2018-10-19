@@ -7,10 +7,10 @@ import { Provider as ReduxProvider } from 'react-redux';
 import createStore from '@app/stores/store';
 
 /**
- * AppRoot is a root component for our application.
+ * App is a root component for our application.
  * It is shared start point for both client and server side rendering.
  */
-import AppRoot from '@app/AppRoot';
+import App from '@app/App';
 
 const documentRoot = document.getElementById('root');
 
@@ -33,7 +33,7 @@ const ClientJsx = (
   <AppContainer>
     <ReduxProvider store={store}>
       <BrowserRouter>
-        <AppRoot />
+        <App />
       </BrowserRouter>
     </ReduxProvider>
   </AppContainer>

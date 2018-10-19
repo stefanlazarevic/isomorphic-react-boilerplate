@@ -19,7 +19,7 @@ import compression from 'compression';
 const templateHTML = fs.readFileSync('dist/index.html', 'utf8');
 
 import AppRoutes from '@app/routes/index';
-import AppRoot from '@app/AppRoot';
+import App from '@app/App';
 
 const app = express();
 app.use(bodyParser.json());
@@ -70,7 +70,7 @@ app.get('/*', (request, response) => {
       <Loadable.Capture report={moduleName => modules.push(moduleName)}>
         <ReduxProvider store={store}>
           <StaticRouter context={context} location={url}>
-            <AppRoot />
+            <App />
           </StaticRouter>
         </ReduxProvider>
       </Loadable.Capture>

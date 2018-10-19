@@ -9,3 +9,4 @@ package-lock.json
 .vscode
 *.log
 yarn-error.log
+__snapshots__
