@@ -46,7 +46,7 @@ module.exports = {
       __isBrowser__: 'true',
     }),
     new HtmlWebPackPlugin({
-      template: './src/index.ejs',
+      template: './public/index.ejs',
       filename: './index.html',
       inject: false,
       minify: {

@@ -2,6 +2,9 @@ import React, { Component, Fragment } from 'react';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router-dom';
 class NotFound extends Component {
+  static propTypes = {};
+  static defaultProps = {};
+
   injectPageMetadata = () => (
     <Helmet>
       <title>Not Found Page</title>

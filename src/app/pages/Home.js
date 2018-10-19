@@ -4,6 +4,9 @@ import { hot } from 'react-hot-loader';
 import { Link } from 'react-router-dom';
 import { H1 } from '@components/heading/Heading';
 class Home extends Component {
+  static propTypes = {};
+  static defaultProps = {};
+
   injectPageMetadata = () => (
     <Helmet>
       <title>Home Page</title>
@@ -18,7 +21,7 @@ class Home extends Component {
     <Fragment>
       {this.injectPageMetadata()}
       <H1>Home Page</H1>
-      <Link to="/about">About</Link>
+      <Link to="/about">About!</Link>
     </Fragment>
   );
 }

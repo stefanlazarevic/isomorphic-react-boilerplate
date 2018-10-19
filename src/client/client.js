@@ -43,7 +43,7 @@ HMRRenderer(ClientJsx);
 
 // webpack Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('@app/AppRoot', () => {
+  module.hot.accept('@app/App', () => {
     // if you are using harmony modules ({modules:false})
     HMRRenderer(ClientJsx);
   });

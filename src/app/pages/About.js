@@ -4,6 +4,9 @@ import { hot } from 'react-hot-loader';
 import { Link } from 'react-router-dom';
 
 class About extends Component {
+  static propTypes = {};
+  static defaultProps = {};
+
   injectPageMetadata = () => (
     <Helmet>
       <title>About Page</title>

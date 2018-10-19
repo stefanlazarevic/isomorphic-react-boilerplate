@@ -5,6 +5,14 @@ import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 
 class Example extends Component {
+  static propTypes = {
+    exampleData: PropTypes.array,
+    exampleAction: PropTypes.func,
+  };
+  static defaultProps = {
+    exampleData: [],
+  };
+
   componentDidMount() {
     if (!this.props.exampleData.length) {
       this.props.exampleAction();
@@ -33,22 +41,15 @@ class Example extends Component {
   );
 }
 
-Example.propTypes = {
-  exampleData: PropTypes.array,
-  exampleAction: PropTypes.func,
-};
-
-Example.defaultProps = {
-  exampleData: [],
-};
-
 const mapStateToProps = state => {
   return { exampleData: state.example };
 };
 
+const mapDispatchToProps = { exampleAction };
+
 export default hot(module)(
   connect(
     mapStateToProps,
-    { exampleAction }
+    mapDispatchToProps
   )(Example)
 );
