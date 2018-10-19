@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import routes from './routes/index';
 
 class AppRouter extends Component {
-  render() {
+  render = () => {
     return (
       <Switch>
         {routes.map((route, index) => (
@@ -11,7 +11,7 @@ class AppRouter extends Component {
         ))}
       </Switch>
     );
-  }
+  };
 }
 
 export default AppRouter;

@@ -52,7 +52,6 @@
     "eslint-plugin-react": "7.11.1",
     "eslint-watch": "4.0.2",
     "express": "4.16.4",
-    "flow-bin": "0.83.0",
     "html-webpack-plugin": "3.2.0",
     "isomorphic-fetch": "2.2.1",
     "jest": "23.6.0",
