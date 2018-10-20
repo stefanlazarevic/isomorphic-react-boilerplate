@@ -21,8 +21,8 @@ const CLIENT_PROD_CONFIG = {
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: 'static/js/[name].[chunkhash:8].js',
-    chunkFilename: 'static/js/[name].[chunkhash:8].js',
+    filename: 'static/js/[name].[chunkhash].js',
+    chunkFilename: 'static/js/[name].[chunkhash].js',
   },
   optimization: {
     splitChunks: {
@@ -38,9 +38,6 @@ const CLIENT_PROD_CONFIG = {
     runtimeChunk: 'single',
   },
   plugins: [
-    new CleanWebpackPlugin('dist/*', {
-      root: path.resolve(__dirname, '..'),
-    }),
     new webpack.DefinePlugin({
       __isBrowser__: 'true',
     }),
@@ -61,6 +58,9 @@ const CLIENT_PROD_CONFIG = {
         minifyURLs: true,
         xhtml: true,
       },
+    }),
+    new CleanWebpackPlugin('dist/*', {
+      root: path.resolve(__dirname, '..'),
     }),
     new ReactLoadablePlugin({
       filename: path.resolve(__dirname, '../dist/static/react-loadable.json'),

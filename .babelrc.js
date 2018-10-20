@@ -10,7 +10,6 @@ if (process.env.NODE_ENV !== 'test') {
   presetEnv.modules = false;
 }
 
-
 module.exports = {
   "presets": [
     ["@babel/preset-env", presetEnv],
@@ -21,7 +20,13 @@ module.exports = {
     "react-hot-loader/babel",
     "react-loadable/babel",
     "@babel/plugin-syntax-dynamic-import",
-    "dynamic-import-node",
     "@babel/plugin-proposal-class-properties"
-  ]
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        "babel-plugin-dynamic-import-node"
+      ]
+    }
+  }
 }
