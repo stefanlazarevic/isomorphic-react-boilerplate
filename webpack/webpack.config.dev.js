@@ -5,13 +5,14 @@ const HtmlWebPackPlugin = require('html-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BASE_CONFIG = require('./webpack.config.base');
 
 const CLIENT_DEV_CONFIG = {
   name: 'webpack-dev-config',
   target: 'web',
-  mode: 'development',
   stats: 'errors-only',
+  mode: 'development',
   entry: path.resolve(__dirname, '../src/client/client.js'),
   devtool: 'source-map',
   plugins: [
@@ -39,6 +40,13 @@ const CLIENT_DEV_CONFIG = {
         messages: ['Application is now running at http://localhost:3000'],
       },
     }),
+    new CopyWebpackPlugin([
+      {
+        ignore: ['index.html', 'index.ejs'],
+        from: path.resolve(__dirname, '../public'),
+        to: path.resolve(__dirname, '../dist/static'),
+      },
+    ]),
   ],
   devServer: {
     host: '0.0.0.0',

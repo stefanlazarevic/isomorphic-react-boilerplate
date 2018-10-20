@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import { hot } from 'react-hot-loader';
 import { Link } from 'react-router-dom';
 import { H1 } from '@components/heading/Heading';
+
 class Home extends Component {
   static propTypes = {};
   static defaultProps = {};
@@ -20,8 +21,11 @@ class Home extends Component {
   render = () => (
     <Fragment>
       {this.injectPageMetadata()}
-      <H1>Home Page 12</H1>
-      <Link to="/about">About</Link>
+      <div style={{ textAlign: 'center' }}>
+        <img src="static/img/landing-react-logo.png" alt="React Logo" />
+        <H1>Home Page</H1>
+        <Link to="/about">About</Link>
+      </div>
     </Fragment>
   );
 }

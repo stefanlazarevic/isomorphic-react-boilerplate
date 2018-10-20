@@ -7,6 +7,8 @@ const ReactLoadablePlugin = require('react-loadable/webpack')
   .ReactLoadablePlugin;
 const webpackNodeExternals = require('webpack-node-externals');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const BASE_CONFIG = require('./webpack.config.base');
 
 const CLIENT_PROD_CONFIG = {
@@ -69,6 +71,19 @@ const CLIENT_PROD_CONFIG = {
         notes: ['Start production server with command ``npm run server``'],
       },
     }),
+    new CopyWebpackPlugin([
+      {
+        ignore: ['index.html', 'index.ejs'],
+        from: path.resolve(__dirname, '../public'),
+        to: path.resolve(__dirname, '../dist/static'),
+      },
+    ]),
+    new ImageminPlugin({
+      test: /\.(jpe?g|png|gif|svg)$/i,
+      optipng: {
+        optimizationLevel: 9,
+      },
+    }),
   ],
 };
 
@@ -77,18 +92,13 @@ const SERVER_PROD_CONFIG = {
   target: 'node',
   mode: 'production',
   stats: 'errors-only',
-  entry: {
-    server: path.resolve(__dirname, '../src/server/server.js'),
-  },
+  entry: path.resolve(__dirname, '../src/server/server.js'),
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: '[name].js',
+    filename: 'server.js',
   },
   externals: [webpackNodeExternals()],
   plugins: [
-    new ReactLoadablePlugin({
-      filename: path.resolve(__dirname, '../dist/static/react-loadable.json'),
-    }),
     new webpack.DefinePlugin({
       __isBrowser__: 'false',
     }),
