@@ -1,0 +1,104 @@
+const webpack = require('webpack');
+const merge = require('webpack-merge');
+const path = require('path');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ReactLoadablePlugin = require('react-loadable/webpack')
+  .ReactLoadablePlugin;
+const webpackNodeExternals = require('webpack-node-externals');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const BASE_CONFIG = require('./webpack.config.base');
+
+const CLIENT_PROD_CONFIG = {
+  name: 'webpack-client-prod-config',
+  target: 'web',
+  mode: 'production',
+  stats: 'errors-only',
+  entry: {
+    app: path.resolve(__dirname, '../src/client/client.js'),
+  },
+  output: {
+    path: path.resolve(__dirname, '../dist'),
+    filename: 'static/js/[name].[chunkhash:8].js',
+    chunkFilename: 'static/js/[name].[chunkhash:8].js',
+  },
+  optimization: {
+    splitChunks: {
+      name: false,
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'initial',
+        },
+      },
+    },
+    runtimeChunk: 'single',
+  },
+  plugins: [
+    new CleanWebpackPlugin('dist/*', {
+      root: path.resolve(__dirname, '..'),
+    }),
+    new webpack.DefinePlugin({
+      __isBrowser__: 'true',
+    }),
+    new HtmlWebPackPlugin({
+      template: path.resolve(__dirname, '../public/index.ejs'),
+      filename: './index.html',
+      inject: false,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyJS: true,
+        minifyCSS: true,
+        minifyURLs: true,
+        xhtml: true,
+      },
+    }),
+    new ReactLoadablePlugin({
+      filename: path.resolve(__dirname, '../dist/static/react-loadable.json'),
+    }),
+    new FriendlyErrorsWebpackPlugin({
+      compilationSuccessInfo: {
+        messages: ['Production bundle has been created.'],
+        notes: ['Start production server with command ``npm run server``'],
+      },
+    }),
+  ],
+};
+
+const SERVER_PROD_CONFIG = {
+  name: 'webpack-server-prod-config',
+  target: 'node',
+  mode: 'production',
+  stats: 'errors-only',
+  entry: {
+    server: path.resolve(__dirname, '../src/server/server.js'),
+  },
+  output: {
+    path: path.resolve(__dirname, '../dist'),
+    filename: '[name].js',
+  },
+  externals: [webpackNodeExternals()],
+  plugins: [
+    new ReactLoadablePlugin({
+      filename: path.resolve(__dirname, '../dist/static/react-loadable.json'),
+    }),
+    new webpack.DefinePlugin({
+      __isBrowser__: 'false',
+    }),
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1,
+    }),
+  ],
+};
+
+module.exports = [
+  merge(BASE_CONFIG, CLIENT_PROD_CONFIG),
+  merge(BASE_CONFIG, SERVER_PROD_CONFIG),
+];

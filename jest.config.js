@@ -68,6 +68,7 @@ module.exports = {
     '^@src(.*)$': '<rootDir>/src$1',
     '^@app(.*)$': '<rootDir>/src/app$1',
     '^@components(.*)$': '<rootDir>/src/app/components$1',
+    '^@utils(.*)$': '<rootDir>/utils$1',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

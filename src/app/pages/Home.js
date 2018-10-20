@@ -20,8 +20,8 @@ class Home extends Component {
   render = () => (
     <Fragment>
       {this.injectPageMetadata()}
-      <H1>Home Page</H1>
-      <Link to="/about">About!</Link>
+      <H1>Home Page 12</H1>
+      <Link to="/about">About</Link>
     </Fragment>
   );
 }

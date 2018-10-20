@@ -10,13 +10,12 @@ import { renderToString } from 'react-dom/server';
 import Loadable from 'react-loadable';
 import { getBundles } from 'react-loadable/webpack';
 import { ServerStyleSheet } from 'styled-components';
-import stats from '../../dist/static/react-loadable.json';
 import { Provider as ReduxProvider } from 'react-redux';
 import createStore from '@app/stores/store';
 import 'isomorphic-fetch';
 import compression from 'compression';
-
 const templateHTML = fs.readFileSync('dist/index.html', 'utf8');
+const stats = JSON.parse(fs.readFileSync('dist/static/react-loadable.json'));
 
 import AppRoutes from '@app/routes/index';
 import App from '@app/App';
