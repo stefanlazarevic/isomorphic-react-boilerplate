@@ -1,15 +1,24 @@
-import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import routes from './routes/index';
+import React, { Component, Fragment } from 'react';
+import { Route } from 'react-router-dom';
+import routes from './routes/web/routes';
+import NotFound from '@app/pages/NotFound';
 
+const RouteWithSubRoutes = route => (
+  <Route
+    path={route.path}
+    exact={route.exact}
+    render={props => <route.component {...props} routes={route.routes} />}
+  />
+);
 class AppRouter extends Component {
   render = () => {
     return (
-      <Switch>
-        {routes.map((route, index) => (
-          <Route key={index} {...route} />
+      <Fragment>
+        {routes.map(route => (
+          <RouteWithSubRoutes key={route.path} {...route} />
         ))}
-      </Switch>
+        <Route component={NotFound} />
+      </Fragment>
     );
   };
 }

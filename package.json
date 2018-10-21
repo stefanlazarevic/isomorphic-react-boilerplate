@@ -60,6 +60,7 @@
     "minify-css-string": "1.0.0",
     "prettier": "1.14.3",
     "react-hot-loader": "4.3.11",
+    "react-router-config": "^4.4.0-beta.1",
     "react-test-renderer": "16.5.2",
     "regenerator-runtime": "0.12.1",
     "serialize-javascript": "1.5.0",
