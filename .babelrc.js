@@ -16,7 +16,9 @@ module.exports = {
     "@babel/preset-react"
   ],
   "plugins": [
-    "babel-plugin-styled-components",
+    ["babel-plugin-styled-components", {
+      "displayName": process.env.NODE_ENV === 'development'
+    }],
     "react-hot-loader/babel",
     "react-loadable/babel",
     "@babel/plugin-syntax-dynamic-import",

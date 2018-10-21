@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dashboard -- webpack-dev-server --config webpack/webpack.config.dev.js",
-    "build": "webpack --config webpack/webpack.config.prod.js",
+    "start": "cross-env NODE_ENV=development webpack-dashboard -- webpack-dev-server --config webpack/webpack.config.dev.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.config.prod.js",
     "server": "node dist/server.js",
     "lint": "eslint .",
     "lint:watch": "esw -w .",
@@ -37,6 +37,7 @@
     "clean-webpack-plugin": "0.1.19",
     "compression": "1.7.3",
     "copy-webpack-plugin": "4.5.4",
+    "cross-env": "^5.2.0",
     "enzyme": "3.7.0",
     "enzyme-adapter-react-16": "1.6.0",
     "enzyme-to-json": "3.3.4",
