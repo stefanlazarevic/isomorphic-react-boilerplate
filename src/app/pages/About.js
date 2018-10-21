@@ -1,20 +1,15 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { hot } from 'react-hot-loader';
-import { Link, Route } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { renderRoutes } from 'react-router-config';
 
-const RouteWithSubRoutes = route => (
-  <Route
-    path={route.path}
-    exact={route.exact}
-    render={props => <route.component {...props} routes={route.routes} />}
-  />
-);
 class About extends Component {
-  static propTypes = {};
-  static defaultProps = {
-    routes: [],
+  static propTypes = {
+    route: PropTypes.object,
   };
+  static defaultProps = {};
 
   injectPageMetadata = () => (
     <Helmet>
@@ -34,12 +29,9 @@ class About extends Component {
       <Link to="/">Home</Link>
       <br />
       <Link to="/about/example">Example</Link>
-
-      {this.props.routes.map(route => (
-        <RouteWithSubRoutes key={route.path} {...route} />
-      ))}
+      {renderRoutes(this.props.route.routes)}
     </Fragment>
   );
 }
 
-export default hot(module)(About);
+export default hot(module)(withRouter(About));

@@ -42,10 +42,6 @@ app.get('/*', (request, response) => {
     matched => matched.route
   );
 
-  if (!activeRoutes.length) {
-    status = 404;
-  }
-
   const preloadedComponents = Promise.all(
     activeRoutes
       .filter(route => route.component.preload)
@@ -73,6 +69,10 @@ app.get('/*', (request, response) => {
     );
 
     const html = renderToString(sheet.collectStyles(jsx));
+
+    if (context.status === 404) {
+      status = 404;
+    }
 
     if (context.url) {
       return response.redirect(302, context.url);
