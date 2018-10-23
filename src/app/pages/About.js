@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
+import ReactGA from 'react-ga';
 import { hot } from 'react-hot-loader';
 import { Link, withRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
@@ -20,6 +21,10 @@ class About extends Component {
       />
     </Helmet>
   );
+
+  componentDidMount = () => {
+    ReactGA.pageView('/about');
+  };
 
   render = () => (
     <Fragment>

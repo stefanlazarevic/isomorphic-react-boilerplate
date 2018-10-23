@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { exampleAction } from '@app/actions/example';
 import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
+
+import { exampleAction } from '@redux/actions/example';
 
 class Example extends Component {
   static propTypes = {

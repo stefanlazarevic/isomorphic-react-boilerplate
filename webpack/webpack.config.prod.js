@@ -38,6 +38,9 @@ const CLIENT_PROD_CONFIG = {
     runtimeChunk: 'single',
   },
   plugins: [
+    new CleanWebpackPlugin('dist/*', {
+      root: path.resolve(__dirname, '..'),
+    }),
     new webpack.DefinePlugin({
       __isBrowser__: 'true',
     }),
@@ -58,9 +61,6 @@ const CLIENT_PROD_CONFIG = {
         minifyURLs: true,
         xhtml: true,
       },
-    }),
-    new CleanWebpackPlugin('dist/*', {
-      root: path.resolve(__dirname, '..'),
     }),
     new ReactLoadablePlugin({
       filename: path.resolve(__dirname, '../dist/static/react-loadable.json'),

@@ -12,14 +12,15 @@ import Loadable from 'react-loadable';
 import { getBundles } from 'react-loadable/webpack';
 import { ServerStyleSheet } from 'styled-components';
 import { Provider as ReduxProvider } from 'react-redux';
-import createStore from '@app/stores/store';
 import 'isomorphic-fetch';
 import compression from 'compression';
+
 const templateHTML = fs.readFileSync('dist/index.html', 'utf8');
 const stats = JSON.parse(fs.readFileSync('dist/static/react-loadable.json'));
 
-import AppRoutes from '@app/routes/web/routes';
+import AppRoutes from '@routes/web/public';
 import App from '@app/App';
+import createStore from '@redux/store';
 
 const app = express();
 app.use(bodyParser.json());

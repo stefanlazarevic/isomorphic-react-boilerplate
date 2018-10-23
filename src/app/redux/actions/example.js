@@ -1,4 +1,4 @@
-import { EXAMPLE_TYPE } from '@app/types/example';
+import { EXAMPLE_TYPE } from '../types/example';
 
 export const exampleAction = () => dispatch => {
   return fetch('https://jsonplaceholder.typicode.com/users')

@@ -102,7 +102,7 @@ module.exports = {
   // restoreMocks: false,
 
   // The root directory that Jest should scan for tests and modules within
-  // rootDir: null,
+  rootDir: '../',
 
   // A list of paths to directories that Jest should use to search for files in
   // roots: [
@@ -116,7 +116,7 @@ module.exports = {
   // setupFiles: [],
 
   // The path to a module that runs some code to configure or set up the testing framework before each test
-  setupTestFrameworkScriptFile: '<rootDir>/config/enzyme.setup.js',
+  setupTestFrameworkScriptFile: '<rootDir>/config/enzyme.config.js',
 
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
   // snapshotSerializers: [],

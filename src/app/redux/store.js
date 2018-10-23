@@ -1,6 +1,6 @@
 import { compose, combineReducers, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import ExampleReducer from '@app/reducers/example';
+import ExampleReducer from './reducers/example';
 
 const thunkMiddleware = [thunk];
 
