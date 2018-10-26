@@ -1,27 +1,9 @@
-import React, { Component, Fragment } from 'react';
-import Helmet from 'react-helmet';
-import { Link } from 'react-router-dom';
-class NotFound extends Component {
-  static propTypes = {};
-  static defaultProps = {};
+import React from 'react';
 
-  injectPageMetadata = () => (
-    <Helmet>
-      <title>Not Found Page</title>
-      <meta
-        name="description"
-        content="Description of the page less than 150 characters"
-      />
-    </Helmet>
-  );
-
-  render = () => (
-    <Fragment>
-      {this.injectPageMetadata()}
-      <h1>Page not found</h1>
-      <Link to="/">Back to Home</Link>
-    </Fragment>
-  );
-}
+// eslint-disable-next-line
+const NotFound = ({ staticContext = {} }) => {
+  staticContext.status = 404;
+  return <h1>Oops, nothing here!</h1>;
+};
 
 export default NotFound;

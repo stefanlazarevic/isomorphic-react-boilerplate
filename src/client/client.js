@@ -1,10 +1,13 @@
 import React from 'react';
+import ReactGA from 'react-ga';
 import { render, hydrate } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { preloadReady } from 'react-loadable';
 import { AppContainer } from 'react-hot-loader';
 import { Provider as ReduxProvider } from 'react-redux';
-import createStore from '@app/stores/store';
+import createStore from '@redux/store';
+
+ReactGA.initialize('');
 
 /**
  * App is a root component for our application.

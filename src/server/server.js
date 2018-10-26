@@ -5,20 +5,22 @@ import serialize from 'serialize-javascript';
 import minifyCssString from 'minify-css-string';
 import React from 'react';
 import Helmet from 'react-helmet';
-import { StaticRouter, matchPath } from 'react-router-dom';
+import { StaticRouter } from 'react-router-dom';
+import { matchRoutes } from 'react-router-config';
 import { renderToString } from 'react-dom/server';
 import Loadable from 'react-loadable';
 import { getBundles } from 'react-loadable/webpack';
 import { ServerStyleSheet } from 'styled-components';
 import { Provider as ReduxProvider } from 'react-redux';
-import createStore from '@app/stores/store';
 import 'isomorphic-fetch';
 import compression from 'compression';
+
 const templateHTML = fs.readFileSync('dist/index.html', 'utf8');
 const stats = JSON.parse(fs.readFileSync('dist/static/react-loadable.json'));
 
-import AppRoutes from '@app/routes/index';
+import AppRoutes from '@routes/web/public';
 import App from '@app/App';
+import createStore from '@redux/store';
 
 const app = express();
 app.use(bodyParser.json());
@@ -29,7 +31,7 @@ app.get('/*', (request, response) => {
   const { url } = request;
   const context = {};
   const store = createStore();
-  let status = 404;
+  let status = 200;
 
   const helmet = Helmet.renderStatic();
   const title = helmet.title.toString();
@@ -37,17 +39,9 @@ app.get('/*', (request, response) => {
 
   Helmet.rewind();
 
-  const activeRoute = AppRoutes.find(route =>
-    matchPath(url.toLowerCase(), route)
+  const activeRoutes = matchRoutes(AppRoutes, url.toLowerCase()).map(
+    matched => matched.route
   );
-
-  const activeRoutes = AppRoutes.filter(route =>
-    matchPath(url.toLowerCase(), route)
-  );
-
-  if (activeRoute.path !== '**') {
-    status = 200;
-  }
 
   const preloadedComponents = Promise.all(
     activeRoutes
@@ -76,6 +70,10 @@ app.get('/*', (request, response) => {
     );
 
     const html = renderToString(sheet.collectStyles(jsx));
+
+    if (context.status === 404) {
+      status = 404;
+    }
 
     if (context.url) {
       return response.redirect(302, context.url);

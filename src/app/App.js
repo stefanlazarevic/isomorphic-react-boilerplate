@@ -1,7 +1,7 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
 
-import AppRouter from './AppRouter';
+import AppRouter from '@routes/Router';
 
 const AppRoot = () => <AppRouter />;
 

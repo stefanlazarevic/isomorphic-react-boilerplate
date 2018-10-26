@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import Helmet from 'react-helmet';
+import ReactGA from 'react-ga';
 import { hot } from 'react-hot-loader';
 import { Link } from 'react-router-dom';
-import { H1 } from '@components/heading/Heading';
 
 class Home extends Component {
   static propTypes = {};
@@ -18,12 +18,16 @@ class Home extends Component {
     </Helmet>
   );
 
+  componentDidMount = () => {
+    ReactGA.pageView('/');
+  };
+
   render = () => (
     <Fragment>
       {this.injectPageMetadata()}
       <div style={{ textAlign: 'center' }}>
         <img src="static/img/landing-react-logo.png" alt="React Logo" />
-        <H1>Home Page</H1>
+        <h1>Home Page</h1>
         <Link to="/about">About</Link>
       </div>
     </Fragment>

@@ -1,4 +1,4 @@
-import { EXAMPLE_TYPE } from '@app/types/example';
+import { EXAMPLE_TYPE } from '../types/example';
 
 export default (state = [], action) => {
   switch (action.type) {
