@@ -66,8 +66,12 @@ module.exports = {
   // A map from regular expressions to module names that allow to stub out resources with a single module
   moduleNameMapper: {
     '^@src(.*)$': '<rootDir>/src$1',
+    '^@config(.*)$': '<rootDir>/config$1',
     '^@app(.*)$': '<rootDir>/src/app$1',
     '^@components(.*)$': '<rootDir>/src/app/components$1',
+    '^@redux(.*)$': '<rootDir>/src/app/redux$1',
+    '^@pages(.*)$': '<rootDir>/src/app/pages$1',
+    '^@routes(.*)$': '<rootDir>/src/app/routes$1',
     '^@utils(.*)$': '<rootDir>/utils$1',
   },
 

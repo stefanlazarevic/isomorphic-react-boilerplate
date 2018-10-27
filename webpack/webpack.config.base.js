@@ -5,6 +5,7 @@ module.exports = {
     extensions: ['.js', '.jsx', '.json'],
     alias: {
       '@src': path.resolve(__dirname, '../src'),
+      '@config': path.resolve(__dirname, '../config'),
       '@app': path.resolve(__dirname, '../src/app'),
       '@components': path.resolve(__dirname, '../src/app/components'),
       '@redux': path.resolve(__dirname, '../src/app/redux'),

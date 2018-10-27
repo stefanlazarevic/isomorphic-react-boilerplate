@@ -23,7 +23,7 @@ class About extends Component {
   );
 
   componentDidMount = () => {
-    ReactGA.pageView('/about');
+    ReactGA.pageview('/about');
   };
 
   render = () => (

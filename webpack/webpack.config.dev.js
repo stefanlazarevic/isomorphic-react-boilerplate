@@ -55,6 +55,11 @@ const CLIENT_DEV_CONFIG = {
     historyApiFallback: true,
     watchContentBase: true,
     quiet: true,
+    watchOptions: {
+      ignored: ['node_modules'],
+      aggregateTimeout: 300,
+      poll: 1000
+    }
   },
 };
 

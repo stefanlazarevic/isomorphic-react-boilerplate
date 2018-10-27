@@ -19,7 +19,7 @@ class Home extends Component {
   );
 
   componentDidMount = () => {
-    ReactGA.pageView('/');
+    ReactGA.pageview('/');
   };
 
   render = () => (
