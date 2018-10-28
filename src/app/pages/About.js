@@ -22,9 +22,9 @@ class About extends Component {
     </Helmet>
   );
 
-  componentDidMount = () => {
+  componentDidMount() {
     ReactGA.pageview('/about');
-  };
+  }
 
   render = () => (
     <Fragment>

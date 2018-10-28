@@ -18,9 +18,9 @@ class Home extends Component {
     </Helmet>
   );
 
-  componentDidMount = () => {
+  componentDidMount() {
     ReactGA.pageview('/');
-  };
+  }
 
   render = () => (
     <Fragment>
