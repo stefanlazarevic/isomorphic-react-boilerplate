@@ -1,6 +1,5 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-
 import { exampleAction } from '@redux/actions/example';
 import NotFound from '@pages/NotFound';
 
@@ -16,7 +15,6 @@ export default [
         '@app/pages/Home'),
       loading: Loading,
     }),
-    loadInitialData: () => exampleAction(),
   },
   {
     path: '/about',
