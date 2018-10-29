@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { hot } from 'react-hot-loader';
 import AppRouter from '@routes/Router';
+import { Reboot } from '@components/reboot/Reboot';
 
-const AppRoot = () => <AppRouter />;
+const AppRoot = () => (
+  <Fragment>
+    <Reboot />
+    <AppRouter />
+  </Fragment>
+);
 
 export default hot(module)(AppRoot);

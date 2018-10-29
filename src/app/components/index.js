@@ -1,3 +1,3 @@
-import Heading from './heading/Heading';
+import { Reboot } from './reset/Reboot';
 
-export default { Heading };
+export default { Reboot };
