@@ -43,6 +43,16 @@ export default [
     ],
   },
   {
+    path: '/login',
+    exact: true,
+    component: Loadable({
+      loader: () =>
+        import(/* webpackChunkName: "login-page" */
+        '@app/pages/Login'),
+      loading: Loading,
+    }),
+  },
+  {
     path: '*',
     component: NotFound,
   },
