@@ -22,7 +22,8 @@ module.exports = {
     "react-hot-loader/babel",
     "react-loadable/babel",
     "@babel/plugin-syntax-dynamic-import",
-    "@babel/plugin-proposal-class-properties"
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-syntax-export-default-from"
   ],
   "env": {
     "test": {
