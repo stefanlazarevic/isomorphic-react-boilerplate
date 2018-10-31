@@ -5,6 +5,7 @@ import ReactGA from 'react-ga';
 import { hot } from 'react-hot-loader';
 import { Link, withRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
+import { Heading } from '@components';
 
 class About extends Component {
   static propTypes = {
@@ -29,7 +30,7 @@ class About extends Component {
   render = () => (
     <Fragment>
       {this.injectPageMetadata()}
-      <h1>About Page</h1>
+      <Heading>About Page</Heading>
 
       <Link to="/">Home</Link>
       <br />

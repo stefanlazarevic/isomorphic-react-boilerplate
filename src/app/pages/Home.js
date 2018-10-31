@@ -3,6 +3,7 @@ import Helmet from 'react-helmet';
 import ReactGA from 'react-ga';
 import { hot } from 'react-hot-loader';
 import { Link } from 'react-router-dom';
+import { Heading } from '@components';
 
 class Home extends Component {
   static propTypes = {};
@@ -27,7 +28,7 @@ class Home extends Component {
       {this.injectPageMetadata()}
       <div style={{ textAlign: 'center' }}>
         <img src="static/img/landing-react-logo.png" alt="React Logo" />
-        <h1>Home Page</h1>
+        <Heading>Home Page</Heading>
         <Link to="/about">About</Link>
       </div>
     </Fragment>

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
 
-const Input = ({ type, onChange, ...props }) => {
-  return <input type={type} onChange={onChange} {...props} />;
-};
+const Input = ({ onChange, ...props }) => (
+  <input onChange={onChange} {...props} />
+);
 
 Input.propTypes = {
   type: PropTypes.string,

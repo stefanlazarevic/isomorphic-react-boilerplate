@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
 import { Input, Button } from '@components';
+import { Heading } from '@components';
 
 class Login extends Component {
   render() {
     return (
       <div>
-        <h1>Login Page</h1>
+        <Heading>Login Page</Heading>
         <Input name="username" type="text" placeholder="Username" />
         <Input name="password" type="password" placeholder="Password" />
         <Button>Login</Button>
