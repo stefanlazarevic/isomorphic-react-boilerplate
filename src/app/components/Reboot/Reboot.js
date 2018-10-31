@@ -203,6 +203,8 @@ injectGlobal`
 
   button {
     border-radius: 0;
+    cursor: pointer;
+    cursor: hand;
   }
 
   button:focus {
