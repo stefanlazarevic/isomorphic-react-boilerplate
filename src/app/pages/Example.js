@@ -11,9 +11,12 @@ class Example extends Component {
     exampleData: PropTypes.array,
     exampleAction: PropTypes.func,
   };
+
   static defaultProps = {
     exampleData: [],
   };
+
+  static serverPreloadData = () => exampleAction();
 
   componentDidMount() {
     if (!this.props.exampleData.length) {

@@ -43,59 +43,60 @@ app.get('/*', (request, response) => {
     matched => matched.route
   );
 
-  const preloadedComponents = Promise.all(
+  const components = Promise.all(
     activeRoutes
       .filter(route => route.component.preload)
       .map(route => route.component.preload())
   );
 
-  const preloadedData = Promise.all(
-    activeRoutes
-      .filter(route => route.loadInitialData)
-      .map(route => store.dispatch(route.loadInitialData()))
-  );
+  components.then(components => {
+    const serverData = components
+      .map(component => component.default)
+      .filter(component => component.serverPreloadData)
+      .map(component => store.dispatch(component.serverPreloadData()));
 
-  Promise.all([preloadedComponents, preloadedData]).then(() => {
-    const modules = [];
-    const sheet = new ServerStyleSheet();
+    Promise.all(serverData).then(() => {
+      const modules = [];
+      const sheet = new ServerStyleSheet();
 
-    const jsx = (
-      <Loadable.Capture report={moduleName => modules.push(moduleName)}>
-        <ReduxProvider store={store}>
-          <StaticRouter context={context} location={url}>
-            <App />
-          </StaticRouter>
-        </ReduxProvider>
-      </Loadable.Capture>
-    );
+      const jsx = (
+        <Loadable.Capture report={moduleName => modules.push(moduleName)}>
+          <ReduxProvider store={store}>
+            <StaticRouter context={context} location={url}>
+              <App />
+            </StaticRouter>
+          </ReduxProvider>
+        </Loadable.Capture>
+      );
 
-    const html = renderToString(sheet.collectStyles(jsx));
+      const html = renderToString(sheet.collectStyles(jsx));
 
-    if (context.status === 404) {
-      status = 404;
-    }
+      if (context.status === 404) {
+        status = 404;
+      }
 
-    if (context.url) {
-      return response.redirect(302, context.url);
-    }
+      if (context.url) {
+        return response.redirect(302, context.url);
+      }
 
-    const reduxState = store.getState();
-    const styleTags = sheet.getStyleTags();
-    const bundles = getBundles(stats, modules);
+      const reduxState = store.getState();
+      const styleTags = sheet.getStyleTags();
+      const bundles = getBundles(stats, modules);
 
-    const bundleScripts = bundles
-      .map(bundle => `<script src="${bundle.publicPath}"></script>`)
-      .join('');
+      const bundleScripts = bundles
+        .map(bundle => `<script src="${bundle.publicPath}"></script>`)
+        .join('');
 
-    const responseHTML = templateHTML
-      .replace('{{TITLE}}', title)
-      .replace('{{SEO_CRITICAL_METADATA}}', metadata)
-      .replace('{{CRITICAL_CSS}}', minifyCssString(styleTags))
-      .replace('{{APP}}', html)
-      .replace('{{LOADABLE_CHUNKS}}', bundleScripts)
-      .replace('{{REDUX_DATA}}', serialize(reduxState));
+      const responseHTML = templateHTML
+        .replace('{{TITLE}}', title)
+        .replace('{{SEO_CRITICAL_METADATA}}', metadata)
+        .replace('{{CRITICAL_CSS}}', minifyCssString(styleTags))
+        .replace('{{APP}}', html)
+        .replace('{{LOADABLE_CHUNKS}}', bundleScripts)
+        .replace('{{REDUX_DATA}}', serialize(reduxState));
 
-    response.status(status).send(responseHTML);
+      response.status(status).send(responseHTML);
+    });
   });
 });
 

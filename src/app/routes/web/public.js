@@ -1,6 +1,5 @@
 import React from 'react';
 import Loadable from 'react-loadable';
-import { exampleAction } from '@redux/actions/example';
 import NotFound from '@pages/NotFound';
 
 const Loading = () => <h5>Loading...</h5>;
@@ -34,7 +33,6 @@ export default [
             '@app/pages/Example'),
           loading: Loading,
         }),
-        loadInitialData: () => exampleAction(),
       },
       {
         path: '/about/*',

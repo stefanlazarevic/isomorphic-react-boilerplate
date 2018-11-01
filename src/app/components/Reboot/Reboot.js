@@ -328,4 +328,4 @@ injectGlobal`
 
 `;
 
-export const Reboot = () => null;
+export default () => null;

@@ -23,7 +23,8 @@ module.exports = {
     "react-loadable/babel",
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-syntax-export-default-from"
+    "@babel/plugin-syntax-export-default-from",
+    "@babel/plugin-proposal-export-default-from",
   ],
   "env": {
     "test": {
