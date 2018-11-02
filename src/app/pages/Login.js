@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
-import { Input, Button } from '@components';
-import { Heading } from '@components';
+import { Input, Button, Heading } from '@components';
 
 class Login extends Component {
   render() {

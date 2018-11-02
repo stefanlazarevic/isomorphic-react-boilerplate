@@ -9,7 +9,7 @@ describe('Testing component rendering.', () => {
     wrap();
   });
 
-  it('Renders "button" element.', () => {
+  it('Renders a "button" element.', () => {
     const wrapper = wrap();
     expect(wrapper.find('button')).toHaveLength(1);
   });
