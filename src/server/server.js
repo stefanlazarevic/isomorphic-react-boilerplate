@@ -81,6 +81,7 @@ app.get('/*', (request, response) => {
 
       const reduxState = store.getState();
       const styleTags = sheet.getStyleTags();
+
       const bundles = getBundles(stats, modules);
 
       const bundleScripts = bundles

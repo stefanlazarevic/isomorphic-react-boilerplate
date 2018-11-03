@@ -1,12 +1,16 @@
 import React, { Fragment } from 'react';
 import { hot } from 'react-hot-loader';
+import { ThemeProvider } from 'styled-components';
 import AppRouter from '@routes/Router';
 import { Reboot } from '@components';
+import theme from '@components/theme';
 
 const AppRoot = () => (
   <Fragment>
     <Reboot />
-    <AppRouter />
+    <ThemeProvider theme={theme}>
+      <AppRouter />
+    </ThemeProvider>
   </Fragment>
 );
 

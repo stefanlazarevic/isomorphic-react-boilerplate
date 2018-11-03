@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Alert from './Alert';
+import Alert from '../Alert';
 
 const wrap = (props = {}) => shallow(<Alert {...props} />);
 

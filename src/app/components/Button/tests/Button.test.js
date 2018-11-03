@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Button from './Button';
+import Button from '../Button';
 
 const wrap = (props = {}) => shallow(<Button {...props} />);
 
