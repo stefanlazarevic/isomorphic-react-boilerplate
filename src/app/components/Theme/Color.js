@@ -9,8 +9,8 @@ const colors = {
 
 injectGlobal`
   :root {
-    --text-primary: ${colors.text.primary}
-    --text-secondary: ${colors.text.secondary}
+    --text-primary: ${colors.text.primary};
+    --text-secondary: ${colors.text.secondary};
   }
 `;
 

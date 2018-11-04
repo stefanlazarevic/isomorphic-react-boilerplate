@@ -22,7 +22,12 @@ module.exports = {
         exclude: /node_modules/,
         use: [
           { loader: 'eslint-loader' },
-          // { loader: 'stylelint-custom-processor-loader' },
+          {
+            loader: 'stylelint-custom-processor-loader',
+            options: {
+              emitWarning: true,
+            },
+          },
         ],
       },
       {

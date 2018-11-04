@@ -17,7 +17,8 @@ module.exports = {
   ],
   "plugins": [
     ["babel-plugin-styled-components", {
-      "displayName": process.env.NODE_ENV === 'development'
+      "displayName": process.env.NODE_ENV === 'development',
+      "ssr": true,
     }],
     "react-hot-loader/babel",
     "react-loadable/babel",

@@ -9,7 +9,7 @@ const StyledHeading = styled(Heading)`
     color: var(--text-primary);
     font-size: ${theme.typography.heading[level].size};
     font-weight: ${theme.typography.heading[level].weight};
-  `}};
+  `};
 `;
 
 StyledHeading.propTypes = {
