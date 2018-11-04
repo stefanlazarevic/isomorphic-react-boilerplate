@@ -30,6 +30,12 @@ class Components extends Component {
           title="Warning message:"
           message="Warning message goes here."
         />
+        <Alert
+          highlight="warning"
+          multiline
+          title="Warning message:"
+          message="Here is a clear explanation. It drops to next line if the content is long."
+        />
         <Heading>Components</Heading>
         <hr />
         <Heading level={3}>Label</Heading>

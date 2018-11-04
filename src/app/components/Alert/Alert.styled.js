@@ -12,12 +12,15 @@ const StyledAlert = styled(Alert)`
     line-height: 1.25rem;
     padding: 1rem;
     margin-bottom: 10px;
+    padding-right: 40px;
 
     border-color: ${props.theme.color.highlight[props.highlight]};
 
     & > strong {
+      display: ${props.multiline ? 'block' : 'inline'};
       color: ${props.theme.color.highlight[props.highlight]};
       margin-right: 10px;
+      margin-bottom: 3px;
     }
 
     & > span {
@@ -41,6 +44,7 @@ const StyledAlert = styled(Alert)`
 StyledAlert.propTypes = {
   position: PropTypes.oneOf(['fixed', 'absolute', 'relative']),
   highlight: PropTypes.oneOf(['info', 'success', 'error', 'warning']),
+  multiline: PropTypes.bool,
   top: PropTypes.string,
   left: PropTypes.string,
   bottom: PropTypes.string,
