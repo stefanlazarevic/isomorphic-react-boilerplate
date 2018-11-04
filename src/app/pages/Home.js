@@ -30,6 +30,8 @@ class Home extends Component {
         <img src="static/img/landing-react-logo.png" alt="React Logo" />
         <Heading>Home Page</Heading>
         <Link to="/about">About</Link>
+        <br />
+        <Link to="/components">Components</Link>
       </div>
     </Fragment>
   );

@@ -2,36 +2,29 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class Alert extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = { active: props.active };
-  }
-
   static propTypes = {
-    active: PropTypes.bool,
-    type: PropTypes.oneOf(['info', 'success', 'warning', 'danger']),
     children: PropTypes.node,
+    message: PropTypes.string,
+    title: PropTypes.string,
+    className: PropTypes.string,
+    onClose: PropTypes.func,
   };
 
   static defaultProps = {
-    active: false,
-    type: 'info',
+    message: 'information message goes here.',
+    title: 'Information message:',
+    onClose: () => null,
   };
 
-  show = () => this.setState(() => ({ active: true }));
-
-  hide = () => this.setState(() => ({ active: false }));
-
-  render() {
-    const { active, children, ...rest } = this.props;
-
-    return this.state.active ? (
-      <div {...rest} active={active.toString()}>
-        {children}
+  render = () => (
+    <div className={this.props.className}>
+      <strong>{this.props.title}</strong>
+      <span>{this.props.children || this.props.message}</span>
+      <div onClick={() => this.props.onClose()}>
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMjQgMjAuMTg4bC04LjMxNS04LjIwOSA4LjItOC4yODItMy42OTctMy42OTctOC4yMTIgOC4zMTgtOC4zMS04LjIwMy0zLjY2NiAzLjY2NiA4LjMyMSA4LjI0LTguMjA2IDguMzEzIDMuNjY2IDMuNjY2IDguMjM3LTguMzE4IDguMjg1IDguMjAzeiIvPjwvc3ZnPg==" />
       </div>
-    ) : null;
-  }
+    </div>
+  );
 }
 
 export default Alert;

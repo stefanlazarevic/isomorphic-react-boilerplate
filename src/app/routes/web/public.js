@@ -41,12 +41,12 @@ export default [
     ],
   },
   {
-    path: '/login',
+    path: '/components',
     exact: true,
     component: Loadable({
       loader: () =>
-        import(/* webpackChunkName: "login-page" */
-        '@app/pages/Login'),
+        import(/* webpackChunkName: "components-page" */
+        '@app/pages/Components'),
       loading: Loading,
     }),
   },
