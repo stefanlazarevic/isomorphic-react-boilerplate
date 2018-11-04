@@ -15,16 +15,19 @@ class Alert extends Component {
     className: PropTypes.string,
     onClose: PropTypes.func,
     highlight: PropTypes.oneOf(['info', 'success', 'warning', 'error']),
+    autoclose: PropTypes.bool,
   };
 
   static defaultProps = {
     message: 'information message goes here.',
     title: 'Information message:',
     onClose: () => console.info('Close called'),
+    autoclose:
+      this.props.highlight === 'info' || this.props.highlight === 'success',
   };
 
   componentDidMount() {
-    if (this.props.highlight === 'info' || this.props.highlight === 'success') {
+    if (this.props.autoclose) {
       this.timeout = setTimeout(() => this.close(), 5000);
     }
   }
