@@ -22,8 +22,6 @@ class Alert extends Component {
     message: 'information message goes here.',
     title: 'Information message:',
     onClose: () => console.info('Close called'),
-    autoclose:
-      this.props.highlight === 'info' || this.props.highlight === 'success',
   };
 
   componentDidMount() {

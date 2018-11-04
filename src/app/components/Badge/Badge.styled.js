@@ -5,17 +5,32 @@ import Badge from './Badge';
 
 const StyledBadge = styled(Badge)`
   display: inline-block;
-  border: 1px solid currentColor;
+  border: 2px solid currentColor;
   border-radius: 13px;
-  text-decoration: uppercase;
+  text-transform: uppercase;
   font-size: 0.85rem;
   line-height: 1rem;
+  padding: 0.25rem 1rem;
+  vertical-align: middle;
+
+  &:not(:first-child):not(:last-child) {
+    margin: 0 5px;
+  }
+
+  color: ${props => props.color};
+  background: ${props => (props.fill ? props.background : 'transparent')};
 `;
 
 StyledBadge.propTypes = {
   fill: PropTypes.bool,
+  color: PropTypes.string,
+  background: PropTypes.string,
 };
 
-StyledBadge.defaultprops = {};
+StyledBadge.defaultProps = {
+  fill: false,
+  color: '#586069',
+  background: '#e6ebf1',
+};
 
 export default hot(module)(StyledBadge);

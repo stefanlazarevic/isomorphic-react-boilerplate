@@ -1,4 +1,5 @@
 export { default as Alert } from './Alert/Alert.styled';
+export { default as Badge } from './Badge/Badge.styled';
 export { default as Button } from './Button/Button.styled';
 export { default as Checkbox } from './Checkbox/Checkbox.styled';
 export { default as Heading } from './Heading/Heading.styled';
