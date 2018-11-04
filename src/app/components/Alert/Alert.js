@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader';
 
 class Alert extends Component {
   constructor(props) {
@@ -25,14 +24,14 @@ class Alert extends Component {
   hide = () => this.setState(() => ({ active: false }));
 
   render() {
-    const { active, children, type, ...rest } = this.props;
+    const { active, children, ...rest } = this.props;
 
     return this.state.active ? (
-      <div {...rest} active={active.toString()} type={type}>
+      <div {...rest} active={active.toString()}>
         {children}
       </div>
     ) : null;
   }
 }
 
-export default hot(module)(Alert);
+export default Alert;

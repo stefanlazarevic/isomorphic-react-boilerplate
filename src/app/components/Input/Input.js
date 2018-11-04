@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader';
 
 const Input = ({ onChange, ...props }) => (
   <input onChange={onChange} {...props} />
@@ -16,4 +15,4 @@ Input.defaultProps = {
   type: 'text',
 };
 
-export default hot(module)(Input);
+export default Input;

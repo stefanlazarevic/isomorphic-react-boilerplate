@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader';
 
 const Button = ({ onClick, ...props }) => (
   <button onClick={onClick} {...props}>
@@ -18,4 +17,4 @@ Button.defaultProps = {
   type: 'button',
 };
 
-export default hot(module)(Button);
+export default Button;
