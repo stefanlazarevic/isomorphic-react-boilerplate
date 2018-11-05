@@ -14,11 +14,11 @@ const StyledAlert = styled(Alert)`
     margin-bottom: 10px;
     padding-right: 40px;
 
-    border-color: ${props.theme.color.highlight[props.highlight]};
+    border-color: ${props.theme.color.highlight[props.type]};
 
     & > strong {
       display: ${props.multiline ? 'block' : 'inline'};
-      color: ${props.theme.color.highlight[props.highlight]};
+      color: ${props.theme.color.highlight[props.type]};
       margin-right: 10px;
       margin-bottom: 3px;
     }
@@ -43,7 +43,7 @@ const StyledAlert = styled(Alert)`
 
 StyledAlert.propTypes = {
   position: PropTypes.oneOf(['fixed', 'absolute', 'relative']),
-  highlight: PropTypes.oneOf(['info', 'success', 'error', 'warning']),
+  type: PropTypes.oneOf(['info', 'success', 'error', 'warning']),
   multiline: PropTypes.bool,
   top: PropTypes.string,
   left: PropTypes.string,
@@ -53,7 +53,7 @@ StyledAlert.propTypes = {
 
 StyledAlert.defaultProps = {
   position: 'relative',
-  highlight: 'info',
+  type: 'info',
 };
 
 export default hot(module)(StyledAlert);

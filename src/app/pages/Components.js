@@ -13,27 +13,27 @@ class Components extends Component {
     return (
       <Fragment>
         <Alert
-          highlight="info"
+          type="info"
           title="Information message:"
           message="Information message goes here."
         />
         <Alert
-          highlight="success"
+          type="success"
           title="Success message:"
           message="Success message goes here!"
         />
         <Alert
-          highlight="error"
+          type="error"
           title="Error message:"
           message="Error message goes here."
         />
         <Alert
-          highlight="warning"
+          type="warning"
           title="Warning message:"
           message="Warning message goes here."
         />
         <Alert
-          highlight="warning"
+          type="warning"
           multiline
           title="Warning message:"
           message="Here is a clear explanation. It drops to next line if the content is long."
