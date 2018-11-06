@@ -14,17 +14,17 @@ const StyledAlert = styled(Alert)`
     margin-bottom: 10px;
     padding-right: 40px;
 
-    border-color: ${props.theme.color.highlight[props.type]};
+    border-color: ${props.theme.highlight[props.type]};
 
     & > strong {
       display: ${props.inline ? 'inline' : 'block'};
-      color: ${props.theme.color.highlight[props.type]};
+      color: ${props.theme.highlight[props.type]};
       margin-right: 10px;
       margin-bottom: 3px;
     }
 
     & > span {
-      color: ${props.theme.color.text.primary}
+      color: ${props.theme.text.primary}
     }
 
     & > div {
@@ -34,8 +34,8 @@ const StyledAlert = styled(Alert)`
       right: 15px;
       transform: translateY(-50%);
       cursor: pointer;
-      img {
-        width: 100%;
+      svg {
+        fill: ${props.theme.text.primary}
       }
     }
   `};

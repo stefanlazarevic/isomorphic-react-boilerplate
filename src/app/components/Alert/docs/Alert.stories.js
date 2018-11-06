@@ -8,15 +8,18 @@ import { action } from '@storybook/addon-actions';
 import { specs } from 'storybook-addon-specifications';
 import { renders } from '../tests/Alert.test';
 import styled from 'styled-components';
+import { withBackgrounds } from '@storybook/addon-backgrounds';
 
 const withCustomPreview = withDocs({
   PreviewComponent: styled.div`
     padding: 25px;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+    background-color: ${props =>
+      props.theme.name === 'Dark' ? 'rgb(44, 44, 43)' : 'rgb(255, 255 ,255)'};
   `,
 });
 
-storiesOf('Components/Feedback', module).add(
+storiesOf('Components|Feedback', module).add(
   'Alert',
   withCustomPreview(AlertDocumentation, () => {
     specs(() => renders);

@@ -29,6 +29,7 @@
     "@babel/preset-env": "7.1.0",
     "@babel/preset-react": "7.0.0",
     "@storybook/addon-actions": "^4.0.2",
+    "@storybook/addon-backgrounds": "^4.0.4",
     "@storybook/addon-console": "^1.1.0",
     "@storybook/addon-info": "^4.0.2",
     "@storybook/addon-knobs": "^4.0.2",
@@ -92,6 +93,7 @@
     "webpack-node-externals": "1.7.2"
   },
   "dependencies": {
+    "@storybook/addon-options": "^4.0.4",
     "react": "16.5.2",
     "react-dom": "16.5.2",
     "react-ga": "2.5.3",
