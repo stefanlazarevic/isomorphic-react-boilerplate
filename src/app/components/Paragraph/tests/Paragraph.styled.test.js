@@ -1,7 +1,7 @@
 import React from 'react';
 import shallow from '@util/shallow';
 import Paragraph from '../Paragraph';
-import theme from '@components/theme';
+import theme from '@theme';
 
 const wrap = (props = {}) => shallow(<Paragraph {...props} />, theme);
 

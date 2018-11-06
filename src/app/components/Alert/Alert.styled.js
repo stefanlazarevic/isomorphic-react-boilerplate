@@ -5,7 +5,7 @@ import Alert from './Alert';
 
 const StyledAlert = styled(Alert)`
   ${props => `
-    position: ${props.position};
+    position: relative;
     border: 1px solid;
     border-left: 6px solid;
     font-size: 1rem;
@@ -17,7 +17,7 @@ const StyledAlert = styled(Alert)`
     border-color: ${props.theme.color.highlight[props.type]};
 
     & > strong {
-      display: ${props.multiline ? 'block' : 'inline'};
+      display: ${props.inline ? 'inline' : 'block'};
       color: ${props.theme.color.highlight[props.type]};
       margin-right: 10px;
       margin-bottom: 3px;
@@ -42,18 +42,13 @@ const StyledAlert = styled(Alert)`
 `;
 
 StyledAlert.propTypes = {
-  position: PropTypes.oneOf(['fixed', 'absolute', 'relative']),
   type: PropTypes.oneOf(['info', 'success', 'error', 'warning']),
-  multiline: PropTypes.bool,
-  top: PropTypes.string,
-  left: PropTypes.string,
-  bottom: PropTypes.string,
-  right: PropTypes.string,
+  inline: PropTypes.bool,
 };
 
 StyledAlert.defaultProps = {
-  position: 'relative',
   type: 'info',
+  inline: true,
 };
 
 export default hot(module)(StyledAlert);

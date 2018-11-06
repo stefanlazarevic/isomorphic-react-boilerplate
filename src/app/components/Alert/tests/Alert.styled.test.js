@@ -1,7 +1,7 @@
 import React from 'react';
 import shallow from '@util/shallow';
 import Alert from '../Alert';
-import theme from '@components/theme';
+import theme from '@theme';
 
 const wrap = (props = {}) => shallow(<Alert {...props} />, theme);
 

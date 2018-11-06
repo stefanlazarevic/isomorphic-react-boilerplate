@@ -73,6 +73,7 @@ module.exports = {
     '^@pages(.*)$': '<rootDir>/src/app/pages$1',
     '^@routes(.*)$': '<rootDir>/src/app/routes$1',
     '^@util(.*)$': '<rootDir>/src/app/util$1',
+    '^@theme(.*)$': '<rootDir>/src/app/components/Theme$1',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader

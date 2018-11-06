@@ -12,7 +12,9 @@
     "lint:fix": "eslint --fix .",
     "test": "jest -c config/jest.config.js",
     "test:watch": "jest --config=./config/jest.config.js --watch",
-    "test:coverage": "jest --config=./config/jest.config.js --coverage"
+    "test:coverage": "jest --config=./config/jest.config.js --coverage",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "keywords": [],
   "author": "http://lazarevicstefan.com",
@@ -26,6 +28,14 @@
     "@babel/plugin-syntax-export-default-from": "7.0.0",
     "@babel/preset-env": "7.1.0",
     "@babel/preset-react": "7.0.0",
+    "@storybook/addon-actions": "^4.0.2",
+    "@storybook/addon-console": "^1.1.0",
+    "@storybook/addon-info": "^4.0.2",
+    "@storybook/addon-knobs": "^4.0.2",
+    "@storybook/addon-links": "^4.0.2",
+    "@storybook/addon-notes": "^4.0.2",
+    "@storybook/addons": "^4.0.2",
+    "@storybook/react": "^4.0.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.1",
     "babel-jest": "23.6.0",
@@ -67,6 +77,8 @@
     "react-test-renderer": "16.5.2",
     "regenerator-runtime": "0.12.1",
     "serialize-javascript": "1.5.0",
+    "storybook-addon-specifications": "^2.1.2",
+    "storybook-readme": "^4.0.2",
     "stylelint": "9.7.0",
     "stylelint-config-recommended": "2.1.0",
     "stylelint-config-styled-components": "0.1.1",
@@ -89,6 +101,8 @@
     "react-router-dom": "4.3.1",
     "redux": "3.7.2",
     "redux-thunk": "2.3.0",
+    "storybook-addon-jsx": "^5.4.0",
+    "storybook-addon-styled-component-theme": "^1.1.0",
     "styled-components": "3.4.10"
   }
 }

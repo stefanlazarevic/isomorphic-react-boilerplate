@@ -4,43 +4,38 @@ import Alert from '../Alert';
 
 const wrap = (props = {}) => shallow(<Alert {...props} />);
 
-describe('Testing component rendering.', () => {
+export const renders = describe('Testing component rendering.', () => {
   it('Renders component.', () => {
     wrap();
   });
 
-  it('Renders component with "active" state set to "false" by the default.', () => {
+  it('Renders component with "visible" state set to "true" by the default.', () => {
     const wrapper = wrap();
-    expect(wrapper.state().active).toBe(false);
-  });
-
-  it('Renders component with "active" state set to "true" when passed as prop.', () => {
-    const wrapper = wrap({ active: true });
-    expect(wrapper.state().active).toBe(true);
+    expect(wrapper.state().visible).toBe(true);
   });
 
   it('Renders a "div" element.', () => {
-    const wrapper = wrap({ active: true });
-    expect(wrapper.find('div')).toHaveLength(1);
-  });
-
-  it('Does not render when "state" is set to "false".', () => {
     const wrapper = wrap();
-    expect(wrapper.get(0)).toBe(null);
+    expect(wrapper.get(0).type).toBe('div');
   });
 
   it('Renders component with "type" set to "info" by the default.', () => {
-    const wrapper = wrap({ active: true });
+    const wrapper = wrap();
     expect(wrapper.props().type).toEqual('info');
   });
 });
 
-describe('Testing component event handlers.', () => {
-  it('Toggle component visibility with built in "show" and "hide" methods.', () => {
+export const events = describe('Testing component event handlers.', () => {
+  it('Closing component triggeres "onClose" callback function.', () => {
+    const onClose = jest.fn();
+    const wrapper = wrap({ onClose });
+    wrapper.instance().close();
+    expect(onClose).toHaveBeenCalled();
+  });
+
+  it('Closed component returns null.', () => {
     const wrapper = wrap();
-    wrapper.instance().show();
-    expect(wrapper.find('div')).toHaveLength(1);
-    wrapper.instance().hide();
+    wrapper.instance().close();
     expect(wrapper.get(0)).toBe(null);
   });
 });

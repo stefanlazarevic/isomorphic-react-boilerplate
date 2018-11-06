@@ -10,3 +10,4 @@ package-lock.json
 *.log
 yarn-error.log
 __snapshots__
+.cache

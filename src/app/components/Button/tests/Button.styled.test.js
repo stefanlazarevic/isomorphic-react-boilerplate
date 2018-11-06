@@ -1,7 +1,7 @@
 import React from 'react';
 import shallow from '@util/shallow';
 import Button from '../Button';
-import theme from '@components/theme';
+import theme from '@theme';
 
 const wrap = (props = {}) => shallow(<Button {...props} />, theme);
 

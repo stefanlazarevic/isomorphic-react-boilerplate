@@ -8,6 +8,7 @@ class Checkbox extends Component {
     label: PropTypes.string,
     onChange: PropTypes.func,
   };
+
   static defaultProps = {
     checked: false,
     label: '',
@@ -24,6 +25,12 @@ class Checkbox extends Component {
     this._id = uniqueID();
   }
 
+  componentDidUpdate(previousProps, previousState) {
+    if (previousState.checked !== this.state.checked) {
+      this.props.onChange(this.state.checked);
+    }
+  }
+
   toggle = () =>
     this.setState(previousState => ({ checked: !previousState.checked }));
 
@@ -33,9 +40,7 @@ class Checkbox extends Component {
         id={this._id}
         type="checkbox"
         checked={this.state.checked}
-        onChange={() =>
-          this.toggle() || this.props.onChange(this.state.checked)
-        }
+        onChange={() => this.toggle()}
       />
       <label htmlFor={this._id}>
         <span>{this.props.label}</span>
