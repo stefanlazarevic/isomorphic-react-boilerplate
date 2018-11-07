@@ -1,8 +1,9 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import Heading from '../Heading';
+import mount from '@util/mount';
+import Heading from '../Heading.styled';
+import { LightTheme } from '@design';
 
-const wrap = (props = {}) => mount(<Heading {...props} />);
+const wrap = (props = {}) => mount(<Heading {...props} />, LightTheme);
 
 export default describe('Heading.', () => {
   it('Renders component.', () => {

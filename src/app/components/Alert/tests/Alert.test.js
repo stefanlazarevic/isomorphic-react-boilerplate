@@ -36,4 +36,12 @@ export default describe('Alert', () => {
     wrapper.instance().close();
     expect(wrapper.get(0)).toBe(null);
   });
+
+  it('Auto close after 5 seconds if "autoclose" property is passed.', () => {
+    const onClose = jest.fn();
+    wrap({ autoclose: true, onClose });
+    setTimeout(() => {
+      expect(onClose).toHaveBeenCalled();
+    }, 5010);
+  });
 });

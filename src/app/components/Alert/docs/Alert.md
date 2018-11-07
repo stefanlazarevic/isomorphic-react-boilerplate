@@ -23,6 +23,7 @@ import { Alert } from '@components';
 | ``children`` | Content of Alert. | ``node`` | ``false`` | - | - |
 | ``autoclose`` | Should Alert autoclose. | ``boolean`` | ``false`` | ``true`` ``false`` | ``false`` |
 | ``onClose`` | Callback when Alert is closed. | ``function`` | ``false`` | - | - |
+| ``inline`` | Show title and message on the same line. | ``boolean`` | ``true`` | ``true`` ``false`` | ``true`` |
 
 ### Examples
 

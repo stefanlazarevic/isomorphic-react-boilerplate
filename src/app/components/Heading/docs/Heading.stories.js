@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text, select } from '@storybook/addon-knobs';
+import { text, select, boolean } from '@storybook/addon-knobs';
 import { specs } from 'storybook-addon-specifications';
 import storyPreview from '@util/storyPreview';
 
@@ -17,6 +17,7 @@ storiesOf('Components|Data Display', module).add(
       <Heading
         level={select('Level', [1, 2, 3, 4, 5, 6], 1)}
         text={text('Text', 'Heading 1')}
+        uppercase={boolean('Uppercase', false)}
       />
     );
   }),

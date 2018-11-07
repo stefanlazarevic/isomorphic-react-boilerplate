@@ -7,18 +7,19 @@ const StyledHeading = styled(Heading)`
   ${({ theme, level, uppercase }) => `
     color: ${theme.text.primary};
     font-size: ${theme[`h${level}`].size};
+    font-weight: ${theme[`h${level}`].weight};
     text-transform: ${uppercase ? 'uppercase' : 'initial'}
   `};
 `;
 
 StyledHeading.propTypes = {
   level: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
-  // uppercase: PropTypes.bool,
+  uppercase: PropTypes.bool,
 };
 
 StyledHeading.defaultProps = {
   level: 1,
-  // uppercase: false,
+  uppercase: false,
 };
 
 export default hot(module)(StyledHeading);
