@@ -1,18 +1,15 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { text, select, boolean } from '@storybook/addon-knobs';
-import { specs } from 'storybook-addon-specifications';
 import storyPreview from '@util/storyPreview';
 
 import Heading from '../Heading.styled';
-import tests from '../tests/Heading.test';
 
 import HeadingDocumentation from './Heading.md';
 
 storiesOf('Components|Data Display', module).add(
   'Heading',
   storyPreview(HeadingDocumentation, () => {
-    specs(() => tests);
     return (
       <Heading
         level={select('Level', [1, 2, 3, 4, 5, 6], 1)}

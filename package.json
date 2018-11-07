@@ -13,6 +13,8 @@
     "test": "jest -c config/jest.config.js",
     "test:watch": "jest --config=./config/jest.config.js --watch",
     "test:coverage": "jest --config=./config/jest.config.js --coverage",
+    "test:generate-output": "jest  --config=./config/jest.config.js --json --outputFile=.storybook/jest-test-results.json || true",
+    "prestart:storybook": "npm run test:generate-output",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -32,6 +34,7 @@
     "@storybook/addon-backgrounds": "^4.0.4",
     "@storybook/addon-console": "^1.1.0",
     "@storybook/addon-info": "^4.0.2",
+    "@storybook/addon-jest": "^4.0.4",
     "@storybook/addon-knobs": "^4.0.2",
     "@storybook/addon-links": "^4.0.2",
     "@storybook/addon-notes": "^4.0.2",

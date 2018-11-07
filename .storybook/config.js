@@ -3,12 +3,10 @@ import { configure, addDecorator, setAddon } from '@storybook/react';
 import { withThemesProvider } from 'storybook-addon-styled-component-theme';
 import { withNotes } from '@storybook/addon-notes';
 import { withKnobs } from '@storybook/addon-knobs';
-import { configure as enzymeConfigure } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import { describe, it } from 'storybook-addon-specifications';
-import expect from 'expect';
-import jest from 'jest-mock';
 import { withOptions } from '@storybook/addon-options';
+import { withTests } from '@storybook/addon-jest';
+import results from './jest-test-results.json';
+
 import light from '@design/Theme/light';
 import dark from '@design/Theme/dark';
 
@@ -26,6 +24,12 @@ addDecorator(
   })
 );
 
+addDecorator(
+  withTests({
+    results,
+  })
+);
+
 addDecorator(story => <div style={{ textAlign: 'left' }}>{story()}</div>);
 addDecorator(withNotes);
 addDecorator(withKnobs);
@@ -37,10 +41,4 @@ function loadStories() {
   req.keys().sort().forEach(filename => req(filename));
 }
 
-window.describe = describe;
-window.it = it;
-window.expect = expect;
-window.jest = jest;
-
-enzymeConfigure({ adapter: new Adapter() });
 configure(loadStories, module);
