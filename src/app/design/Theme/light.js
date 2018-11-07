@@ -1,10 +1,9 @@
-export default {
-  social: {
-    facebook: '#4c66a4',
-    gplus: '#dd4b39',
-    pinterest: '#cb2027',
-    twitter: '#2fc2ef',
-    tumblr: '#35465c',
+import typography from '../Typography';
+
+const colors = {
+  text: {
+    primary: 'rgb(44, 44, 43)',
+    secondary: 'rgb(125, 124, 122)',
   },
   highlight: {
     error: '#e74c3c',
@@ -12,8 +11,6 @@ export default {
     warning: '#f1c40f',
     info: '#288ad6',
   },
-  text: {
-    primary: '#111313',
-    secondary: '#697374',
-  },
 };
+
+export default Object.assign({}, typography, colors);

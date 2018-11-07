@@ -3,12 +3,12 @@ import { hot } from 'react-hot-loader';
 import { ThemeProvider } from 'styled-components';
 import AppRouter from '@routes/Router';
 import { Reboot } from '@components';
-import { lightTheme } from '@design';
+import { darkTheme } from '@design';
 
 const AppRoot = () => (
   <Fragment>
     <Reboot />
-    <ThemeProvider theme={lightTheme}>
+    <ThemeProvider theme={darkTheme}>
       <AppRouter />
     </ThemeProvider>
   </Fragment>

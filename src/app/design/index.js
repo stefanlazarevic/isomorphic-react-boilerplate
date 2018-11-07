@@ -1,2 +1,4 @@
-export { default as lightTheme } from './Theme/light';
-export { default as darkTheme } from './Theme/dark';
+import darkTheme from './Theme/dark';
+import lightTheme from './Theme/light';
+
+export default { darkTheme, lightTheme };

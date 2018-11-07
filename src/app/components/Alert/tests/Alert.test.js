@@ -4,7 +4,7 @@ import Alert from '../Alert';
 
 const wrap = (props = {}) => shallow(<Alert {...props} />);
 
-export const renders = describe('Testing component rendering.', () => {
+export default describe('Alert', () => {
   it('Renders component.', () => {
     wrap();
   });
@@ -23,9 +23,7 @@ export const renders = describe('Testing component rendering.', () => {
     const wrapper = wrap();
     expect(wrapper.props().type).toEqual('info');
   });
-});
 
-export const events = describe('Testing component event handlers.', () => {
   it('Closing component triggeres "onClose" callback function.', () => {
     const onClose = jest.fn();
     const wrapper = wrap({ onClose });

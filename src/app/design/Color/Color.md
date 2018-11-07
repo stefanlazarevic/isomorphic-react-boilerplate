@@ -86,6 +86,60 @@ rgb(40,138,214); vertical-align: middle;"></div>
 rgb(40,138,214)</code>
 <div>
 
+### Social
+
+Used for social media backgrounds, icon colors.
+
+<div>
+  <div style="display: inline-block; padding: 40px; background-color: rgb(36, 91, 158); vertical-align: middle;"></div>
+  <code style="vertical-align: middle;">rgb(36, 91, 158)</code>
+<div>
+
+<div>
+  <div style="display: inline-block; padding: 40px; background-color: rgb(0, 196, 81); vertical-align: middle;"></div>
+  <code style="vertical-align: middle;">rgb(0, 196, 81)</code>
+<div>
+
+<div>
+  <div style="display: inline-block; padding: 40px; background-color: rgb(254, 49, 46); vertical-align: middle;"></div>
+  <code style="vertical-align: middle;">rgb(254, 49, 46)</code>
+<div>
+
+<div>
+  <div style="display: inline-block; padding: 40px; background-color: rgb(0, 171, 227); vertical-align: middle;"></div>
+  <code style="vertical-align: middle;">rgb(0, 171, 227)</code>
+<div>
+
+<div>
+  <div style="display: inline-block; padding: 40px; background-color: rgb(245, 226, 0); vertical-align: middle;"></div>
+  <code style="vertical-align: middle;">rgb(245, 226, 0)</code>
+<div>
+
+<div>
+  <div style="display: inline-block; padding: 40px; background-color: rgb(245, 127, 32); vertical-align: middle;"></div>
+  <code style="vertical-align: middle;">rgb(245, 127, 32)</code>
+<div>
+
+<div>
+  <div style="display: inline-block; padding: 40px; background-color: rgb(51, 70, 94); vertical-align: middle;"></div>
+  <code style="vertical-align: middle;">rgb(51, 70, 94)</code>
+<div>
+
+<div>
+  <div style="display: inline-block; padding: 40px; background-color: rgb(156, 156, 156); vertical-align: middle;"></div>
+  <code style="vertical-align: middle;">rgb(156, 156, 156)</code>
+<div>
+
+<div>
+  <div style="display: inline-block; padding: 40px; background-color: rgb(240, 111, 164); vertical-align: middle;"></div>
+  <code style="vertical-align: middle;">rgb(240, 111, 164)</code>
+<div>
+
+<div>
+  <div style="display: inline-block; padding: 40px; background-color: rgb(177, 88, 166); vertical-align: middle;"></div>
+  <code style="vertical-align: middle;">rgb(177, 88, 166)</code>
+<div>
+
 ### Other
 
 Used for illustrations, graphics, marketing material.

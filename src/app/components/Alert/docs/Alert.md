@@ -33,5 +33,3 @@ import { Alert } from '@components';
 <!-- STORY -->
 
 <br />
-
-##### Since version 1.0

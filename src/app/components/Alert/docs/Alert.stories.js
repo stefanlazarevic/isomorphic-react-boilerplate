@@ -1,28 +1,19 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withDocs } from 'storybook-readme';
-import Alert from '../Alert.styled';
-import AlertDocumentation from './README.md';
-import { text, select, boolean } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
+import { text, select, boolean } from '@storybook/addon-knobs';
 import { specs } from 'storybook-addon-specifications';
-import { renders } from '../tests/Alert.test';
-import styled from 'styled-components';
-import { withBackgrounds } from '@storybook/addon-backgrounds';
+import storyPreview from '@util/storyPreview';
 
-const withCustomPreview = withDocs({
-  PreviewComponent: styled.div`
-    padding: 25px;
-    box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
-    background-color: ${props =>
-      props.theme.name === 'Dark' ? 'rgb(44, 44, 43)' : 'rgb(255, 255 ,255)'};
-  `,
-});
+import Alert from '../Alert.styled';
+import tests from '../tests/Alert.test';
+
+import AlertDocumentation from './Alert.md';
 
 storiesOf('Components|Feedback', module).add(
   'Alert',
-  withCustomPreview(AlertDocumentation, () => {
-    specs(() => renders);
+  storyPreview(AlertDocumentation, () => {
+    specs(() => tests);
     return (
       <Alert
         type={select('Type', ['info', 'success', 'error', 'warning'], 'info')}

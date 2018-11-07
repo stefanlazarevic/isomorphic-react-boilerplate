@@ -1,10 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import Heading from '../Heading';
 
-const wrap = (props = {}) => shallow(<Heading {...props} />);
+const wrap = (props = {}) => mount(<Heading {...props} />);
 
-describe('Testing component rendering.', () => {
+export default describe('Heading.', () => {
   it('Renders component.', () => {
     wrap();
   });
@@ -23,8 +23,13 @@ describe('Testing component rendering.', () => {
     expect(wrap({ level: 6 }).find('h6')).toHaveLength(1);
   });
 
-  it('Renders heading with text if it is passed as props.', () => {
+  it('Renders heading with text if it is passed as children.', () => {
     const wrapper = wrap({ children: 'Heading' });
+    expect(wrapper.find('h1').contains('Heading')).toBe(true);
+  });
+
+  it('Renders heading with text if it is passed as "text" property.', () => {
+    const wrapper = wrap({ text: 'Heading' });
     expect(wrapper.find('h1').contains('Heading')).toBe(true);
   });
 });

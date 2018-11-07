@@ -4,20 +4,21 @@ import { hot } from 'react-hot-loader';
 import Heading from './Heading';
 
 const StyledHeading = styled(Heading)`
-  ${({ theme, level }) => `
-    color: ${theme.color.text.primary};
-    color: var(--text-primary);
-    font-size: ${theme.typography.heading[level].size};
-    font-weight: ${theme.typography.heading[level].weight};
+  ${({ theme, level, uppercase }) => `
+    color: ${theme.text.primary};
+    font-size: ${theme[`h${level}`].size};
+    text-transform: ${uppercase ? 'uppercase' : 'initial'}
   `};
 `;
 
 StyledHeading.propTypes = {
   level: PropTypes.oneOf([1, 2, 3, 4, 5, 6]),
+  // uppercase: PropTypes.bool,
 };
 
 StyledHeading.defaultProps = {
   level: 1,
+  // uppercase: false,
 };
 
 export default hot(module)(StyledHeading);

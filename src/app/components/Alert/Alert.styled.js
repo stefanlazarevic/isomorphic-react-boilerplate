@@ -4,15 +4,16 @@ import { hot } from 'react-hot-loader';
 import Alert from './Alert';
 
 const StyledAlert = styled(Alert)`
+  position: relative;
+  border: 1px solid;
+  border-left: 6px solid;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  padding: 1rem;
+  margin-bottom: 10px;
+  padding-right: 40px;
+
   ${props => `
-    position: relative;
-    border: 1px solid;
-    border-left: 6px solid;
-    font-size: 1rem;
-    line-height: 1.25rem;
-    padding: 1rem;
-    margin-bottom: 10px;
-    padding-right: 40px;
 
     border-color: ${props.theme.highlight[props.type]};
 
