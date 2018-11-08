@@ -10,14 +10,11 @@ const StyledTag = styled(Tag)`
   line-height: 1rem;
   padding: 0.25rem 0.5rem;
   vertical-align: middle;
-  border: 1px solid transparent;
-  cursor: pointer;
-
-  &[data-checked='true'] {
-    background: ${props => (props.fill ? props.background : 'transparent')};
-    color: ${props => props.color};
-    border-color: currentColor;
-  }
+  border: 1px solid;
+  cursor: ${props => (props.clickable ? 'pointer' : 'auto')};
+  color: ${props => props.labelColor || props.theme.text.primary};
+  background-color: ${props => props.bgColor || props.theme.text.secondary};
+  border-color: ${props => props.bgColor};
 
   &:not(:first-child):not(:last-child) {
     margin: 0 5px;
@@ -25,21 +22,15 @@ const StyledTag = styled(Tag)`
 `;
 
 StyledTag.propTypes = {
-  visible: PropTypes.bool,
-  closable: PropTypes.bool,
-  checked: PropTypes.bool,
-  color: PropTypes.string,
-  fill: PropTypes.bool,
-  background: PropTypes.string,
+  clickable: PropTypes.bool,
+  labelColor: PropTypes.string,
+  bgColor: PropTypes.string,
 };
 
 StyledTag.defaultProps = {
+  clickable: false,
+  bgColor: 'transparent',
   visible: true,
-  checked: true,
-  closable: false,
-  fill: false,
-  color: 'rgba(0,0,0,.65)',
-  background: '#f3f3f3',
 };
 
 export default hot(module)(StyledTag);

@@ -32,7 +32,12 @@ addDecorator(
 
 addDecorator(story => <div style={{ textAlign: 'left' }}>{story()}</div>);
 addDecorator(withNotes);
-addDecorator(withKnobs);
+addDecorator(withKnobs, {
+  knobs: {
+    timestamps: true,
+    escapeHTML: true,
+  },
+});
 
 // automatically import all files ending in *.stories.js
 const req = require.context('../src/app/', true, /.stories.js$/);

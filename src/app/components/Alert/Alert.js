@@ -44,7 +44,7 @@ class Alert extends Component {
 
   render = () =>
     this.state.visible ? (
-      <div className={this.props.className} type={this.props.type}>
+      <div className={this.props.className} type={this.props.type} role="alert">
         <strong>{this.props.title}</strong>
         <span>{this.props.children || this.props.message}</span>
         <div onClick={this.close}>

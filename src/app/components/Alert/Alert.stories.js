@@ -24,10 +24,6 @@ storiesOf('Components|Feedback', module)
       );
     }),
     {
-      knobs: {
-        timestamps: true,
-        escapeHTML: true,
-      },
       notes: {
         markdown:
           '- When ``autoclose`` property is present on component, ``Alert`` will close automatically after 5 seconds.',

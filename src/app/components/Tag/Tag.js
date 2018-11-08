@@ -11,8 +11,9 @@ class Tag extends Component {
     onChange: PropTypes.func,
     color: PropTypes.string,
     children: PropTypes.node,
-    text: PropTypes.string,
+    label: PropTypes.string,
     className: PropTypes.string,
+    renderAs: PropTypes.string,
   };
 
   static defaultProps = {
@@ -20,6 +21,7 @@ class Tag extends Component {
     checked: true,
     closable: false,
     clickable: false,
+    renderAs: 'div',
   };
 
   state = {
@@ -45,14 +47,16 @@ class Tag extends Component {
     this.setState(previousState => ({ checked: !previousState.checked }));
 
   render = () => {
+    const CustomTagElement = this.props.renderAs;
+
     return this.state.visible ? (
-      <span
+      <CustomTagElement
         className={this.props.className}
         data-checked={this.state.checked.toString()}
         onClick={this.toggleCheck}
       >
-        {this.props.children || this.props.text}
-      </span>
+        {this.props.children || this.props.label}
+      </CustomTagElement>
     ) : null;
   };
 }

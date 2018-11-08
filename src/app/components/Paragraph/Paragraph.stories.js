@@ -13,11 +13,5 @@ storiesOf('Components|Data Display', module)
     'Paragraph',
     storyPreview(ParagraphDocumentation, () => {
       return <Paragraph>{text('Text', 'Hello World')}</Paragraph>;
-    }),
-    {
-      knobs: {
-        timestamps: true,
-        escapeHTML: true,
-      },
-    }
+    })
   );

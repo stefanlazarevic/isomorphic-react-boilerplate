@@ -41,16 +41,6 @@ export default [
     ],
   },
   {
-    path: '/components',
-    exact: true,
-    component: Loadable({
-      loader: () =>
-        import(/* webpackChunkName: "components-page" */
-        '@app/pages/Components'),
-      loading: Loading,
-    }),
-  },
-  {
     path: '*',
     component: NotFound,
   },

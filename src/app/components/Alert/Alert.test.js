@@ -26,6 +26,11 @@ describe('Testing component rendering.', () => {
     expect(wrapper.get(0).type).toBe('div');
   });
 
+  it('Contains "alert" role attribute.', () => {
+    const wrapper = wrap().dive();
+    expect(wrapper.prop('role')).toEqual('alert');
+  });
+
   it('Renders component with "type" set to "info" by the default.', () => {
     const wrapper = wrap().dive();
     expect(wrapper.props().type).toEqual('info');

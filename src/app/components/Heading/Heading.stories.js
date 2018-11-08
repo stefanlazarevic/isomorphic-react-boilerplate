@@ -21,10 +21,6 @@ storiesOf('Components|Data Display', module)
       );
     }),
     {
-      knobs: {
-        timestamps: true,
-        escapeHTML: true,
-      },
       notes: {
         markdown: `> The six heading elements, H1 through H6, denote section headings. Although the order and occurrence of headings is not constrained by the HTML DTD, documents should not skip levels (for example, from H1 to H3), as converting such documents to other representations is often problematic.
          >

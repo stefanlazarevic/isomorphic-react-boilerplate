@@ -1,15 +1,16 @@
-# Paragraph
+# Tag
 
-The most important element in data presentation.
+Element for categorizing or markup.
 
 ## When to use?
 
-- When you need to present a sentence or a lot of text.
+- It can be used to tag by dimension or property.
+- When categorizing.
 
 ## Usage
 
 ```js
-import { Paragraph } from '@components';
+import { Tag } from '@components';
 ```
 
 ## API
@@ -23,7 +24,7 @@ import { Paragraph } from '@components';
 ### Examples
 
 ```js
-<Paragraph>Hello World</Paragraph>
+<Tag>Premium</Tag>
 ```
 
 <!-- STORY -->
