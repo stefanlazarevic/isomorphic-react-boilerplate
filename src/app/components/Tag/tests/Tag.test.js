@@ -5,7 +5,6 @@ import { styleSheetSerializer } from 'jest-styled-components/serializer';
 import { addSerializer } from 'jest-specific-snapshot';
 
 import shallow from '@util/shallow';
-// import Tag from '../Tag.styled';
 import { Tag } from '@components';
 import { LightTheme } from '@design';
 
@@ -13,12 +12,12 @@ const wrap = (props = {}) => shallow(<Tag {...props} />, LightTheme);
 addSerializer(styleSheetSerializer);
 
 describe('General component tests.', () => {
-  // it('Should match the last snapshot.', () => {
-  //   const styledComponent = wrap();
-  //   const component = styledComponent.dive();
-  //   expect(renderer.create(component).toJSON()).toMatchSnapshot();
-  //   expect(renderer.create(styledComponent).toJSON()).toMatchSnapshot();
-  // });
+  it('Should match the last snapshot.', () => {
+    const styledComponent = wrap();
+    const component = styledComponent.dive();
+    expect(renderer.create(component).toJSON()).toMatchSnapshot();
+    expect(renderer.create(styledComponent).toJSON()).toMatchSnapshot();
+  });
 
   it('Should have "visible" and "checked" states.', () => {
     const component = wrap().dive();

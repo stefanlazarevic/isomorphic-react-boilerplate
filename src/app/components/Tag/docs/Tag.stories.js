@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text, select, boolean, color } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
+import { text, boolean, color } from '@storybook/addon-knobs';
 import storyPreview from '@util/storyPreview';
 
 import { Tag } from '@components';
@@ -16,7 +17,9 @@ storiesOf('Components|Data Display', module)
         <Tag
           label={text('Label', 'Premium')}
           clickable={boolean('Clickable', false)}
-          labelColor={color('Label color', '#444')}
+          closable={boolean('Closable', false)}
+          onClose={action('Element has been removed.')}
+          onChange={action('Element "active" state set to ')}
         />
       );
     })

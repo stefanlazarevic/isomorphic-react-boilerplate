@@ -6,19 +6,18 @@ class Tag extends Component {
     visible: PropTypes.bool,
     closable: PropTypes.bool,
     clickable: PropTypes.bool,
-    checked: PropTypes.bool,
+    active: PropTypes.bool,
     onClose: PropTypes.func,
     onChange: PropTypes.func,
-    color: PropTypes.string,
-    children: PropTypes.node,
     label: PropTypes.string,
     className: PropTypes.string,
+    children: PropTypes.node,
     renderAs: PropTypes.string,
   };
 
   static defaultProps = {
     visible: true,
-    checked: true,
+    active: false,
     closable: false,
     clickable: false,
     renderAs: 'div',
@@ -26,7 +25,7 @@ class Tag extends Component {
 
   state = {
     visible: this.props.visible,
-    checked: this.props.checked,
+    active: this.props.active,
   };
 
   componentDidUpdate(previousProps, previousState) {
@@ -34,8 +33,8 @@ class Tag extends Component {
       this.props.onClose();
     }
 
-    if (previousState.checked !== this.state.checked && this.props.onChange) {
-      this.props.onChange(this.state.checked);
+    if (previousState.active !== this.state.active && this.props.onChange) {
+      this.props.onChange(this.state.active);
     }
   }
 
@@ -44,7 +43,7 @@ class Tag extends Component {
 
   toggleCheck = () =>
     this.props.clickable &&
-    this.setState(previousState => ({ checked: !previousState.checked }));
+    this.setState(previousState => ({ active: !previousState.active }));
 
   render = () => {
     const CustomTagElement = this.props.renderAs;
@@ -52,10 +51,21 @@ class Tag extends Component {
     return this.state.visible ? (
       <CustomTagElement
         className={this.props.className}
-        data-checked={this.state.checked.toString()}
-        onClick={this.toggleCheck}
+        data-checked={this.state.active.toString()}
       >
-        {this.props.children || this.props.label}
+        <span onClick={this.toggleCheck}>
+          {this.props.children || this.props.label}
+        </span>
+        {this.props.closable ? (
+          <svg
+            width="0.6em"
+            height="0.6em"
+            viewBox="0 0 24 24"
+            onClick={this.close}
+          >
+            <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z" />
+          </svg>
+        ) : null}
       </CustomTagElement>
     ) : null;
   };

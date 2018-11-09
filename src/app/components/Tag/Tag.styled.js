@@ -10,20 +10,39 @@ const StyledTag = styled(Tag)`
   line-height: 1rem;
   padding: 0.25rem 0.5rem;
   vertical-align: middle;
-  border: 1px solid;
+  border: 1px solid transparent;
   cursor: ${props => (props.clickable ? 'pointer' : 'auto')};
   color: ${props => props.labelColor || props.theme.text.primary};
-  background-color: ${props => props.bgColor || props.theme.text.secondary};
+  background-color: ${props => props.bgColor};
   border-color: ${props => props.bgColor};
 
   &:not(:first-child):not(:last-child) {
     margin: 0 5px;
+  }
+
+  & > svg {
+    margin-left: 0.5em;
+    cursor: pointer;
+    fill: ${props => props.labelColor};
+  }
+
+  &[data-checked='true'] {
+    color: ${props => props.activeLabelColor || props.theme.text.primary};
+    background-color: ${props =>
+      props.activeBgColor || props.theme.text.secondary};
+    border-color: ${props => props.activeBgColor || props.theme.text.secondary};
+
+    svg {
+      fill: ${props => props.activeLabelColor || props.theme.text.primary};
+    }
   }
 `;
 
 StyledTag.propTypes = {
   clickable: PropTypes.bool,
   labelColor: PropTypes.string,
+  activeLabelColor: PropTypes.string,
+  activeBgColor: PropTypes.string,
   bgColor: PropTypes.string,
 };
 
