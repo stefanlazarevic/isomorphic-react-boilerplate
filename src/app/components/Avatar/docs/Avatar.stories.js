@@ -26,7 +26,7 @@ storiesOf('Components|Data Display', module)
           onError={action('Error occured during image load.')}
           src={
             showImage
-              ? text('Source', 'https://ww.w3schools.com/howto/img_avatar.png')
+              ? text('Source', 'https://www.w3schools.com/howto/img_avatar.png')
               : null
           }
         />

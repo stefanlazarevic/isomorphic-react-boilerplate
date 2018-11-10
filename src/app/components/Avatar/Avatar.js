@@ -14,10 +14,15 @@ export default class Avatar extends Component {
 
   state = { hasError: false };
 
-  handleError = error => {
+  handleError = () => {
     this.setState(() => ({ hasError: true }));
-    this.props.onError(error);
   };
+
+  componentDidUpdate(previousProps, previousState) {
+    if (this.props.onError && previousState.hasError !== this.state.hasError) {
+      this.props.onError();
+    }
+  }
 
   render() {
     return (

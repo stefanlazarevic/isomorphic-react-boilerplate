@@ -10,6 +10,7 @@ import { LightTheme } from '@design';
 
 const wrap = (props = { letter: 'L' }) =>
   shallow(<Avatar {...props} />, LightTheme);
+
 addSerializer(styleSheetSerializer);
 
 describe('General component tests.', () => {
@@ -28,7 +29,7 @@ describe('Testing component rendering.', () => {
   });
 
   it('Should render "img" element inside "div" if "src" property is passed.', () => {
-    const component = wrap({ src: '#' }).dive();
+    const component = wrap({ src: '#', letter: 'L' }).dive();
     expect(component.find('img')).toHaveLength(1);
   });
 
@@ -39,11 +40,20 @@ describe('Testing component rendering.', () => {
 
   it('Should not accepts child components.', () => {
     const children = 'icon';
-    const component = wrap({ children }).dive();
-    expect(component.text()).toEqual('');
+    const component = wrap({ children, letter: 'L' }).dive();
+    expect(component.text()).toEqual('L');
   });
 });
 
 describe('Testing component UI.', () => {});
 
-describe('Testing component event handlers.', () => {});
+describe('Testing component event handlers.', () => {
+  it('Should throw an error if image source cannot be loaded.', () => {
+    const onError = jest.fn();
+    wrap({ src: 'adasfas', onError, letter: 'L' }).dive();
+
+    setTimeout(() => {
+      expect(onError).toBeCalled();
+    }, 500);
+  });
+});

@@ -14,6 +14,7 @@ const StyledAvatar = styled(Avatar)`
   border-color: transparent;
 
   img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
