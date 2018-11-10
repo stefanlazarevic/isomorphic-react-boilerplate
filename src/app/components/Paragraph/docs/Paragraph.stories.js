@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { text } from '@storybook/addon-knobs';
 import storyPreview from '@util/storyPreview';
 
-import Paragraph from './Paragraph.styled';
+import { Paragraph } from '@components';
 
 import ParagraphDocumentation from './Paragraph.md';
 

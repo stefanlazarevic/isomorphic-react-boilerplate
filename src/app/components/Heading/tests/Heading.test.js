@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import shallow from '@util/shallow';
-import Heading from './Heading.styled';
+import { Heading } from '@components';
 import { LightTheme } from '@design';
 
 const wrap = (props = {}) => shallow(<Heading {...props} />, LightTheme);

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class Tag extends Component {
+export default class Tag extends Component {
   static propTypes = {
     visible: PropTypes.bool,
     closable: PropTypes.bool,
     clickable: PropTypes.bool,
-    active: PropTypes.bool,
+    selected: PropTypes.bool,
     onClose: PropTypes.func,
     onChange: PropTypes.func,
     label: PropTypes.string,
@@ -17,7 +17,7 @@ class Tag extends Component {
 
   static defaultProps = {
     visible: true,
-    active: false,
+    selected: false,
     closable: false,
     clickable: false,
     renderAs: 'div',
@@ -25,7 +25,7 @@ class Tag extends Component {
 
   state = {
     visible: this.props.visible,
-    active: this.props.active,
+    selected: this.props.selected,
   };
 
   componentDidUpdate(previousProps, previousState) {
@@ -33,8 +33,8 @@ class Tag extends Component {
       this.props.onClose();
     }
 
-    if (previousState.active !== this.state.active && this.props.onChange) {
-      this.props.onChange(this.state.active);
+    if (previousState.selected !== this.state.selected && this.props.onChange) {
+      this.props.onChange(this.state.selected);
     }
   }
 
@@ -43,7 +43,7 @@ class Tag extends Component {
 
   toggleCheck = () =>
     this.props.clickable &&
-    this.setState(previousState => ({ active: !previousState.active }));
+    this.setState(previousState => ({ selected: !previousState.selected }));
 
   render = () => {
     const CustomTagElement = this.props.renderAs;
@@ -51,7 +51,7 @@ class Tag extends Component {
     return this.state.visible ? (
       <CustomTagElement
         className={this.props.className}
-        data-checked={this.state.active.toString()}
+        data-checked={this.state.selected.toString()}
       >
         <span onClick={this.toggleCheck}>
           {this.props.children || this.props.label}
@@ -70,5 +70,3 @@ class Tag extends Component {
     ) : null;
   };
 }
-
-export default Tag;

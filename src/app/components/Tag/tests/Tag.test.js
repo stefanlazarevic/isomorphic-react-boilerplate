@@ -19,10 +19,10 @@ describe('General component tests.', () => {
     expect(renderer.create(styledComponent).toJSON()).toMatchSnapshot();
   });
 
-  it('Should have "visible" and "checked" states.', () => {
+  it('Should have "visible" and "selected" states.', () => {
     const component = wrap().dive();
     expect(component.state('visible')).toBeDefined();
-    expect(component.state('checked')).toBeDefined();
+    expect(component.state('selected')).toBeDefined();
   });
 
   it('Should set "visible" state to the value of "visible" property.', () => {
@@ -30,9 +30,9 @@ describe('General component tests.', () => {
     expect(component.state('visible')).toBe(false);
   });
 
-  it('Should set "checked" state to the value of "checked" property.', () => {
-    const component = wrap({ checked: true }).dive();
-    expect(component.state('checked')).toBe(true);
+  it('Should set "selected" state to the value of "selected" property.', () => {
+    const component = wrap({ selected: true }).dive();
+    expect(component.state('selected')).toBe(true);
   });
 });
 
@@ -87,7 +87,7 @@ describe('Testing component event handlers.', () => {
   it('Should execute "onChange" callback on Tag click if "clickable" property is passed.', () => {
     const onChange = jest.fn();
     const component = wrap({ clickable: true, onChange }).dive();
-    component.find('div').simulate('click');
+    component.find('span').simulate('click');
     expect(onChange).toBeCalled();
   });
 

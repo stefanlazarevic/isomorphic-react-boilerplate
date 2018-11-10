@@ -4,7 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { text, select, boolean } from '@storybook/addon-knobs';
 import storyPreview from '@util/storyPreview';
 
-import Alert from './Alert.styled';
+import { Alert } from '@components';
 
 import AlertDocumentation from './Alert.md';
 

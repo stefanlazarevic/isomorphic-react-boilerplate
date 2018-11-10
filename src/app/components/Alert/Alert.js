@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-class Alert extends Component {
+export default class Alert extends Component {
   constructor(props) {
     super(props);
 
@@ -55,5 +55,3 @@ class Alert extends Component {
       </div>
     ) : null;
 }
-
-export default Alert;

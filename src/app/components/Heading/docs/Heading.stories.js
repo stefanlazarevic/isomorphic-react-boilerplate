@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/react';
 import { text, select, boolean } from '@storybook/addon-knobs';
 import storyPreview from '@util/storyPreview';
 
-import Heading from './Heading.styled';
+import { Heading } from '@components';
 
 import HeadingDocumentation from './Heading.md';
 

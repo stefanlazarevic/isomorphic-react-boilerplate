@@ -1,7 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import mount from '@util/shallow';
-import Alert from './Alert.styled';
+import { Alert } from '@components';
 import { LightTheme } from '@design';
 
 const wrap = (props = {}) => mount(<Alert {...props} />, LightTheme);
