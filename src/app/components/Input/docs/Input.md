@@ -1,9 +1,11 @@
 # Input
 
-
+A basic widget for getting the user input.
 
 ## When to use?
 
+- A user input in a form field is needed.
+- A search input is required.
 
 
 ## Usage
@@ -31,7 +33,7 @@ import { Input } from '@components';
 ### Examples
 
 ```js
-<Input placeholder="Put your content here" />
+<Input label="Website" prefix="https://" placeholder="Put your content here" />
 ```
 
 <!-- STORY -->

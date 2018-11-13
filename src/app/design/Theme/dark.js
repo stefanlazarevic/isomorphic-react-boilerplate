@@ -1,15 +1,22 @@
 import typography from '../Typography';
 
 const colors = {
+  background: {
+    primary: 'rgb(23, 26, 31)',
+    secondary: 'rgb(31, 34, 41)',
+  },
   text: {
     primary: 'rgb(255, 255, 255)',
-    secondary: 'rgb(217, 217, 217)',
+    secondary: 'rgb(153,153,153)',
+  },
+  border: {
+    default: 'rgb(67, 76, 92)',
   },
   highlight: {
-    error: '#e74c3c',
+    error: 'rgb(255,88,91)',
     success: '#16c98d',
     warning: '#f1c40f',
-    info: '#288ad6',
+    info: 'rgb(40,138,214)',
   },
 };
 

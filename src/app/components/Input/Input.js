@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { METHODS } from 'http';
 
 export default class Input extends Component {
   static propTypes = {
@@ -33,8 +34,24 @@ export default class Input extends Component {
     disabled: false,
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: props.value,
+    };
+  }
+
+  handleChangeEvent = event => {
+    this.setState(() => ({ value: event.currentTarget.value }));
+
+    if (this.props.onChange) {
+      this.props.onChange(this.value);
+    }
+  };
+
   get value() {
-    return (this.props.prefix + this.input.value + this.props.suffix).trim();
+    return (this.props.prefix + this.state.value + this.props.suffix).trim();
   }
 
   render() {
@@ -43,17 +60,15 @@ export default class Input extends Component {
         {this.props.label ? (
           <label htmlFor={this.props.name}>{this.props.label}</label>
         ) : null}
-        <div>
+        <div data-group-table="true">
           {this.props.prefix ? <span>{this.props.prefix}</span> : null}
           <input
             ref={input => (this.input = input)}
             name={this.props.name}
             type={this.props.type}
-            value={this.props.value}
+            value={this.state.value}
             placeholder={this.props.placeholder}
-            onChange={() =>
-              this.props.onChange && this.props.onChange(this.value)
-            }
+            onChange={this.handleChangeEvent}
             onError={error => this.props.onError && this.props.onError(error)}
             autoComplete={this.props.autoComplete}
             disabled={this.props.disabled}
