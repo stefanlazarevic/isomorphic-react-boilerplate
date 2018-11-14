@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { METHODS } from 'http';
 
 export default class Input extends Component {
   static propTypes = {

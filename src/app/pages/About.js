@@ -31,7 +31,6 @@ class About extends Component {
     <Fragment>
       {this.injectPageMetadata()}
       <Heading>About Page</Heading>
-
       <Link to="/">Home</Link>
       <br />
       <Link to="/about/example">Example</Link>

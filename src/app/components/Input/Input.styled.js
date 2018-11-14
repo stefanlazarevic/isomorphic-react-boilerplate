@@ -37,13 +37,13 @@ const StyledInput = styled(Input)`
       opacity: 1; /* Firefox */
     }
 
-    &:-ms-input-placeholder {
-      /* Internet Explorer 10-11 */
+    &::-ms-input-placeholder {
+      /* Microsoft Edge */
       color: ${({ theme }) => theme.text_secondary};
     }
 
-    &::-ms-input-placeholder {
-      /* Microsoft Edge */
+    &:-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
       color: ${({ theme }) => theme.text_secondary};
     }
 

@@ -8,6 +8,7 @@ const StyledParagraph = styled(Paragraph)`
     font-size: ${theme.p.size};
     font-weight: ${theme.p.weight};
     margin-bottom: 2rem;
+    line-height: ${theme.p.height};
   `};
 `;
 

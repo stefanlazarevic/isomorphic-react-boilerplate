@@ -31,7 +31,7 @@ class Home extends Component {
         <Heading>Home Page</Heading>
         <Link to="/about">About</Link>
         <br />
-        <Link to="/components">Components</Link>
+        <Link to="/components">Not Found</Link>
       </div>
     </Fragment>
   );
