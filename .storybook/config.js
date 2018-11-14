@@ -7,16 +7,10 @@ import { withOptions } from '@storybook/addon-options';
 import { withTests } from '@storybook/addon-jest';
 import results from './jest-test-results.json';
 
-import light from '@design/Theme/light';
-import dark from '@design/Theme/dark';
+import { LightTheme, DarkTheme } from '@design/Theme';
 
-import { LightSwatch, DarkSwatch } from '@design/Color';
-
-// const LIGHT_THEME = Object.assign({ name: "Light" }, light);
-// const DARK_THEME = Object.assign({ name: "Dark" }, dark);
-
-const LIGHT_SWATCH = Object.assign({ name: 'Light' }, LightSwatch);
-const DARK_SWATCH = Object.assign({ name: 'Dark' }, DarkSwatch);
+const LIGHT_SWATCH = Object.assign({ name: 'Light' }, LightTheme);
+const DARK_SWATCH = Object.assign({ name: 'Dark' }, DarkTheme);
 
 const themes = [LIGHT_SWATCH, DARK_SWATCH];
 

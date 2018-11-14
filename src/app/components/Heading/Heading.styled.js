@@ -5,7 +5,7 @@ import Heading from './Heading';
 
 const StyledHeading = styled(Heading)`
   ${({ theme, level, uppercase }) => `
-    color: ${theme.text.primary};
+    color: ${theme.text_primary};
     font-size: ${theme[`h${level}`].size};
     font-weight: ${theme[`h${level}`].weight};
     text-transform: ${uppercase ? 'uppercase' : 'initial'}

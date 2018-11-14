@@ -4,7 +4,7 @@ import Paragraph from './Paragraph';
 
 const StyledParagraph = styled(Paragraph)`
   ${({ theme }) => `
-    color: ${theme.text.secondary};
+    color: ${theme.text_secondary};
     font-size: ${theme.p.size};
     font-weight: ${theme.p.weight};
     margin-bottom: 2rem;

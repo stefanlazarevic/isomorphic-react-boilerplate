@@ -15,36 +15,36 @@ const StyledInput = styled(Input)`
     width: ${props => (props.inline ? 'auto' : '100%')};
     margin-bottom: ${props => (props.inline ? '0' : '10')}px;
     margin-right: ${props => (props.inline ? '10' : '0')}px;
-    color: ${props => props.theme.text.primary};
+    color: ${({ theme }) => theme.text_primary};
     font-size: 1em;
   }
 
   input {
     font-size: 1em;
     width: 100%;
-    height: 34px;
-    background-color: ${props => props.theme.background.secondary};
+    height: 40px;
+    background-color: ${({ theme }) => theme.background_light};
     outline: 0;
     border: 1px solid;
     border-radius: 4px;
     padding: 0 15px;
-    color: ${props => props.theme.text.primary};
-    border-color: ${props => props.theme.border.default};
+    color: ${({ theme }) => theme.text_primary};
+    border-color: ${({ theme }) => theme.border_light};
 
     &::placeholder {
       /* Chrome, Firefox, Opera, Safari 10.1+ */
-      color: ${props => props.theme.text.secondary};
+      color: ${({ theme }) => theme.text_secondary};
       opacity: 1; /* Firefox */
     }
 
     &:-ms-input-placeholder {
       /* Internet Explorer 10-11 */
-      color: ${props => props.theme.text.secondary};
+      color: ${({ theme }) => theme.text_secondary};
     }
 
     &::-ms-input-placeholder {
       /* Microsoft Edge */
-      color: ${props => props.theme.text.secondary};
+      color: ${({ theme }) => theme.text_secondary};
     }
 
     &:disabled {
@@ -52,8 +52,12 @@ const StyledInput = styled(Input)`
       cursor: not-allowed;
     }
 
+    &:not(:disabled):hover {
+      border-color: ${({ theme }) => theme.border_dark};
+    }
+
     &:not(:disabled):focus {
-      border-color: ${props => props.theme.highlight.info};
+      border-color: ${({ theme }) => theme.border_dark};
     }
   }
 
@@ -65,9 +69,10 @@ const StyledInput = styled(Input)`
       display: flex;
       align-items: center;
       padding: 0 5px;
-      color: ${props => props.theme.text.secondary};
-      background: ${props => props.theme.background.secondary};
-      border: 1px solid ${props => props.theme.border.default};
+      height: 40px;
+      color: ${({ theme }) => theme.text_primary};
+      background: ${({ theme }) => theme.background_light};
+      border: 1px solid ${({ theme }) => theme.border_light};
     }
 
     span:first-child {

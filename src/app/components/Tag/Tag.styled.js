@@ -12,7 +12,7 @@ const StyledTag = styled(Tag)`
   vertical-align: middle;
   border: 1px solid transparent;
   cursor: ${props => (props.clickable ? 'pointer' : 'auto')};
-  color: ${props => props.labelColor || props.theme.text.primary};
+  color: ${({ labelColor, theme }) => labelColor || theme.text_primary};
   background-color: ${props => props.bgColor};
   border-color: ${props => props.bgColor};
 
@@ -27,13 +27,16 @@ const StyledTag = styled(Tag)`
   }
 
   &[data-checked='true'] {
-    color: ${props => props.activeLabelColor || props.theme.text.primary};
-    background-color: ${props =>
-      props.activeBgColor || props.theme.text.secondary};
-    border-color: ${props => props.activeBgColor || props.theme.text.secondary};
+    color: ${({ activeLabelColor, theme }) =>
+      activeLabelColor || theme.text_primary};
+    background-color: ${({ activeBgColor, theme }) =>
+      activeBgColor || theme.text_secondary};
+    border-color: ${({ activeBgColor, theme }) =>
+      activeBgColor || theme.text_secondary};
 
     svg {
-      fill: ${props => props.activeLabelColor || props.theme.text.primary};
+      fill: ${({ activeLabelColor, theme }) =>
+        activeLabelColor || theme.text_primary};
     }
   }
 `;
