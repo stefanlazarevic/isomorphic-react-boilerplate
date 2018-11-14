@@ -10,10 +10,15 @@ import results from './jest-test-results.json';
 import light from '@design/Theme/light';
 import dark from '@design/Theme/dark';
 
-const LIGHT_THEME = Object.assign({ name: "Light" }, light);
-const DARK_THEME = Object.assign({ name: "Dark" }, dark);
+import { LightSwatch, DarkSwatch } from '@design/Color';
 
-const themes = [LIGHT_THEME, DARK_THEME];
+// const LIGHT_THEME = Object.assign({ name: "Light" }, light);
+// const DARK_THEME = Object.assign({ name: "Dark" }, dark);
+
+const LIGHT_SWATCH = Object.assign({ name: 'Light' }, LightSwatch);
+const DARK_SWATCH = Object.assign({ name: 'Dark' }, DarkSwatch);
+
+const themes = [LIGHT_SWATCH, DARK_SWATCH];
 
 addDecorator(withThemesProvider(themes));
 

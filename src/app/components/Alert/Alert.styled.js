@@ -12,20 +12,21 @@ const StyledAlert = styled(Alert)`
   padding: 1rem;
   margin-bottom: 10px;
   padding-right: 40px;
+  background-color: ${({ theme }) => theme.background_light};
 
   ${props => `
 
-    border-color: ${props.theme.highlight[props.type]};
+    border-color: ${props.theme[props.type]};
 
     & > strong {
       display: ${props.inline ? 'inline' : 'block'};
-      color: ${props.theme.highlight[props.type]};
+      color: ${props.theme[props.type]};
       margin-right: 10px;
       margin-bottom: 3px;
     }
 
     & > span {
-      color: ${props.theme.text.primary}
+      color: ${props.theme.text_primary}
     }
 
     & > div {
@@ -36,7 +37,7 @@ const StyledAlert = styled(Alert)`
       transform: translateY(-50%);
       cursor: pointer;
       svg {
-        fill: ${props.theme.text.primary}
+        fill: ${props.theme.text_primary}
       }
     }
   `};
