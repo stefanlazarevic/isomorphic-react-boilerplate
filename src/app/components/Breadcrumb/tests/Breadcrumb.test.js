@@ -4,27 +4,23 @@ import 'jest-styled-components';
 import { styleSheetSerializer } from 'jest-styled-components/serializer';
 import { addSerializer } from 'jest-specific-snapshot';
 
-import shallow from '@util/shallow';
 import { Breadcrumb } from '@components';
 import { LightTheme } from '@design';
+import mount from '@util/mount';
 
-import { StaticRouter as Router } from 'react-router-dom';
-
-const wrap = (props = { location: { pathname: '/' } }) =>
-  shallow(
-    <Router location={location} context={{}}>
-      <Breadcrumb {...props} />
-    </Router>,
-    LightTheme
-  );
+const wrap = (props = {}) => mount(<Breadcrumb {...props} />, LightTheme);
 
 addSerializer(styleSheetSerializer);
 
 describe('General component tests.', () => {
   it('Should match last snapshot.', () => {
-    const styledComponent = wrap();
-    expect(renderer.create(styledComponent).toJSON()).toMatchSnapshot();
+    // TODO
   });
 });
 
-describe('Testing component rendering.', () => {});
+describe('Testing component rendering.', () => {
+  it('Should render a "ol" element.', () => {
+    const wrapper = wrap();
+    expect(wrapper.find('ol')).toHaveLength(1);
+  });
+});

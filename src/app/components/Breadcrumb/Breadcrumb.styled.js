@@ -4,6 +4,10 @@ import { hot } from 'react-hot-loader';
 import Breadcrumb from './Breadcrumb';
 
 const StyledBreadcrumb = styled(Breadcrumb)`
+  display: inline-block;
+  list-style: none;
+  padding-left: 0;
+
   a {
     text-decoration: none;
     text-transform: capitalize;
@@ -14,11 +18,15 @@ const StyledBreadcrumb = styled(Breadcrumb)`
     }
   }
 
-  & > span:last-child a {
+  & > li {
+    display: inline-block;
+  }
+
+  & > li:last-child a {
     color: ${({ theme }) => theme.text_secondary};
   }
 
-  & > span:after {
+  & > li:after {
     content: '/';
     color: ${({ theme }) => theme.border_dark};
     display: inline-block;
