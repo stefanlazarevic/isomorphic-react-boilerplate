@@ -36,7 +36,7 @@ class Breadcrumb extends Component {
   }
 
   generateBreadcrumb = () => {
-    const URL = this.props.path || this.props.location.pathname;
+    const URL = this.props.path || this.props.location.pathname || '/';
     const segments = [''].concat(URL.split('/').filter(Boolean));
     const MASK_URL = this.props.mask;
     const maskSegments = ['Home'].concat(MASK_URL.split('/').filter(Boolean));

@@ -6,7 +6,7 @@ import { MemoryRouter } from 'react-router';
 
 import styled from 'styled-components';
 
-import { Breadcrumb } from '@components';
+import { Breadcrumb, Heading } from '@components';
 
 import BreadcrumbDocumentation from './Breadcrumb.md';
 
@@ -22,10 +22,13 @@ storiesOf('Components|Navigation', module)
 
       const maskData = {
         category: (prop, field) => {
-          return field.replace(/(-_)/g, ' ');
+          const category = field.replace(/(-)/g, ' ');
+          return category.charAt(0).toUpperCase() + category.slice(1);
         },
-        season_id: 1,
-        episode_title: 'Winter is comming',
+        title: (prop, field) => {
+          const title = field.replace(/(-)/g, ' ');
+          return title.charAt(0).toUpperCase() + title.slice(1);
+        },
       };
 
       return (
@@ -37,7 +40,7 @@ storiesOf('Components|Navigation', module)
               exact={true}
               component={() => (
                 <div>
-                  <h1>Home</h1>
+                  <Heading>Home</Heading>
                   <Link to="tv-shows">TV Shows</Link>
                 </div>
               )}
@@ -47,7 +50,7 @@ storiesOf('Components|Navigation', module)
               exact={true}
               component={() => (
                 <div>
-                  <h1>TV Shows</h1>
+                  <Heading>TV Shows</Heading>
                   <Link to="/tv-shows/action">Action</Link>
                   &nbsp;
                   <Link to="/tv-shows/comedy">Comedy</Link>
@@ -61,7 +64,7 @@ storiesOf('Components|Navigation', module)
                 if (match.params.category === 'action') {
                   return (
                     <div>
-                      <h1>{match.params.category}</h1>
+                      <Heading>{match.params.category}</Heading>
                       <Link to="/tv-shows/action/game-of-thrones">
                         Game of Thrones
                       </Link>
@@ -70,7 +73,7 @@ storiesOf('Components|Navigation', module)
                 } else if (match.params.category === 'comedy') {
                   return (
                     <div>
-                      <h1>{match.params.category}</h1>
+                      <Heading>{match.params.category}</Heading>
                       <Link to="/tv-shows/comedy/south-park">South Park</Link>
                     </div>
                   );
@@ -84,7 +87,7 @@ storiesOf('Components|Navigation', module)
               exact={true}
               component={({ match }) => (
                 <div>
-                  <h1>{match.params.title}</h1>
+                  <Heading>{match.params.title}</Heading>
                   <Link to="/">Home</Link>
                   &nbsp;
                   <Link to={`/tv-shows/${match.params.category}`}>

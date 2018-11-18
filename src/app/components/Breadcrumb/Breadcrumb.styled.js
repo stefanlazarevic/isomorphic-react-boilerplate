@@ -10,7 +10,6 @@ const StyledBreadcrumb = styled(Breadcrumb)`
 
   a {
     text-decoration: none;
-    text-transform: capitalize;
     color: ${({ theme }) => theme.link};
 
     &:hover {
