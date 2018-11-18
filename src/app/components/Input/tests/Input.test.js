@@ -43,22 +43,26 @@ describe('Testing component rendering.', () => {
   });
 
   it('Should render "label" if "label" property is passed.', () => {
-    const component = wrap({ label: 'Label' }).dive();
+    const component = wrap({ label: 'Label', name: 'input' }).dive();
     expect(component.find('label').text()).toEqual('Label');
   });
 
   it('Should render "span" if "prefix" property is passed.', () => {
-    const component = wrap({ prefix: 'Prefix' }).dive();
+    const component = wrap({ prefix: 'Prefix', name: 'input' }).dive();
     expect(component.find('span').text()).toEqual('Prefix');
   });
 
   it('Should render "span" if "suffix" property is passed.', () => {
-    const component = wrap({ prefix: 'Suffix' }).dive();
+    const component = wrap({ prefix: 'Suffix', name: 'input' }).dive();
     expect(component.find('span').text()).toEqual('Suffix');
   });
 
   it('Should render two "span" elements if both "prefix" and "suffix" properties are passed.', () => {
-    const component = wrap({ prefix: 'Prefix', suffix: 'Suffix' }).dive();
+    const component = wrap({
+      prefix: 'Prefix',
+      suffix: 'Suffix',
+      name: 'input',
+    }).dive();
     expect(
       component
         .find('span')

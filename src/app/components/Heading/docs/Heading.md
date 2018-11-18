@@ -16,10 +16,10 @@ import { Heading } from '@components';
 
 | Property | Description | Type | Required | Options | Default |
 |---|---|---|---|---|---|
-| ``level`` | Level of the Heading element. | ``number`` | ``true`` | ``1 - 6`` | ``1`` |
-| ``text`` | Heading content. | ``string`` | ``false`` | - | - |
-| ``children`` | Heading content. | ``node`` | ``false`` | - | - |
-| ``uppercase`` | Determine if content should be printed in all capital letters. | ``boolean`` | ``false`` | ``true`` ``false`` | ``false`` |
+| `level` | Level of the Heading element. | `number` | `true` | `1 - 6` | `1` |
+| `text` | Heading content. | `string` | `false` | - | - |
+| `children` | Heading content. | `node` | `false` | - | - |
+| `uppercase` | Determine if content should be printed in all capital letters. | `boolean` | `false` | `true` `false` | `false` |
 
 
 ### Examples

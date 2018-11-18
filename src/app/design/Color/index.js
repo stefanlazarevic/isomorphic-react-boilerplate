@@ -19,7 +19,7 @@ export const DarkSwatch = {
   background_light: '#525566',
   text_primary: '#ffffff',
   text_secondary: '#dde0ee',
-  border_light: '#75798c',
+  border_light: '#9b9eaf',
   border_dark: '#343745',
   green_light: '#4BCA81',
   link: '#88c1ff',
