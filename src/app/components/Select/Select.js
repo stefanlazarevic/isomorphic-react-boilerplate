@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+
+import { ChevronDown } from '@icons/Chevron';
+import { XMark } from '@icons/Mark';
 
 class Select extends Component {
   static propTypes = {
     value: PropTypes.string,
     placeholder: PropTypes.string,
     className: PropTypes.string,
+    onChange: PropTypes.func,
   };
 
   static defaultProps = {
@@ -18,42 +22,66 @@ class Select extends Component {
 
     this.state = {
       value: props.value,
-      open: true,
+      open: false,
     };
   }
 
   componentDidMount() {
-    document.addEventListener('mousedown', this.close);
+    document.addEventListener('mousedown', event => {
+      if (this.node.contains(event.target)) {
+        return;
+      }
+
+      this.close();
+    });
   }
 
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.close);
   }
 
-  open = () => this.setState(() => ({ open: true }));
+  shouldComponentUpdate(previousProps, previousState) {
+    return (
+      previousState.value !== this.state.value ||
+      previousState.open !== this.state.open ||
+      previousProps.className !== this.props.className
+    );
+  }
+
+  clear = event => {
+    event.stopPropagation();
+    this.setState(() => ({ value: '' }));
+  };
 
   close = () => this.setState(() => ({ open: false }));
 
-  toggle = event => {
-    event.preventDefault();
-    event.stopPropagation();
-    this.setState(state => ({ open: !state.open }));
-  };
+  toggle = () =>
+    this.setState(previousState => ({ open: !previousState.open }));
 
   select = (event, value) => {
-    event.preventDefault();
-    event.stopPropagation();
     this.setState(() => ({ value }));
+    this.close();
+    this.props.onChange && this.props.onChange(value);
   };
 
+  get value() {
+    return this.state.value;
+  }
+
   render = () => (
-    <div className={this.props.className}>
+    <div className={this.props.className} ref={node => (this.node = node)}>
       <div data-input onClick={this.toggle}>
         {this.state.value ? (
-          <span data-value>{this.state.value}</span>
+          <Fragment>
+            <span data-value>{this.state.value}</span>
+            <span data-close onClick={this.clear}>
+              <XMark size="16" />
+            </span>
+          </Fragment>
         ) : (
           <span data-placeholder>{this.props.placeholder}</span>
         )}
+        <ChevronDown size="14" />
       </div>
       {this.state.open ? (
         <div data-options>

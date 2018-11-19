@@ -74,13 +74,23 @@ module.exports = {
     '^@routes(.*)$': '<rootDir>/src/app/routes$1',
     '^@util(.*)$': '<rootDir>/src/app/util$1',
     '^@design(.*)$': '<rootDir>/src/app/design$1',
+    '^@icons(.*)$': '<rootDir>/src/app/design/Iconography$1',
+    '^@theme(.*)$': '<rootDir>/src/app/design/Theme$1',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
-  modulePathIgnorePatterns: ['/node_modules/', '.git', '.storybook'],
+  modulePathIgnorePatterns: [
+    '/node_modules/',
+    '.git',
+    '.storybook',
+    'dist',
+    'docs',
+    'public',
+    'webpack',
+  ],
 
   // Activates notifications for test results
-  // notify: false,
+  notify: true,
 
   // An enum that specifies notification mode. Requires { notify: true }
   // notifyMode: "always",

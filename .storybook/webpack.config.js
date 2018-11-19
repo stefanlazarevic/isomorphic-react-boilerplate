@@ -29,6 +29,8 @@ module.exports = {
       '@routes': path.resolve(__dirname, '../src/app/routes'),
       '@util': path.resolve(__dirname, '../src/app/util'),
       '@design': path.resolve(__dirname, '../src/app/design'),
+      '@icons': path.resolve(__dirname, '../src/app/design/Iconography'),
+      '@theme': path.resolve(__dirname, '../src/app/design/Theme'),
     },
   },
   externals: {

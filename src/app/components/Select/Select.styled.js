@@ -8,11 +8,12 @@ const StyledSelect = styled(Select)`
   cursor: pointer;
 
   & > [data-input] {
+    position: relative;
     width: 100%;
     height: 35px;
     border: 1px solid transparent;
     border-radius: 4px;
-    padding: 0 10px;
+    padding: 0 40px 0 10px;
     outline: none;
     margin-bottom: 35px;
     transition: border-color 0.2s linear;
@@ -25,6 +26,20 @@ const StyledSelect = styled(Select)`
 
     & > [data-placeholder] {
       color: ${({ theme }) => theme.border_light};
+    }
+
+    & > [data-close] {
+      position: absolute;
+      right: 25px;
+      top: 3px;
+      stroke: ${({ theme }) => theme.text_primary};
+    }
+
+    & > svg {
+      position: absolute;
+      right: 5px;
+      top: 10px;
+      stroke: ${({ theme }) => theme.text_primary};
     }
   }
 
