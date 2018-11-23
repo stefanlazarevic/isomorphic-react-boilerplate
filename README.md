@@ -26,3 +26,19 @@ Under consideration
 
 - Typescript
 - TSLint
+
+## Installation
+
+`npm install`
+
+## Run Unit Tests
+
+`npm run test`
+
+## Run Storybook Documentation
+
+`npm run storybook`
+
+## Run Development environment
+
+`npm start`
