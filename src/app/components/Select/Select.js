@@ -10,6 +10,8 @@ class Select extends Component {
     placeholder: PropTypes.string,
     className: PropTypes.string,
     onChange: PropTypes.func,
+    children: PropTypes.node,
+    options: PropTypes.arrayOf(PropTypes.object),
   };
 
   static defaultProps = {
@@ -28,7 +30,7 @@ class Select extends Component {
 
   componentDidMount() {
     document.addEventListener('mousedown', event => {
-      if (this.node.contains(event.target)) {
+      if (this.node && this.node.contains(event.target)) {
         return;
       }
 
@@ -85,27 +87,20 @@ class Select extends Component {
       </div>
       {this.state.open ? (
         <div data-options>
-          <div
-            data-option
-            role="option"
-            onClick={event => this.select(event, 'Option 1')}
-          >
-            Option 1
-          </div>
-          <div
-            data-option
-            role="option"
-            onClick={event => this.select(event, 'Option 2')}
-          >
-            Option 2
-          </div>
-          <div
-            data-option
-            role="option"
-            onClick={event => this.select(event, 'Option 3')}
-          >
-            Option 3
-          </div>
+          {(this.props.options || this.props.children || []).map(
+            (option, index) => {
+              return (
+                <div
+                  key={index}
+                  data-option
+                  role="option"
+                  onClick={event => this.select(event, option.value)}
+                >
+                  {option.label || 'No Label'}
+                </div>
+              );
+            }
+          )}
         </div>
       ) : null}
     </div>

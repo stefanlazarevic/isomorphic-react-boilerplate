@@ -11,6 +11,6 @@ storiesOf('Components|Data Entry', module)
   .add(
     'Select',
     storyPreview(SelectDocumentation, () => {
-      return <Select />;
+      return <Select options={[{ value: 'test', label: 'Test' }]} />;
     })
   );
