@@ -21,43 +21,41 @@ Buttons, solid background, links.
 
 <br />
 
-### Gray
+### Backgrounds.
 
-Backgrounds and text colors.
-
+#### Light
 <div>
-  <div style="display: inline-block; padding: 39px; background-color: rgb(255, 255, 255); vertical-align: middle; border: 1px solid #f3f3f3;"></div>
-  <code style="vertical-align: middle;">rgb(255, 255, 255)</code>
+  <div style="display: inline-block; padding: 39px; background-color: #fdfdfd; vertical-align: middle; border: 1px solid #f3f3f3;"></div>
+  <span>Primary</span>
+  <code style="vertical-align: middle;">#fdfdfd</code>
 <div>
-
 <div>
-  <div style="display: inline-block; padding: 40px; background-color: rgb(247, 247, 247); vertical-align: middle;"></div>
-  <code style="vertical-align: middle;">rgb(247, 247, 247)</code>
+  <div style="display: inline-block; padding: 39px; background-color: #f7f7f7; vertical-align: middle; border: 1px solid #f3f3f3;"></div>
+  <span>Secondary</span>
+  <code style="vertical-align: middle;">#f7f7f7</code>
 <div>
-
 <div>
-  <div style="display: inline-block; padding: 40px; background-color: rgb(236, 236, 236); vertical-align: middle;"></div>
-  <code style="vertical-align: middle;">rgb(236, 236, 236)</code>
-<div>
-
-<div>
-  <div style="display: inline-block; padding: 40px; background-color: rgb(217, 217, 217); vertical-align: middle;"></div>
-  <code style="vertical-align: middle;">rgb(217, 217, 217)</code>
+  <div style="display: inline-block; padding: 39px; background-color: #ffffff; vertical-align: middle; border: 1px solid #f3f3f3;"></div>
+  <span>Tertiary</span>
+  <code style="vertical-align: middle;">#ffffff</code>
 <div>
 
-<div>
-  <div style="display: inline-block; padding: 40px; background-color: rgb(178, 177, 175); vertical-align: middle;"></div>
-  <code style="vertical-align: middle;">rgb(178, 177, 175)</code>
-<div>
 
+#### Dark
 <div>
-  <div style="display: inline-block; padding: 40px; background-color: rgb(125, 124, 122); vertical-align: middle;"></div>
-  <code style="vertical-align: middle;">rgb(125, 124, 122)</code>
+  <div style="display: inline-block; padding: 40px; background-color: #484b5b; vertical-align: middle;"></div>
+  <span>Primary</span>
+  <code style="vertical-align: middle;">#484b5b</code>
 <div>
-
 <div>
-  <div style="display: inline-block; padding: 40px; background-color: rgb(44, 44, 43); vertical-align: middle;"></div>
-  <code style="vertical-align: middle;">rgb(44, 44, 43)</code>
+  <div style="display: inline-block; padding: 40px; background-color: #343745; vertical-align: middle;"></div>
+  <span>Secondary</span>
+  <code style="vertical-align: middle;">#343745</code>
+<div>
+<div>
+  <div style="display: inline-block; padding: 40px; background-color: #525566; vertical-align: middle;"></div>
+  <span>Tertiary</span>
+  <code style="vertical-align: middle;">#525566</code>
 <div>
 
 ### Semantic
