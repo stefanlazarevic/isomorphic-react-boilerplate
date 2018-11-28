@@ -13,6 +13,8 @@ export default withDocs({
     padding: 25px;
     box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
     background-color: ${({ theme }) =>
-      theme.name === 'Dark' ? DarkSwatch.background : LightSwatch.background};
+      theme.name === 'Dark'
+        ? DarkSwatch.background_primary
+        : LightSwatch.background_primary};
   `,
 });
