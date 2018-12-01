@@ -54,9 +54,10 @@ export const DarkSwatch = {
   text_primary: '#ffffff',
   text_secondary: '#c5c8d4',
   text_tertiary: '#9b9eaf',
-  border_primary: '#343745',
-  border_hovered: '#222222',
-  border_active: '',
+
+  border_primary: '#434c5c',
+  border_hover: '#4e586b',
+  border_focus: '#637188',
 };
 
 export const LightSwatch = {
@@ -68,7 +69,7 @@ export const LightSwatch = {
   text_secondary: '#75798c',
   text_tertiary: '#eeeeee',
 
-  border_primary: '#eeeeee',
-  border_hovered: '',
-  border_active: '',
+  border_primary: '#ececec',
+  border_hover: '#dfdfdf',
+  border_focus: '#c5c5c5',
 };

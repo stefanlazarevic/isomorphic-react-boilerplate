@@ -14,8 +14,6 @@ storiesOf('Components|Data Entry', module)
     storyPreview(InputDocumentation, () => {
       return (
         <Input
-          label={text('Label', 'Website')}
-          inline={boolean('Inline', false)}
           disabled={boolean('Disabled', false)}
           type={select(
             'Type',
@@ -23,9 +21,7 @@ storiesOf('Components|Data Entry', module)
             'url'
           )}
           name="website"
-          prefix={text('Prefix', 'https://')}
-          suffix={text('Suffix', '')}
-          placeholder={text('Placeholder', 'Your awesome website location.')}
+          placeholder={text('Placeholder', 'Put your content here.')}
         />
       );
     })
