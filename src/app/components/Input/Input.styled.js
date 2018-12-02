@@ -17,6 +17,7 @@ const StyledInput = styled(Input)`
   transition: border-color 0.2s ease-in;
   outline: 0;
   color: ${({ theme }) => theme.text_primary};
+  font-size: 1rem;
 
   &:hover {
     border-color: ${({ theme }) => theme.border_hover};
