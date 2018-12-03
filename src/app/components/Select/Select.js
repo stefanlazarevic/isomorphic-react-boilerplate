@@ -29,17 +29,11 @@ class Select extends Component {
   }
 
   componentDidMount() {
-    document.addEventListener('mousedown', event => {
-      if (this.node && this.node.contains(event.target)) {
-        return;
-      }
-
-      this.close();
-    });
+    document.addEventListener('mousedown', this.eventClose);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('mousedown', this.close);
+    document.removeEventListener('mousedown', this.eventClose);
   }
 
   shouldComponentUpdate(previousProps, previousState) {
@@ -54,6 +48,9 @@ class Select extends Component {
     event.stopPropagation();
     this.setState(() => ({ value: '' }));
   };
+
+  eventClose = event =>
+    this.node && this.node.contains(event.target) ? null : this.close();
 
   close = () => this.setState(() => ({ open: false }));
 
@@ -77,13 +74,13 @@ class Select extends Component {
           <Fragment>
             <span data-value>{this.state.value}</span>
             <span data-close onClick={this.clear}>
-              <XMark size="16" />
+              <XMark size="20" />
             </span>
           </Fragment>
         ) : (
           <span data-placeholder>{this.props.placeholder}</span>
         )}
-        <ChevronDown size="14" />
+        <ChevronDown size="16" />
       </div>
       {this.state.open ? (
         <div data-options>
