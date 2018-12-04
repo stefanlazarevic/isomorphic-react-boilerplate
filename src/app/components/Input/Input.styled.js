@@ -3,9 +3,6 @@ import { hot } from 'react-hot-loader';
 import PropTypes from 'prop-types';
 import Input from './Input';
 
-/**
- * Static Input Styling.
- */
 const StyledInput = styled(Input)`
   display: block;
   width: 100%;
@@ -18,6 +15,10 @@ const StyledInput = styled(Input)`
   outline: 0;
   color: ${({ theme }) => theme.text_primary};
   font-size: 1rem;
+
+  &:disabled {
+    opacity: 0.5;
+  }
 
   &:hover {
     border-color: ${({ theme }) => theme.border_hover};

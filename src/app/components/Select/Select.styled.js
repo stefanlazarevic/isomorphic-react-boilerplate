@@ -57,6 +57,8 @@ const StyledSelect = styled(Select)`
 
   & > [data-options] {
     display: block;
+    padding: 0;
+    margin: 0;
     position: absolute;
     width: 100%;
     top: 120%;
@@ -65,19 +67,12 @@ const StyledSelect = styled(Select)`
     border-radius: 4px;
     overflow-y: auto;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12), 0 2px 4px 0 rgba(0, 0, 0, 0.08);
-
-    & > [data-option] {
-      color: ${({ theme }) => theme.text_secondary};
-      padding: 10px;
-
-      &:hover {
-        background-color: ${({ theme }) => theme.background_secondary};
-      }
-    }
   }
 `;
 
-StyledSelect.propTypes = {};
+StyledSelect.propTypes = {
+  theme: PropTypes.object,
+};
 
 StyledSelect.defaultProps = {};
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { storiesOf } from '@storybook/react';
 import storyPreview from '@util/storyPreview';
 
@@ -11,6 +11,15 @@ storiesOf('Components|Data Entry', module)
   .add(
     'Select',
     storyPreview(SelectDocumentation, () => {
-      return <Select options={[{ value: 'test', label: 'Test' }]} />;
+      const selectData = [
+        { value: 'M', label: 'Male' },
+        { value: 'F', label: 'Female' },
+        { value: 'O', label: 'Other' },
+      ];
+      return (
+        <Fragment>
+          <Select options={selectData} />
+        </Fragment>
+      );
     })
   );

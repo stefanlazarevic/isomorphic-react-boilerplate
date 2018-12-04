@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 export default class Input extends Component {
   static propTypes = {
     id: PropTypes.string,
+    name: PropTypes.string.isRequired,
     type: PropTypes.oneOf([
       'text',
       'search',
@@ -14,12 +15,9 @@ export default class Input extends Component {
     ]).isRequired,
     className: PropTypes.string,
     placeholder: PropTypes.string,
-    name: PropTypes.string.isRequired,
+    value: PropTypes.string,
     disabled: PropTypes.bool,
     required: PropTypes.bool,
-    value: PropTypes.string,
-    prefix: PropTypes.string,
-    suffix: PropTypes.string,
     onError: PropTypes.func,
     onSuccess: PropTypes.func,
     onBlur: PropTypes.func,
@@ -39,6 +37,7 @@ export default class Input extends Component {
 
     this.state = {
       value: props.value,
+      disabled: props.disabled,
     };
   }
 
@@ -46,10 +45,15 @@ export default class Input extends Component {
     if (nextProps.value !== this.props.value) {
       this.setState({ value: nextProps.value });
     }
+
+    if (nextProps.disabled !== this.state.disabled) {
+      this.setState({ disabled: nextProps.disabled });
+    }
   }
 
   handleChangeEvent = event => {
-    if (this.props.disabled) return;
+    if (this.state.disabled) return;
+
     const { value } = event.target;
 
     this.setState(() => {
@@ -87,7 +91,7 @@ export default class Input extends Component {
         placeholder={this.props.placeholder}
         name={this.props.name}
         value={this.state.value}
-        disabled={this.props.disabled}
+        disabled={this.state.disabled}
         required={this.props.required}
         onBlur={this.props.onBlur}
         onFocus={this.props.onFocus}

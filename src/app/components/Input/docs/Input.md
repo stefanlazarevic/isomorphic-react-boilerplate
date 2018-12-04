@@ -18,10 +18,13 @@ import { Input } from '@components';
 
 | Property | Description | Type | Required | Options | Default |
 |---|---|---|---|---|---|
+| `id` | An input id | `string` | `false` | - | - |
 | `name` | An input name | `string` | `true` | - | - |
 | `type` | An input type | `string` | `false` | `text` \| `password` \| `email` \| `url` \| `search` \| `hidden` | `text` |
-| `value` | Default input value | `string` | `false` | - | - |
 | `placeholder` | An input placeholder | `string` | `false` | - | - |
+| `value` | Default input value | `string` | `false` | - | - |
+| `disabled` | Input disabled state. | `boolean` | `false` | `true` \| `false` | `false` |
+| `required` | Input required state. | `boolean` | `false` | `true` \| `false` | `false` |
 | `onChange` | Callback on input value change. | `function` | `false` | - | - |
 | `onError` | Callback on input validation error. | `function` | `false` | - | - |
 | `disabled` | Is input disabled. | `boolean` | `false` | `true` \| `false` | `false` |

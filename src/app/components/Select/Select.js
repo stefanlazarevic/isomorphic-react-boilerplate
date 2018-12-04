@@ -4,19 +4,23 @@ import PropTypes from 'prop-types';
 import { ChevronDown } from '@icons/Chevron';
 import { XMark } from '@icons/Mark';
 
+import Option from './components/Option/Option.styled';
+
 class Select extends Component {
   static propTypes = {
+    label: PropTypes.string,
     value: PropTypes.string,
+    required: PropTypes.bool,
     placeholder: PropTypes.string,
     className: PropTypes.string,
     onChange: PropTypes.func,
-    children: PropTypes.node,
     options: PropTypes.arrayOf(PropTypes.object),
   };
 
   static defaultProps = {
     value: '',
     placeholder: 'Select...',
+    required: false,
   };
 
   constructor(props) {
@@ -24,6 +28,7 @@ class Select extends Component {
 
     this.state = {
       value: props.value,
+      label: props.label,
       open: false,
     };
   }
@@ -57,8 +62,8 @@ class Select extends Component {
   toggle = () =>
     this.setState(previousState => ({ open: !previousState.open }));
 
-  select = (event, value) => {
-    this.setState(() => ({ value }));
+  select = (event, value, label) => {
+    this.setState(() => ({ value, label }));
     this.close();
     this.props.onChange && this.props.onChange(value);
   };
@@ -69,10 +74,20 @@ class Select extends Component {
 
   render = () => (
     <div className={this.props.className} ref={node => (this.node = node)}>
-      <div data-input onClick={this.toggle}>
+      <div
+        data-input
+        // onClick={this.toggle}
+        role="combobox"
+        tabIndex="0"
+        aria-autocomplete="none"
+        aria-expanded={this.state.open}
+        aria-required={this.props.required}
+        aria-activedescendant={this.state.value || 'default'}
+        aria-owns="age-list"
+      >
         {this.state.value ? (
           <Fragment>
-            <span data-value>{this.state.value}</span>
+            <span data-value>{this.state.label}</span>
             <span data-close onClick={this.clear}>
               <XMark size="20" />
             </span>
@@ -82,24 +97,18 @@ class Select extends Component {
         )}
         <ChevronDown size="16" />
       </div>
-      {this.state.open ? (
-        <div data-options>
-          {(this.props.options || this.props.children || []).map(
-            (option, index) => {
-              return (
-                <div
-                  key={index}
-                  data-option
-                  role="option"
-                  onClick={event => this.select(event, option.value)}
-                >
-                  {option.label || 'No Label'}
-                </div>
-              );
-            }
-          )}
-        </div>
-      ) : null}
+      {/* {this.state.open ? ( */}
+      <ul data-options role="listbox" id="age-list">
+        {this.props.options.map((option, index) => (
+          <Option
+            key={index}
+            label={option.label}
+            value={option.value}
+            onClick={this.select}
+          />
+        ))}
+      </ul>
+      {/* ) : null} */}
     </div>
   );
 }
