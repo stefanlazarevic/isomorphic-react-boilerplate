@@ -1,116 +1,88 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
-import { ChevronDown } from '@icons/Chevron';
-import { XMark } from '@icons/Mark';
-
+import styled from 'styled-components';
 import Option from './components/Option/Option.styled';
 
-class Select extends Component {
+const Placeholder = styled.span`
+  color: ${({ theme }) => theme.text_secondary};
+`;
+
+const SelectedValue = styled.span`
+  color: ${({ theme }) => theme.text_primary};
+`;
+
+export default class Select extends Component {
   static propTypes = {
-    label: PropTypes.string,
-    value: PropTypes.string,
-    required: PropTypes.bool,
-    placeholder: PropTypes.string,
     className: PropTypes.string,
-    onChange: PropTypes.func,
-    options: PropTypes.arrayOf(PropTypes.object),
+    defaultLabel: PropTypes.string,
+    placeholder: PropTypes.string,
+    open: PropTypes.bool,
   };
 
   static defaultProps = {
-    value: '',
-    placeholder: 'Select...',
-    required: false,
+    placeholder: 'Do you like cheese?',
+    open: false,
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      value: props.value,
-      label: props.label,
-      open: false,
+      value: props.defaultLabel,
+      open: props.open,
     };
   }
 
   componentDidMount() {
-    document.addEventListener('mousedown', this.eventClose);
+    document.addEventListener('mousedown', this.handleClickOutside);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('mousedown', this.eventClose);
+    document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
-  shouldComponentUpdate(previousProps, previousState) {
+  handleClickEvent = () => {
+    this.setState(currentState => ({ open: !currentState.open }));
+  };
+
+  handleClickOutside = event => {
+    if (this.selectDom && !this.selectDom.contains(event.target)) {
+      this.setState(() => ({ open: false }));
+    }
+  };
+
+  handleKeyDown = event => {
+    if (event.keyCode !== event.keycode.TAB) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  };
+
+  render() {
     return (
-      previousState.value !== this.state.value ||
-      previousState.open !== this.state.open ||
-      previousProps.className !== this.props.className
+      <div
+        className={this.props.className}
+        ref={selectDom => (this.selectDom = selectDom)}
+      >
+        <button
+          aria-haspopup="true"
+          role="button"
+          aria-controls="_001"
+          aria-expanded={this.state.open ? true : undefined}
+          tabIndex={this.state.open ? '-1' : '0'}
+          onClick={this.handleClickEvent}
+          onKeyDown={this.handleKeyDown}
+        >
+          <SelectedValue>{this.state.value}</SelectedValue>
+          <Placeholder>{this.props.placeholder}</Placeholder>
+        </button>
+        {this.state.open ? (
+          <ul id="_001" className="options" role="listbox">
+            <Option label="Yes" value="yes" onClick={() => undefined} />
+            <Option label="No" value="no" onClick={() => undefined} />
+          </ul>
+        ) : null}
+      </div>
     );
   }
-
-  clear = event => {
-    event.stopPropagation();
-    this.setState(() => ({ value: '' }));
-  };
-
-  eventClose = event =>
-    this.node && this.node.contains(event.target) ? null : this.close();
-
-  close = () => this.setState(() => ({ open: false }));
-
-  toggle = () =>
-    this.setState(previousState => ({ open: !previousState.open }));
-
-  select = (event, value, label) => {
-    this.setState(() => ({ value, label }));
-    this.close();
-    this.props.onChange && this.props.onChange(value);
-  };
-
-  get value() {
-    return this.state.value;
-  }
-
-  render = () => (
-    <div className={this.props.className} ref={node => (this.node = node)}>
-      <div
-        data-input
-        // onClick={this.toggle}
-        role="combobox"
-        tabIndex="0"
-        aria-autocomplete="none"
-        aria-expanded={this.state.open}
-        aria-required={this.props.required}
-        aria-activedescendant={this.state.value || 'default'}
-        aria-owns="age-list"
-      >
-        {this.state.value ? (
-          <Fragment>
-            <span data-value>{this.state.label}</span>
-            <span data-close onClick={this.clear}>
-              <XMark size="20" />
-            </span>
-          </Fragment>
-        ) : (
-          <span data-placeholder>{this.props.placeholder}</span>
-        )}
-        <ChevronDown size="16" />
-      </div>
-      {/* {this.state.open ? ( */}
-      <ul data-options role="listbox" id="age-list">
-        {this.props.options.map((option, index) => (
-          <Option
-            key={index}
-            label={option.label}
-            value={option.value}
-            onClick={this.select}
-          />
-        ))}
-      </ul>
-      {/* ) : null} */}
-    </div>
-  );
 }
-
-export default Select;
