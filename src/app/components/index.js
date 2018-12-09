@@ -11,4 +11,5 @@ export { default as Label } from './Label/Label.styled';
 export { default as Paragraph } from './Paragraph/Paragraph.styled';
 export { default as Reboot } from './Reboot/Reboot';
 export { default as Select } from './Select/Select.styled';
+export { default as Switch } from './Switch/Switch.styled';
 export { default as Tag } from './Tag/Tag.styled';
