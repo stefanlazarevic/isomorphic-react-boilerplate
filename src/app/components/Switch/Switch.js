@@ -21,9 +21,28 @@ export default class Switch extends Component {
     };
   }
 
+  toggleState = event => {
+    event.preventDefault();
+    this.setState(currentState => ({ checked: !currentState.checked }));
+  };
+
+  handleKeyPress = event => {
+    const { keyCode } = event;
+    console.info(event);
+    console.info(event.keyCode);
+    if (keyCode === event.keyCode.ENTER) {
+      this.toggleState();
+    }
+  };
+
   render() {
     return (
-      <div className={this.props.className}>
+      <div
+        className={this.props.className}
+        onClick={this.toggleState}
+        onKeyPress={this.handleKeyPress}
+        tabIndex="0"
+      >
         <input
           id={this.props.id}
           type="checkbox"
