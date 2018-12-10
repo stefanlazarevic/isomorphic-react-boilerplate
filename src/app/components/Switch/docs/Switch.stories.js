@@ -12,6 +12,6 @@ storiesOf('Components|Data Entry', module)
   .add(
     'Switch',
     storyPreview(SwitchDocumentation, () => {
-      return <Switch name="switch" />;
+      return <Switch name="switch" checked="true" />;
     })
   );

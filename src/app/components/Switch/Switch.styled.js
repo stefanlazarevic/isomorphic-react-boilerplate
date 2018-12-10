@@ -13,7 +13,7 @@ const StyledSwitch = styled(Switch)`
     position: relative;
     height: 30px;
     width: 55px;
-    border: 2px solid ${({ theme }) => theme.border_tertiary};
+    border: 2px solid ${({ theme }) => theme.border_primary};
     border-radius: 15px;
     cursor: pointer;
     background-color: ${({ theme }) => theme.background_secondary};
