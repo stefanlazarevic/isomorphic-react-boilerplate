@@ -12,6 +12,13 @@ storiesOf('Components|Data Entry', module)
   .add(
     'Checkbox',
     storyPreview(CheckboxDocument, () => {
-      return <Checkbox name="switch" checked={true} label="Remember me" />;
+      return (
+        <Checkbox
+          name="switch"
+          checked={boolean('Checked', true)}
+          label={text('Label', 'Remember me')}
+          textPosition={select('Text position', ['left', 'right'], 'left')}
+        />
+      );
     })
   );
