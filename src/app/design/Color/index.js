@@ -30,22 +30,6 @@
 //   warning: '#FFB75D',
 // };
 
-/**
- * Color usage:
- *
- * Primary background: Only used as the document/body background color.
- *
- * Secondary background: Darker version of primary color, used for input elements and layers further from the user.
- *
- * Tertiary background: Lihter version of primary color, used for sidebars, disabled state background,
- * and layers closer to the user.
- *
- * Primary text color: Used for the most important text, such as titles, important messages etc.
- *
- * Secondary text color: Used for the regular text such as paragraphs, footer links etc.
- *
- * Tertiary text color: Used for disabled text, del element and all the text with lowest highligh priority to the user.
- */
 export const DarkSwatch = {
   background_primary: '#484b5b',
   background_secondary: '#343745',
@@ -58,11 +42,14 @@ export const DarkSwatch = {
   border_primary: '#434c5c',
   border_hover: '#4e586b',
   border_focus: '#637188',
+
+  success: '#7BC96F',
+  info: '#4eaeeb',
 };
 
 export const LightSwatch = {
   background_primary: '#fdfdfd',
-  background_secondary: '#f7f7f7',
+  background_secondary: '#f4f4f4',
   background_tertiary: '#ffffff',
 
   text_primary: '#343745',
@@ -72,4 +59,7 @@ export const LightSwatch = {
   border_primary: '#ececec',
   border_hover: '#dfdfdf',
   border_focus: '#c5c5c5',
+
+  success: '#71c565',
+  info: '#14abfa',
 };
