@@ -1,35 +1,27 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import Option from './components/Option/Option.styled';
-
-const Placeholder = styled.span`
-  color: ${({ theme }) => theme.text_secondary};
-`;
-
-const SelectedValue = styled.span`
-  color: ${({ theme }) => theme.text_primary};
-`;
 
 export default class Select extends Component {
   static propTypes = {
     className: PropTypes.string,
-    defaultLabel: PropTypes.string,
-    placeholder: PropTypes.string,
-    open: PropTypes.bool,
+    isOpen: PropTypes.bool,
+    onOpen: PropTypes.func,
+    onClose: PropTypes.func,
+    disabled: PropTypes.bool,
   };
 
   static defaultProps = {
-    placeholder: 'Do you like cheese?',
-    open: false,
+    isOpen: false,
+    disabled: false,
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
-      value: props.defaultLabel,
-      open: props.open,
+      isOpen: props.isOpen,
     };
   }
 
@@ -41,45 +33,74 @@ export default class Select extends Component {
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
 
-  handleClickEvent = () => {
-    this.setState(currentState => ({ open: !currentState.open }));
+  open = () => {
+    this.setState(() => {
+      if (this.state.isOpen) {
+        return;
+      }
+
+      if (this.props.onOpen) {
+        this.props.onOpen();
+      }
+
+      return { isOpen: true };
+    });
+  };
+
+  close = () => {
+    this.setState(() => {
+      if (!this.state.isOpen) {
+        return;
+      }
+
+      if (this.props.onClose) {
+        this.props.onClose();
+      }
+
+      return { isOpen: false };
+    });
+  };
+
+  toggleOpen = () => {
+    this.setState(() => {
+      if (this.state.isOpen) {
+        this.close();
+      } else {
+        this.open();
+      }
+    });
   };
 
   handleClickOutside = event => {
-    if (this.selectDom && !this.selectDom.contains(event.target)) {
-      this.setState(() => ({ open: false }));
+    if (this.root && !this.root.contains(event.target)) {
+      this.close();
     }
   };
 
-  handleKeyDown = event => {
-    if (event.keyCode !== event.keycode.TAB) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+  handleListClick = event => {
+    console.log(event.target.dataset.index);
   };
 
   render() {
     return (
-      <div
-        className={this.props.className}
-        ref={selectDom => (this.selectDom = selectDom)}
-      >
+      <div className={this.props.className} ref={root => (this.root = root)}>
         <button
+          aria-disabled={this.props.disabled}
           aria-haspopup="true"
           role="button"
-          aria-controls="_001"
-          aria-expanded={this.state.open ? true : undefined}
-          tabIndex={this.state.open ? '-1' : '0'}
-          onClick={this.handleClickEvent}
-          onKeyDown={this.handleKeyDown}
-        >
-          <SelectedValue>{this.state.value}</SelectedValue>
-          <Placeholder>{this.props.placeholder}</Placeholder>
-        </button>
-        {this.state.open ? (
-          <ul id="_001" className="options" role="listbox">
-            <Option label="Yes" value="yes" onClick={() => undefined} />
-            <Option label="No" value="no" onClick={() => undefined} />
+          aria-expanded={this.state.isOpen ? true : undefined}
+          tabIndex={this.state.isOpen ? '-1' : '0'}
+          onClick={this.toggleOpen}
+          disabled={this.props.disabled}
+        />
+        {this.state.isOpen ? (
+          <ul className="options" role="listbox" onClick={this.handleListClick}>
+            <Option data-index="0" value="yes">
+              Yes
+            </Option>
+            <Option data-index="1" value="no">
+              No
+            </Option>
           </ul>
         ) : null}
       </div>

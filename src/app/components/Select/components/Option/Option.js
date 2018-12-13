@@ -1,32 +1,29 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const Option = props => {
-  return (
-    <li
-      className={props.className}
-      role="option"
-      onClick={event =>
-        props.disabled || props.onClick(event, props.value, props.label)
-      }
-      aria-disabled={props.disabled}
-      data-disabled={props.disabled}
-    >
-      {props.label}
-    </li>
-  );
-};
+export default class Option extends Component {
+  static propTypes = {
+    className: PropTypes.string,
+    disabled: PropTypes.bool,
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  };
 
-Option.propTypes = {
-  className: PropTypes.string,
-  disabled: PropTypes.bool,
-  value: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-};
+  static defaultProps = {
+    disabled: false,
+  };
 
-Option.defaultProps = {
-  disabled: false,
-};
-
-export default Option;
+  render() {
+    return (
+      <li
+        className={this.props.className}
+        role="option"
+        aria-disabled={this.props.disabled}
+        data-disabled={this.props.disabled}
+        {...this.props}
+      >
+        {this.props.children}
+      </li>
+    );
+  }
+}

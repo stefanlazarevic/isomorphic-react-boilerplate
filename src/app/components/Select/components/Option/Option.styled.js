@@ -8,7 +8,8 @@ const StyledOption = styled(Option)`
   color: ${({ theme }) => theme.text_secondary};
   padding: 10px;
 
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: ${({ theme }) => theme.background_secondary};
   }
 `;
