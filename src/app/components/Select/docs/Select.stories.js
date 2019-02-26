@@ -11,14 +11,25 @@ storiesOf('Components|Data Entry', module)
   .add(
     'Select',
     storyPreview(SelectDocumentation, () => {
-      const selectData = [
-        { value: 'M', label: 'Male' },
-        { value: 'F', label: 'Female' },
-        { value: 'O', label: 'Other' },
+      const options = [
+        {
+          label: 'Yes',
+        },
+        {
+          label: 'Maybe',
+        },
+        {
+          label: 'Disabled',
+          disabled: true,
+        },
+        {
+          label: 'No',
+        },
       ];
+
       return (
         <Fragment>
-          <Select options={selectData} />
+          <Select options={options} />
         </Fragment>
       );
     })

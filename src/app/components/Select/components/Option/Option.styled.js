@@ -7,10 +7,24 @@ const StyledOption = styled(Option)`
   display: block;
   color: ${({ theme }) => theme.text_secondary};
   padding: 10px;
+  outline: 0;
+  color: ${({ theme }) => theme.text_primary};
+  background-color: ${({ theme }) => theme.background_primary};
+  cursor: pointer;
 
-  &:hover,
-  &:focus {
+  &[data-disabled='false']:hover,
+  &[data-disabled='false']:focus {
+    background-color: ${({ theme }) => theme.background_tertiary};
+  }
+
+  &[data-disabled='false'].selected,
+  &[data-disabled='false'].selected:hover {
     background-color: ${({ theme }) => theme.background_secondary};
+  }
+
+  &[data-disabled='true'] {
+    cursor: not-allowed;
+    opacity: 0.45;
   }
 `;
 

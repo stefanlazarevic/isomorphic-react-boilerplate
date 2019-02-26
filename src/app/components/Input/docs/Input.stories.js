@@ -18,7 +18,7 @@ storiesOf('Components|Data Entry', module)
           type={select(
             'Type',
             ['text', 'search', 'url', 'password', 'hidden', 'email'],
-            'url'
+            'text'
           )}
           name="website"
           placeholder={text('Placeholder', 'Put your content here.')}
