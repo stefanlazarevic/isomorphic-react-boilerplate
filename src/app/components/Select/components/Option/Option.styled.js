@@ -12,17 +12,17 @@ const StyledOption = styled(Option)`
   background-color: ${({ theme }) => theme.background_primary};
   cursor: pointer;
 
-  &[data-disabled='false']:hover,
-  &[data-disabled='false']:focus {
+  &[aria-disabled='false']:hover,
+  &[aria-disabled='false']:focus {
     background-color: ${({ theme }) => theme.background_tertiary};
   }
 
-  &[data-disabled='false'].selected,
-  &[data-disabled='false'].selected:hover {
+  &[aria-disabled='false'].selected,
+  &[aria-disabled='false'].selected:hover {
     background-color: ${({ theme }) => theme.background_secondary};
   }
 
-  &[data-disabled='true'] {
+  &[aria-disabled='true'] {
     cursor: not-allowed;
     opacity: 0.45;
   }

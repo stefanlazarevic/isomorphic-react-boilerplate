@@ -13,6 +13,8 @@ const StyledOptionWrapper = styled(OptionWrapper)`
   border: 1px solid ${({ theme }) => theme.border_primary};
   border-radius: 4px;
   background-color: ${({ theme }) => theme.background_primary};
+  max-height: 210px;
+  overflow-y: scroll;
 
   &.opened {
     display: block;

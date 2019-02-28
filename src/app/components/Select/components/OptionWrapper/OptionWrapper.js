@@ -7,6 +7,7 @@ export default class OptionWrapper extends Component {
     options: PropTypes.array,
     className: PropTypes.string,
     open: PropTypes.bool,
+    /** Callback Functions. */
     onOpen: PropTypes.func,
     onClose: PropTypes.func,
     onSelect: PropTypes.func,
@@ -22,7 +23,7 @@ export default class OptionWrapper extends Component {
 
     this.Options = [];
 
-    this.focusedIndex = 0;
+    this.focusedIndex = -1;
     this.selectedIndex = -1;
 
     this.state = {
@@ -30,52 +31,109 @@ export default class OptionWrapper extends Component {
     };
   }
 
+  /**
+   * Returns the current state of option list visibility.
+   *
+   * @return {boolean}
+   */
   isOpen = () => this.state.open;
 
+  /**
+   * Make option list visible.
+   */
   open = () => {
-    this.setState(() => ({ open: true }));
+    if (this.props.options.length) {
+      this.setState(() => ({ open: true }));
+    }
   };
 
+  /**
+   * Make option list invisible.
+   */
   close = () => this.setState(() => ({ open: false }));
 
+  /**
+   * Reset focused option index to initial value.
+   */
+  resetFocusIndex = () => {
+    this.focusedIndex = -1;
+  };
+
+  /**
+   * Handle keyboard input while the focus is inside option list.
+   */
   handleKeyboardInput = event => {
+    event.preventDefault();
     const { which } = event;
 
+    /** 40 = Keyboard down. */
     if (which === 40) {
-      this.focusNextOption(1);
+      this.focusNextOption();
     }
 
+    /** 38 = Keyboard up. */
     if (which === 38) {
-      this.focusNextOption(-1);
+      this.focusPreviousOption();
     }
   };
 
-  focusNextOption = (directionSteps = 0) => {
-    let newIndex = this.focusedIndex + directionSteps;
-    const goingDown = directionSteps > 0;
+  /**
+   * Recursive function that focuses first valid option in the list.
+   */
+  focusNextOption = () => {
+    let newFocusedIndex = this.focusedIndex + 1;
 
-    if (newIndex > this.Options.length - 1 && goingDown) {
-      newIndex = 0;
-    }
+    do {
+      if (newFocusedIndex >= this.Options.length) {
+        newFocusedIndex = 0;
+      }
 
-    if (newIndex < 0 && !goingDown) {
-      newIndex = this.Options.length - 1;
-    }
+      const option = this.Options[newFocusedIndex];
 
-    this.focusedIndex = newIndex;
+      if (option.isDisabled() || option.isReadonly()) {
+        newFocusedIndex++;
+      } else {
+        option.focus();
 
-    if (this.Options[newIndex].isDisabled()) {
-      console.info('Disabled');
-      this.focusNextOption(goingDown ? 1 : -1);
-    }
-
-    this.Options[this.focusedIndex].focus();
+        this.focusedIndex = newFocusedIndex;
+        break;
+      }
+    } while (this.focusedIndex !== newFocusedIndex);
   };
 
-  focusFirstOption = () => {
-    this.focusedIndex = 0;
-    if (this.Options[0]) {
-      this.Options[0].focus();
+  /**
+   * Recursive function that focuses first valid option in the list.
+   */
+  focusPreviousOption = () => {
+    let newFocusedIndex = this.focusedIndex - 1;
+
+    do {
+      if (newFocusedIndex < 0) {
+        newFocusedIndex = this.Options.length - 1;
+      }
+
+      const option = this.Options[newFocusedIndex];
+
+      if (option.isDisabled() || option.isReadonly()) {
+        newFocusedIndex--;
+      } else {
+        option.focus();
+
+        this.focusedIndex = newFocusedIndex;
+        break;
+      }
+    } while (this.focusedIndex !== newFocusedIndex);
+  };
+
+  /**
+   * Focuses first valid option.
+   */
+  focusSelectedOption = () => {
+    if (this.Options[this.selectedIndex]) {
+      this.Options[this.selectedIndex].focus();
+    } else {
+      this.resetFocusIndex();
+      this.focusNextOption();
     }
   };
 
@@ -95,20 +153,17 @@ export default class OptionWrapper extends Component {
     }
   };
 
+  /** Component lifecycle events. */
+
   componentDidUpdate(previousProps, previousState) {
     if (previousState.open === false && this.state.open === true) {
+      this.focusSelectedOption();
       this.props.onOpen && this.props.onOpen();
-      this.Options[this.selectedIndex] &&
-        this.Options[this.selectedIndex].focus();
     }
 
     if (previousState.open === true && this.state.open === false) {
       this.props.onClose && this.props.onClose();
     }
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextState.open !== this.state.open;
   }
 
   render() {
@@ -129,10 +184,9 @@ export default class OptionWrapper extends Component {
             <Option
               innerRef={node => (this.Options[index] = node)}
               key={index}
-              index={index}
               label={option.label}
               disabled={option.disabled}
-              onSelect={this.handleOptionSelection}
+              onSelect={() => this.handleOptionSelection(index)}
             />
           );
         })}

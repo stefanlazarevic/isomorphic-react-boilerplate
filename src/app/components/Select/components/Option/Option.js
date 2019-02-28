@@ -3,21 +3,22 @@ import PropTypes from 'prop-types';
 
 export default class Option extends Component {
   static propTypes = {
-    index: PropTypes.number.isRequired,
-    className: PropTypes.string,
-    disabled: PropTypes.bool,
-    value: PropTypes.string,
     label: PropTypes.string.isRequired,
+    className: PropTypes.string,
+    value: PropTypes.string,
     children: PropTypes.node,
+    readonly: PropTypes.bool,
+    disabled: PropTypes.bool,
     selected: PropTypes.bool,
-    focused: PropTypes.bool,
+    /** Callback Functions */
     onSelect: PropTypes.func,
     onUnselect: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
   };
 
   static defaultProps = {
     disabled: false,
-    focused: false,
     selected: false,
     value: '',
   };
@@ -27,7 +28,6 @@ export default class Option extends Component {
 
     this.state = {
       selected: props.selected,
-      focused: props.focused,
     };
   }
 
@@ -62,14 +62,24 @@ export default class Option extends Component {
    *
    * @return void
    */
-  focus = () => this.DOMNode.focus();
+  focus = () => {
+    this.DOMNode.focus();
+    if (this.props.onFocus) {
+      this.props.onFocus();
+    }
+  };
 
   /**
    * 1. Removes focus from option DOM element.
    *
    * @return void
    */
-  blur = () => this.DOMNode.blur();
+  blur = () => {
+    this.DOMNode.blur();
+    if (this.props.onBlur) {
+      this.props.onBlur();
+    }
+  };
 
   /**
    * Returns current state of selection for the option.
@@ -93,6 +103,13 @@ export default class Option extends Component {
   isDisabled = () => this.props.disabled;
 
   /**
+   * Determines whether the option is in readonly mode or not.
+   *
+   * @return {boolean}
+   */
+  isReadonly = () => this.props.readonly;
+
+  /**
    * Returns value of the option.
    *
    * 1. In case where the property value is missing, property label is used as value.
@@ -101,23 +118,31 @@ export default class Option extends Component {
    */
   getValue = () => this.props.value || this.props.label;
 
+  /**
+   * Handle keyboard event when option is in focus.
+   *
+   * @return void
+   */
   handleKeyboardEvent = event => {
+    event.preventDefault();
     const { which } = event;
 
+    /** 13 = Enter */
     if (which === 13) {
-      if (!this.isDisabled()) {
-        this.select();
-      }
+      this.select();
     }
 
+    /** 38 = Arrow up, 40 = Arrow down */
     if (which === 38 || which === 40) {
       this.blur();
     }
   };
 
+  /** Component lifecycle events. */
+
   componentDidUpdate(previousProps, previousState) {
     if (previousState.selected === false && this.state.selected === true) {
-      this.props.onSelect && this.props.onSelect(this.props.index);
+      this.props.onSelect && this.props.onSelect();
     }
 
     if (previousState.selected === true && this.state.selected === false) {
@@ -135,7 +160,6 @@ export default class Option extends Component {
         `}
         role="option"
         aria-disabled={this.props.disabled}
-        data-disabled={this.props.disabled}
         aria-selected={this.state.selected}
         tabIndex="-1"
         onClick={this.select}

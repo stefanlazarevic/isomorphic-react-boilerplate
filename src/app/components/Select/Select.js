@@ -33,6 +33,7 @@ export default class Select extends Component {
   }
 
   handleKeyboardInput = event => {
+    event.preventDefault();
     const { which } = event;
 
     if (which === 32) {
@@ -46,8 +47,6 @@ export default class Select extends Component {
     if (which === 40) {
       if (!this.OptionWrapper.isOpen()) {
         this.OptionWrapper.open();
-      } else {
-        this.OptionWrapper.focusFirstOption();
       }
     }
     if (which === 38) {

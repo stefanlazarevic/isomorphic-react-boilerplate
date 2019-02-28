@@ -13,17 +13,28 @@ storiesOf('Components|Data Entry', module)
     storyPreview(SelectDocumentation, () => {
       const options = [
         {
-          label: 'Yes',
+          label: 'Alberta',
         },
         {
-          label: 'Maybe',
+          label: 'British Columbia',
         },
         {
-          label: 'Disabled',
+          label: 'Manitoba',
           disabled: true,
         },
         {
-          label: 'No',
+          label: 'New Brunswick',
+          disabled: true,
+        },
+        {
+          label: 'Newfoundland and Labrador',
+        },
+        {
+          label: 'Nova Scotia',
+        },
+        {
+          label: 'Ontario',
+          disabled: true,
         },
       ];
 
