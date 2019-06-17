@@ -8,7 +8,9 @@ export { default as InputGroup } from './InputGroup/InputGroup.styled';
 export {
   default as InputGroupAddon,
 } from './InputGroupAddon/InputGroupAddon.styled';
+export { default as Item } from './Item/Item.styled';
 export { default as Label } from './Label/Label.styled';
+export { default as List } from './List/List.styled';
 export { default as Paragraph } from './Paragraph/Paragraph.styled';
 export { default as Reboot } from './Reboot/Reboot';
 export { default as Select } from './Select/Select.styled';
