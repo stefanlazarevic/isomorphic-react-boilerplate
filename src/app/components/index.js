@@ -3,6 +3,7 @@ export { default as Avatar } from './Avatar/Avatar.styled';
 export { default as Box } from './Box/Box.styled';
 export { default as Breadcrumb } from './Breadcrumb/Breadcrumb.styled';
 export { default as Checkbox } from './Checkbox/Checkbox.styled';
+export { default as Container } from './Container/Container.styled';
 export { default as Heading } from './Heading/Heading.styled';
 export { default as Input } from './Input/Input.styled';
 export { default as InputGroup } from './InputGroup/InputGroup.styled';
