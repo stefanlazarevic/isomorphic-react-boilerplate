@@ -1,5 +1,6 @@
 export { default as Alert } from './Alert/Alert.styled';
 export { default as Avatar } from './Avatar/Avatar.styled';
+export { default as Box } from './Box/Box.styled';
 export { default as Breadcrumb } from './Breadcrumb/Breadcrumb.styled';
 export { default as Checkbox } from './Checkbox/Checkbox.styled';
 export { default as Heading } from './Heading/Heading.styled';

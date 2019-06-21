@@ -27,7 +27,7 @@ class Item extends Component {
   render() {
     return (
       <li
-        tabIndex={this.props.static ? null : '0'}
+        tabIndex={this.props.static ? null : '-1'}
         ref={this.bindReference}
         onClick={this.handleClickEvent}
         onKeyDown={this.handleKeyDownEvent}>
@@ -57,15 +57,16 @@ class Item extends Component {
   }
 
   handleKeyDownEvent = event => {
-    event.preventDefault();
-
+    console.log(event.key);
     switch (event.key) {
       case 'ArrowUp':
+        event.preventDefault();
         if (typeof this.props.onArrowUp === 'function') {
           this.props.onArrowUp(event);
         }
         break;
       case 'ArrowDown':
+        event.preventDefault();
         if (typeof this.props.onArrowDown === 'function') {
           this.props.onArrowDown(event);
         }

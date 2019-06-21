@@ -29,12 +29,9 @@ class List extends Component {
     this.items = [];
   }
 
-  componentDidMount() {
-    console.log(this.items);
-  }
+  componentDidMount() {}
 
   bindReference = element => {
-    console.log(this.props.static, element, this.items);
     if (this.props.static) {
       return undefined;
     }
@@ -48,7 +45,7 @@ class List extends Component {
       return undefined;
     }
 
-    // this.items[index].blur();
+    this.items[index].blur();
 
     if (index === this.items.length - 1) {
       index = 0;
@@ -64,7 +61,7 @@ class List extends Component {
       return undefined;
     }
 
-    // this.items[index].blur();
+    this.items[index].blur();
 
     if (index === 0) {
       index = this.items.length - 1;
@@ -75,11 +72,27 @@ class List extends Component {
     this.items[index].focus();
   }
 
+  focusFirst = () => {
+    if (!this.items.length) {
+      return undefined;
+    }
+
+    this.items[0].focus();
+  }
+
+  focusLast = () => {
+    if (!this.items.length) {
+      return undefined;
+    }
+
+    this.items[this.items.length - 1].focus();
+  }
+
   render() {
     return (
       <this.props.type>
         {
-          array_wrap(this.props.children).map((item, index) => {
+          array_wrap(this.props.items || this.props.children).map((item, index) => {
             return (
               <Item
                 key={index}
@@ -88,7 +101,7 @@ class List extends Component {
                 onArrowDown={() => this.focusNext(index)}
                 onArrowUp={() => this.focusPrevious(index)}
                 {...array_wrap(item.props)}>
-                  {item.props.children || item}
+                  {item.props ? (item.props.children || item) : item}
               </Item>
             );
           })

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { List, Item } from '@components';
 import SelectLabel from './components/Label/LabelStyled.styled';
 import OptionWrapper from './components/OptionWrapper/OptionWrapper.styled';
 
@@ -88,11 +89,11 @@ export default class Select extends Component {
             placeholder={this.props.placeholder}
           />
         </div>
-        <OptionWrapper
-          innerRef={node => (this.OptionWrapper = node)}
-          options={this.props.options}
-          onSelect={this.handleOptionSelect}
-        />
+        <List static={false}>
+          {
+            this.props.options.map(option => <Item disabled={option.disabled}>{option.label}</Item>)
+          }
+        </List>
       </div>
     );
   }
