@@ -16,9 +16,6 @@ import { Paragraph } from '@components';
 
 | Property | Description | Type | Required | Options | Default |
 |---|---|---|---|---|---|
-| `children` | Content of Paragraph component. | `node` | `false` | - | - |
-
-
 
 ### Examples
 
