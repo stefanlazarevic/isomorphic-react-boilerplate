@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { getProp } from '@util/helpers';
 
 export default class Item extends Component {
   static displayName = 'Accordion.Item';
@@ -12,39 +13,52 @@ export default class Item extends Component {
     expanded: false,
   };
 
-  state = {
-    expanded: this.props.expanded,
+  constructor(props) {
+    super(props);
   }
 
-  expand = () => this.setState(() => ({ expanded: true }));
-
-  collapse = () => this.setState(() => ({ expanded: false }));
-
-  toggleExpansion = () => {
-    if (this.state.expanded) {
-      this.collapse();
-    } else {
-      this.expand();
-    }
+  componentWillMount() {
+    this.header = React.createRef();
+    this.body = React.createRef();
   }
 
   render() {
     return (
+
       <div className={this.props.className}>
         {
           React.Children.map(this.props.children, child => {
-            if (child.type.target && child.type.target.displayName === 'Accordion.Header') {
+            console.log(child);
+
+            if (getProp(child, ['type', 'target', 'displayName']) === 'Accordion.Header') {
               const props = {
-                expanded: this.state.expanded,
-                onClick: () => this.toggleExpansion(),
+                innerRef: this.header,
                 ...child.props,
+                expanded: this.props.expanded,
+                // onClick: () => this.body.current.toggle(),
+                // onArrowDownKeyDown: () => this.body.current.expand(),
+                // onArrowUpKeyDown: () => this.body.current.collapse(),
+                // onSpaceKeyDown: () => this.body.current.toggle(),
+                // onEnterKeyDown: () => this.body.current.toggle(),
               };
 
               return React.cloneElement(child, props);
             }
 
-            if (child.type.displayName === 'Accordion.Body') {
-              const props = { expanded: this.state.expanded, ...child.props };
+            if (getProp(child, ['type', 'target', 'displayName']) === 'Accordion.Panel') {
+              const props = {
+                innerRef: this.body,
+                ...child.props,
+                expanded: this.props.expanded,
+              };
+
+              // if (!this.props.allowedMultipleOpen) {
+              //   props.beforeExpansion = () => {
+              //     if (this.props.beforeExpansion) {
+              //       this.props.beforeExpansion(this.body)
+              //     }
+              //   };
+              // }
 
               return React.cloneElement(child, props);
             }

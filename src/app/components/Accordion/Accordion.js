@@ -1,24 +1,37 @@
 import React, { Component } from 'react';
-import { Item, Header, Body } from './components';
+import PropTypes from 'prop-types';
+import { Item, Header, Panel } from './components';
+import { getProp } from '@util/helpers';
+import { Provider } from './Accordion.context';
 
 export default class Accordion extends Component {
   static displayName = 'Accordion';
 
   static Item = Item;
   static Header = Header;
-  static Body = Body;
+  static Panel = Panel;
+
+  static propTypes = {
+    allowedMultipleOpen: PropTypes.bool
+  }
+
+  static defaultProps = {
+    allowedMultipleOpen: false,
+  }
 
   render() {
     return (
-      <div className={this.props.className}>
-        { React.Children.map(this.props.children, child => {
-          if (child.type.displayName === 'Accordion.Item') {
-            return child;
-          }
+      <Provider allowedMultipleOpen={this.props.allowedMultipleOpen}>
+        <div className={this.props.className}>
+          { React.Children.map(this.props.children, child => {
+            if (getProp(child, ['type', 'displayName']) === 'Accordion.Item') {
+              return child;
+            }
 
-          return null;
-        }) }
-      </div>
+            return null;
+          }) }
+        </div>
+      </Provider>
     );
   }
 }

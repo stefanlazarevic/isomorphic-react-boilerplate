@@ -6,6 +6,13 @@ const StyledHeader = styled(Header)`
   // Replace with your custom styles.
   background-color: #eee;
   color: #444;
+  cursor: pointer;
+  outline: 0;
+
+  &:hover,
+  &:focus {
+    background-color: #ccc;
+  }
 `;
 
 StyledHeader.displayName = 'Accordion.Header';

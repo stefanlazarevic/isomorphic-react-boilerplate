@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { not } from '@util/helpers';
 
 export default class Collapsable extends Component {
+  static displayName = 'Collapsable';
+
   static propTypes = {
     expanded: PropTypes.bool.isRequired,
     beforeExpansion: PropTypes.func,
@@ -29,8 +31,20 @@ export default class Collapsable extends Component {
 
   expand = () => this.setState(() => ({ expanded: true }));
 
-  componentDidMount() {
-    console.log();
+  toggle = () => {
+    if (this.state.expanded) {
+      this.collapse();
+    } else {
+      this.expand();
+    }
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.expanded === nextState.expanded) {
+      return false;
+    }
+
+    return true;
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -62,9 +76,17 @@ export default class Collapsable extends Component {
       <div
         ref={this.node}
         className={this.props.className}
-        style={{ maxHeight: this.props.expanded ? `${this.node.current.scrollHeight}px` : '0px'}}
+        style={{ maxHeight: this.state.expanded ? `${this.node.current.scrollHeight}px` : '0px'}}
+        aria-expanded={this.state.expanded}
       >
-        {this.props.children}
+        { React.Children.map(this.props.children, child => {
+          if (!this.state.expanded) {
+            const props = { ...child.props, tabIndex: '-1'}
+            return React.cloneElement(child, props);
+          }
+
+          return child;
+        }) }
       </div>
     );
   }

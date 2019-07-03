@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text, select, boolean } from '@storybook/addon-knobs';
 import storyPreview from '@util/storyPreview';
 
 import { Accordion } from '@components';
@@ -16,15 +15,16 @@ storiesOf('Components|Layout', module)
         <Accordion>
           <Accordion.Item>
             <Accordion.Header>Question one</Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Panel>
               <div>This is <strong>strong</strong> text.</div>
-            </Accordion.Body>
+            </Accordion.Panel>
           </Accordion.Item>
           <Accordion.Item>
             <Accordion.Header>Question two</Accordion.Header>
-            <Accordion.Body>
+            <Accordion.Panel>
               <div>This is <strong>strong</strong> text.</div>
-            </Accordion.Body>
+              <a href="#">Yo</a>
+            </Accordion.Panel>
           </Accordion.Item>
         </Accordion>
       );

@@ -2,20 +2,12 @@ export function not(value) {
   return !value;
 }
 
-export class Counter {
-  constructor(start = 0) {
-    this.counter = start;
+export function getProp(object, path = [], fallback) {
+  const value = path.reduce((xs, x) => (xs && xs[x]) ? xs[x] : null, object);
+
+  if (value === undefined || value === null) {
+    return fallback;
   }
 
-  increment = () => {
-    ++this.counter
-    return this;
-  }
-
-  decrement = () => {
-    --this.counter;
-    return this;
-  }
-
-  value = () => this.counter;
+  return value;
 }
