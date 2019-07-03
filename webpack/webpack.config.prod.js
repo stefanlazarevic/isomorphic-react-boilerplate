@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ReactLoadablePlugin = require('react-loadable/webpack')
   .ReactLoadablePlugin;
 const webpackNodeExternals = require('webpack-node-externals');
@@ -38,9 +37,6 @@ const CLIENT_PROD_CONFIG = {
     runtimeChunk: 'single',
   },
   plugins: [
-    // new CleanWebpackPlugin({
-    //   root: path.resolve(__dirname, '../dist/*'),
-    // }),
     new webpack.DefinePlugin({
       __isBrowser__: 'true',
     }),
