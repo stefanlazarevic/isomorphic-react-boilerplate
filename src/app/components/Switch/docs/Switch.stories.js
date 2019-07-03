@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { text, select, boolean } from '@storybook/addon-knobs';
 import storyPreview from '@util/storyPreview';
 
 import { Switch } from '@components';

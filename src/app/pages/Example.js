@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { hot } from 'react-hot-loader';
 import { connect } from 'react-redux';
 import ReactGA from 'react-ga';
 
@@ -57,9 +56,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = { exampleAction };
 
-export default hot(module)(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Example)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Example);

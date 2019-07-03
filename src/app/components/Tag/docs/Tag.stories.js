@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { text, boolean, color } from '@storybook/addon-knobs';
+import { text, boolean } from '@storybook/addon-knobs';
 import storyPreview from '@util/storyPreview';
 
 import { Tag } from '@components';

@@ -12,24 +12,28 @@ export default class Accordion extends Component {
   static Panel = Panel;
 
   static propTypes = {
-    allowedMultipleOpen: PropTypes.bool
-  }
+    allowedMultipleOpen: PropTypes.bool,
+
+    className: PropTypes.string,
+
+    children: PropTypes.node,
+  };
 
   static defaultProps = {
     allowedMultipleOpen: false,
-  }
+  };
 
   render() {
     return (
       <Provider allowedMultipleOpen={this.props.allowedMultipleOpen}>
         <div className={this.props.className}>
-          { React.Children.map(this.props.children, child => {
+          {React.Children.map(this.props.children, child => {
             if (getProp(child, ['type', 'displayName']) === 'Accordion.Item') {
               return child;
             }
 
             return null;
-          }) }
+          })}
         </div>
       </Provider>
     );

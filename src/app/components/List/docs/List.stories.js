@@ -12,18 +12,19 @@ storiesOf('Components|Data Display', module)
     'List',
     storyPreview(ListDocumentation, () => {
       const items = ['Apple', 'Graves', 'Banana', 'Strawberry'];
-      return <React.Fragment>
-        <button>Test</button>
-        <List static={false}>
-          {
-            items.map(item => <Item>{item}</Item>)
-          }
-          <Item>
-            <a href="google.com">google</a>
-          </Item>
-        </List>
-        <button>Test</button>
-      </React.Fragment>
-
+      return (
+        <React.Fragment>
+          <button>Test</button>
+          <List static={false}>
+            {items.map((item, index) => (
+              <Item key={index}>{item}</Item>
+            ))}
+            <Item>
+              <a href="google.com">google</a>
+            </Item>
+          </List>
+          <button>Test</button>
+        </React.Fragment>
+      );
     })
   );

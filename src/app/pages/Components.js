@@ -2,10 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import ReactGA from 'react-ga';
-import { hot } from 'react-hot-loader';
-import { Link, withRouter } from 'react-router-dom';
-import { renderRoutes } from 'react-router-config';
-import { Card, Heading, Input, Select } from '@components';
+import { withRouter } from 'react-router-dom';
 
 class Components extends Component {
   static propTypes = {
@@ -27,11 +24,7 @@ class Components extends Component {
     ReactGA.pageview('/components');
   }
 
-  render = () => (
-    <Fragment>
-      {this.injectPageMetadata()}
-    </Fragment>
-  );
+  render = () => <Fragment>{this.injectPageMetadata()}</Fragment>;
 }
 
-export default hot(module)(withRouter(About));
+export default withRouter(Components);

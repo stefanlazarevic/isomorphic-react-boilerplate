@@ -16,13 +16,17 @@ storiesOf('Components|Layout', module)
           <Accordion.Item>
             <Accordion.Header>Question one</Accordion.Header>
             <Accordion.Panel>
-              <div>This is <strong>strong</strong> text.</div>
+              <div>
+                This is <strong>strong</strong> text.
+              </div>
             </Accordion.Panel>
           </Accordion.Item>
           <Accordion.Item>
             <Accordion.Header>Question two</Accordion.Header>
             <Accordion.Panel>
-              <div>This is <strong>strong</strong> text.</div>
+              <div>
+                This is <strong>strong</strong> text.
+              </div>
               <a href="#">Yo</a>
             </Accordion.Panel>
           </Accordion.Item>

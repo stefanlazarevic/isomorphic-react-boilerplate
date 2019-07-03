@@ -13,7 +13,7 @@ function array_wrap(value) {
 class List extends Component {
   static propTypes = {
     type: PropTypes.oneOf(['ul', 'ol']).isRequired,
-    static: PropTypes.bool.isRequired
+    static: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
@@ -37,8 +37,7 @@ class List extends Component {
     }
 
     this.items.push(element);
-  }
-
+  };
 
   focusNext = index => {
     if (!this.items.length || index < 0 || index >= this.items.length) {
@@ -54,7 +53,7 @@ class List extends Component {
     }
 
     this.items[index].focus();
-  }
+  };
 
   focusPrevious = index => {
     if (!this.items.length || index < 0 || index >= this.items.length) {
@@ -70,7 +69,7 @@ class List extends Component {
     }
 
     this.items[index].focus();
-  }
+  };
 
   focusFirst = () => {
     if (!this.items.length) {
@@ -78,7 +77,7 @@ class List extends Component {
     }
 
     this.items[0].focus();
-  }
+  };
 
   focusLast = () => {
     if (!this.items.length) {
@@ -86,13 +85,13 @@ class List extends Component {
     }
 
     this.items[this.items.length - 1].focus();
-  }
+  };
 
   render() {
     return (
       <this.props.type>
-        {
-          array_wrap(this.props.items || this.props.children).map((item, index) => {
+        {array_wrap(this.props.items || this.props.children).map(
+          (item, index) => {
             return (
               <Item
                 key={index}
@@ -100,12 +99,13 @@ class List extends Component {
                 static={this.props.static}
                 onArrowDown={() => this.focusNext(index)}
                 onArrowUp={() => this.focusPrevious(index)}
-                {...array_wrap(item.props)}>
-                  {item.props ? (item.props.children || item) : item}
+                {...array_wrap(item.props)}
+              >
+                {item.props ? item.props.children || item : item}
               </Item>
             );
-          })
-        }
+          }
+        )}
       </this.props.type>
     );
   }

@@ -16,9 +16,10 @@ storiesOf('Components|Layout', module)
         <Container fluid={boolean('Fluid', false)}>
           <h1>Hello World</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga odio velit fugiat aliquam amet consequatur
-            dicta? Velit aspernatur odit similique accusamus fugit dicta neque, exercitationem tenetur natus aut
-            ex amet.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga odio
+            velit fugiat aliquam amet consequatur dicta? Velit aspernatur odit
+            similique accusamus fugit dicta neque, exercitationem tenetur natus
+            aut ex amet.
           </p>
         </Container>
       );

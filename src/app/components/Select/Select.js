@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { List, Item } from '@components';
 import SelectLabel from './components/Label/LabelStyled.styled';
-import OptionWrapper from './components/OptionWrapper/OptionWrapper.styled';
 
 export default class Select extends Component {
   static propTypes = {
@@ -90,9 +89,9 @@ export default class Select extends Component {
           />
         </div>
         <List static={false}>
-          {
-            this.props.options.map(option => <Item disabled={option.disabled}>{option.label}</Item>)
-          }
+          {React.Children.map(this.props.options, option => (
+            <Item disabled={option.disabled}>{option.label}</Item>
+          ))}
         </List>
       </div>
     );

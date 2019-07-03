@@ -82,6 +82,9 @@ app.get('/*', (request, response) => {
       const reduxState = store.getState();
       const styleTags = sheet.getStyleTags();
 
+      // eslint-ignore-line
+      console.info(styleTags);
+
       const bundles = getBundles(stats, modules);
 
       const bundleScripts = bundles

@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const merge = require('webpack-merge');
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ReactLoadablePlugin = require('react-loadable/webpack')
   .ReactLoadablePlugin;
 const webpackNodeExternals = require('webpack-node-externals');
@@ -38,9 +38,9 @@ const CLIENT_PROD_CONFIG = {
     runtimeChunk: 'single',
   },
   plugins: [
-    new CleanWebpackPlugin('dist/*', {
-      root: path.resolve(__dirname, '..'),
-    }),
+    // new CleanWebpackPlugin({
+    //   root: path.resolve(__dirname, '../dist/*'),
+    // }),
     new webpack.DefinePlugin({
       __isBrowser__: 'true',
     }),
@@ -90,7 +90,7 @@ const CLIENT_PROD_CONFIG = {
 const SERVER_PROD_CONFIG = {
   name: 'webpack-server-prod-config',
   target: 'node',
-  mode: 'production',
+  mode: 'development',
   stats: 'errors-only',
   entry: path.resolve(__dirname, '../src/server/server.js'),
   output: {

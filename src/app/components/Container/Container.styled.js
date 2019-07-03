@@ -4,12 +4,7 @@ import styled from 'styled-components';
 import { hot } from 'react-hot-loader';
 import Container from './Container';
 
-
-styled(({ completed, ...rest }) => <Textarea {...rest} />)`
-color: ${({ completed }) => completed ? '#ccc' : '#fff'};
-`;
-
-const StyledContainer = styled(({ fluid, ...props }) => <Container {...props} />)`
+const StyledContainer = styled(({ ...props }) => <Container {...props} />)`
   width: 100%;
   padding: 0 15px;
   margin-left: auto;
@@ -36,7 +31,7 @@ const StyledContainer = styled(({ fluid, ...props }) => <Container {...props} />
         }
       `;
     }
-  }}
+  }};
 `;
 
 StyledContainer.propTypes = {
@@ -44,7 +39,7 @@ StyledContainer.propTypes = {
 };
 
 StyledContainer.defaultProps = {
-  fluid: false
+  fluid: false,
 };
 
 export default hot(module)(StyledContainer);

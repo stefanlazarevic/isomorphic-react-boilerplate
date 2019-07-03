@@ -13,12 +13,13 @@ class Item extends Component {
     beforeFocus: PropTypes.func,
     afterFocus: PropTypes.func,
     beforeBlur: PropTypes.func,
-    afterBlur: PropTypes.func
+    afterBlur: PropTypes.func,
+    children: PropTypes.node,
   };
 
   static defaultProps = {
     static: true,
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -30,8 +31,9 @@ class Item extends Component {
         tabIndex={this.props.static ? null : '-1'}
         ref={this.bindReference}
         onClick={this.handleClickEvent}
-        onKeyDown={this.handleKeyDownEvent}>
-          {this.props.children}
+        onKeyDown={this.handleKeyDownEvent}
+      >
+        {this.props.children}
       </li>
     );
   }
@@ -46,18 +48,17 @@ class Item extends Component {
     if (typeof this.props.afterReferenceBinding === 'function') {
       this.props.afterReferenceBinding(element);
     }
-  }
+  };
 
-  handleClickEvent = (event) => {
+  handleClickEvent = event => {
     this.focus();
 
-    if (typeof this.props.onClick === "function") {
+    if (typeof this.props.onClick === 'function') {
       this.props.onClick(event);
     }
-  }
+  };
 
   handleKeyDownEvent = event => {
-    console.log(event.key);
     switch (event.key) {
       case 'ArrowUp':
         event.preventDefault();
@@ -77,41 +78,41 @@ class Item extends Component {
         }
         break;
       default:
-        // ...
+      // ...
     }
 
     if (typeof this.props.onKeyDown === 'function') {
       this.props.onKeyDown(event);
     }
-  }
+  };
 
   focus = () => {
     if (this.ref) {
-      if (typeof this.props.beforeFocus === "function") {
+      if (typeof this.props.beforeFocus === 'function') {
         this.props.beforeFocus(this);
       }
 
       this.ref.focus();
 
-      if (typeof this.props.afterFocus === "function") {
+      if (typeof this.props.afterFocus === 'function') {
         this.props.afterFocus(this);
       }
     }
-  }
+  };
 
   blur = () => {
     if (this.ref) {
-      if (typeof this.props.beforeBlur === "function") {
+      if (typeof this.props.beforeBlur === 'function') {
         this.props.beforeBlur(this);
       }
 
       this.ref.blur();
 
-      if (typeof this.props.afterBlur === "function") {
+      if (typeof this.props.afterBlur === 'function') {
         this.props.afterBlur(this);
       }
     }
-  }
+  };
 }
 
 export default Item;

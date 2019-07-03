@@ -1,5 +1,4 @@
 import React from 'react';
-import renderer from 'react-test-renderer';
 import 'jest-styled-components';
 import { styleSheetSerializer } from 'jest-styled-components/serializer';
 import { addSerializer } from 'jest-specific-snapshot';

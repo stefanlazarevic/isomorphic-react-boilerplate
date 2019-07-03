@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import ReactGA from 'react-ga';
-import { hot } from 'react-hot-loader';
 import { Link, withRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
 import { Heading } from '@components';
@@ -39,4 +38,4 @@ class About extends Component {
   );
 }
 
-export default hot(module)(withRouter(About));
+export default withRouter(About);

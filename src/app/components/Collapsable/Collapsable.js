@@ -11,10 +11,13 @@ export default class Collapsable extends Component {
     beforeCollapsing: PropTypes.func,
     afterExpansion: PropTypes.func,
     afterCollapsing: PropTypes.func,
+    className: PropTypes.string,
+
+    children: PropTypes.node,
   };
 
   static defaultProps = {
-    expanded: false
+    expanded: false,
   };
 
   state = {
@@ -37,7 +40,7 @@ export default class Collapsable extends Component {
     } else {
       this.expand();
     }
-  }
+  };
 
   shouldComponentUpdate(nextProps, nextState) {
     if (this.state.expanded === nextState.expanded) {
@@ -49,24 +52,40 @@ export default class Collapsable extends Component {
 
   componentWillUpdate(nextProps, nextState) {
     /* From not expanded to expanded update. */
-    if (not(this.state.expanded) && nextState.expanded && this.props.beforeExpansion) {
+    if (
+      not(this.state.expanded) &&
+      nextState.expanded &&
+      this.props.beforeExpansion
+    ) {
       this.props.beforeExpansion();
     }
 
     /* From expanded to not expanded update. */
-    if (this.state.expanded && not(nextState.expanded) && this.props.beforeCollapsing) {
+    if (
+      this.state.expanded &&
+      not(nextState.expanded) &&
+      this.props.beforeCollapsing
+    ) {
       this.props.beforeCollapsing();
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
     /* From not expanded to expanded state updated. */
-    if (not(prevState.expanded) && this.state.expanded && this.props.afterExpansion) {
+    if (
+      not(prevState.expanded) &&
+      this.state.expanded &&
+      this.props.afterExpansion
+    ) {
       this.props.afterExpansion();
     }
 
     /* From expanded to not expanded state updated. */
-    if (prevState.expanded && not(this.state.expanded) && this.props.afterCollapsing) {
+    if (
+      prevState.expanded &&
+      not(this.state.expanded) &&
+      this.props.afterCollapsing
+    ) {
       this.props.afterCollapsing();
     }
   }
@@ -76,17 +95,21 @@ export default class Collapsable extends Component {
       <div
         ref={this.node}
         className={this.props.className}
-        style={{ maxHeight: this.state.expanded ? `${this.node.current.scrollHeight}px` : '0px'}}
+        style={{
+          maxHeight: this.state.expanded
+            ? `${this.node.current.scrollHeight}px`
+            : '0px',
+        }}
         aria-expanded={this.state.expanded}
       >
-        { React.Children.map(this.props.children, child => {
+        {React.Children.map(this.props.children, child => {
           if (!this.state.expanded) {
-            const props = { ...child.props, tabIndex: '-1'}
+            const props = { ...child.props, tabIndex: '-1' };
             return React.cloneElement(child, props);
           }
 
           return child;
-        }) }
+        })}
       </div>
     );
   }

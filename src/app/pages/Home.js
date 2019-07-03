@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Helmet from 'react-helmet';
 import ReactGA from 'react-ga';
-import { hot } from 'react-hot-loader';
 import { Link } from 'react-router-dom';
 import { Heading } from '@components';
 
@@ -37,4 +36,4 @@ class Home extends Component {
   );
 }
 
-export default hot(module)(Home);
+export default Home;

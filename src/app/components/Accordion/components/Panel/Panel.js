@@ -6,17 +6,19 @@ import { Consumer } from '../../Accordion.context';
 export default class Panel extends Component {
   static displayName = 'Accordion.Panel';
 
+  static propTypes = {
+    className: PropTypes.string,
+
+    children: PropTypes.node,
+  };
+
   render() {
     return (
       <Consumer>
-        {(context) => {
-          return (
-            <Collapsable>
-              {this.props.children}
-            </Collapsable>
-          );
+        {() => {
+          return <Collapsable>{this.props.children}</Collapsable>;
         }}
       </Consumer>
-    )
+    );
   }
 }

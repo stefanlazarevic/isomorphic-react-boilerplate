@@ -11,6 +11,8 @@ export default class Header extends Component {
     onArrowUpKeyDown: PropTypes.func,
     onKeyDown: PropTypes.func,
     onClick: PropTypes.func,
+    className: PropTypes.string,
+    children: PropTypes.node,
   };
 
   onKeyDown = event => {
@@ -19,32 +21,32 @@ export default class Header extends Component {
         if (this.props.onSpaceKeyDown) {
           this.props.onSpaceKeyDown(event);
         }
-      break;
+        break;
       case 'Enter':
         if (this.props.onEnterKeyDown) {
           this.props.onEnterKeyDown(event);
         }
-      break;
+        break;
       case 'ArrowDown':
         event.preventDefault();
 
         if (this.props.onArrowDownKeyDown) {
           this.props.onArrowDownKeyDown(event);
         }
-      break;
+        break;
       case 'ArrowUp':
         event.preventDefault();
 
         if (this.props.onArrowUpKeyDown) {
           this.props.onArrowUpKeyDown(event);
         }
-      break;
+        break;
       default:
         if (this.props.onKeyDown) {
           this.props.onKeyDown(event);
         }
     }
-  }
+  };
 
   render() {
     return (

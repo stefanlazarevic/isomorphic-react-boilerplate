@@ -3,7 +3,7 @@ import React from 'react';
 
 const defaultSize = '24';
 
-export const CheckMark = ({ size = defaultSize }) => <svg />;
+export const CheckMark = () => <svg />;
 
 export const XMark = ({ size = defaultSize, ...rest }) => (
   <svg width={size} height={size} {...rest} viewBox="0 0 24 24">
@@ -35,7 +35,7 @@ export const XMark = ({ size = defaultSize, ...rest }) => (
   </svg>
 );
 
-export const BookMark = ({ size = defaultSize }) => <svg />;
+export const BookMark = () => <svg />;
 
 export default {
   Check: CheckMark,
