@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 import ReactGA from 'react-ga';
 import { Link, withRouter } from 'react-router-dom';
 import { renderRoutes } from 'react-router-config';
-import { Heading } from '@components';
+import { Typography } from '@components';
 
 class About extends Component {
   static propTypes = {
@@ -29,7 +29,7 @@ class About extends Component {
   render = () => (
     <Fragment>
       {this.injectPageMetadata()}
-      <Heading>About Page</Heading>
+      <Typography component="h1">About Page</Typography>
       <Link to="/">Home</Link>
       <br />
       <Link to="/about/example">Example</Link>

@@ -21,7 +21,7 @@ module.exports = {
       "ssr": true,
     }],
     "react-hot-loader/babel",
-    "react-loadable/babel",
+    "universal-import",
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-syntax-export-default-from",

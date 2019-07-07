@@ -1,5 +1,5 @@
+import { hot } from 'react-hot-loader/root';
 import React, { Fragment } from 'react';
-import { hot } from 'react-hot-loader';
 import { ThemeProvider } from 'styled-components';
 import AppRouter from '@routes/Router';
 import { Reboot } from '@components';
@@ -14,4 +14,4 @@ const AppRoot = () => (
   </Fragment>
 );
 
-export default hot(module)(AppRoot);
+export default hot(AppRoot);

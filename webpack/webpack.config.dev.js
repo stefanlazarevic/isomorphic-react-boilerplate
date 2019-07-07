@@ -13,7 +13,10 @@ const CLIENT_DEV_CONFIG = {
   target: 'web',
   stats: 'errors-only',
   mode: 'development',
-  entry: path.resolve(__dirname, '../src/client/client.js'),
+  entry: [
+    'react-hot-loader/patch',
+    path.resolve(__dirname, '../src/client/client.js')
+  ],
   devtool: 'source-map',
   plugins: [
     new webpack.DefinePlugin({
@@ -53,7 +56,7 @@ const CLIENT_DEV_CONFIG = {
     port: 3001,
     hot: true,
     historyApiFallback: true,
-    watchContentBase: true,
+    watchContentBase: false,
     quiet: true,
     watchOptions: {
       ignored: ['node_modules'],
