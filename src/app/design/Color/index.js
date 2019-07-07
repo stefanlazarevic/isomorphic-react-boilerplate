@@ -1,35 +1,3 @@
-// export const LightSwatch = {
-//   background: '#f2f4fc',
-//   background_light: '#ffffff',
-//   text_primary: '#343745',
-//   text_secondary: '#75798c',
-//   border_light: '#f2f4fc',
-//   border_dark: '#dde0ee',
-//   green_light: '#4BCA81',
-//   link: '#008CFB',
-//   link_active: '#0061AF',
-//   info: '#54698D',
-//   success: '#1DA362',
-//   error: '#C23934',
-//   warning: '#FFA778',
-// };
-
-// export const DarkSwatch = {
-//   background: '#484b5b',
-//   background_light: '#525566',
-//   text_primary: '#ffffff',
-//   text_secondary: '#dde0ee',
-//   border_light: '#9b9eaf',
-//   border_dark: '#343745',
-//   green_light: '#4BCA81',
-//   link: '#88c1ff',
-//   link_active: '#5895D9',
-//   info: '#bcd6f3',
-//   success: '#6aeaa1',
-//   error: '#FF585B',
-//   warning: '#FFB75D',
-// };
-
 export const DarkSwatch = {
   background_primary: '#484b5b',
   background_secondary: '#343745',
