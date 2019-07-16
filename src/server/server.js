@@ -14,9 +14,23 @@ import { ServerStyleSheet } from 'styled-components';
 import { Provider as ReduxProvider } from 'react-redux';
 import 'isomorphic-fetch';
 import compression from 'compression';
+import spdy from 'spdy';
 
-const templateHTML = fs.readFileSync('dist/index.html', 'utf8');
-const stats = JSON.parse(fs.readFileSync('dist/static/react-loadable.json'));
+let templateHTML = '';
+let stats = {};
+let certificates = { key: '', cert: '' };
+
+try {
+  templateHTML = fs.readFileSync('dist/index.html', 'utf8');
+  stats = JSON.parse(fs.readFileSync('dist/static/react-loadable.json'));
+
+  certificates = {
+    key: fs.readFileSync('certificates/server.key'),
+    cert: fs.readFileSync('certificates/server.crt'),
+  };
+} catch (err) {
+  console.info(err);
+}
 
 import AppRoutes from '@routes/web/public';
 import App from '@app/App';
@@ -82,9 +96,6 @@ app.get('/*', (request, response) => {
       const reduxState = store.getState();
       const styleTags = sheet.getStyleTags();
 
-      // eslint-ignore-line
-      console.info(styleTags);
-
       const bundles = getBundles(stats, modules);
 
       const bundleScripts = bundles
@@ -105,7 +116,11 @@ app.get('/*', (request, response) => {
 });
 
 Loadable.preloadAll().then(() => {
-  app.listen(3000, () => {
-    console.info(`HTTP Server is listening @ port 3000`);
+  spdy.createServer(certificates, app).listen(3000, err => {
+    if (err) {
+      throw new Error(err);
+    }
+
+    console.info(`HTTPS Server is listening @ port 3000`);
   });
 });

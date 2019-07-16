@@ -80,6 +80,7 @@
     "react-test-renderer": "16.8.6",
     "regenerator-runtime": "0.12.1",
     "serialize-javascript": "1.5.0",
+    "spdy": "^4.0.0",
     "storybook-addon-specifications": "^2.1.2",
     "storybook-readme": "^5.0.5",
     "stylelint": "^10.1.0",
@@ -108,7 +109,6 @@
     "redux-thunk": "2.3.0",
     "storybook-addon-jsx": "7.1.2",
     "storybook-addon-styled-component-theme": "1.2.3",
-    "styled-components": "4.3.2",
-    "uuid": "^3.3.2"
+    "styled-components": "4.3.2"
   }
 }

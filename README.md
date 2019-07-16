@@ -1,6 +1,6 @@
 # isomorphic-react-boilerplate
 
-Boilerplate for quick start using 
+Boilerplate for quick start using
 
 - React
 - React Router with Dynamic route import.
@@ -27,9 +27,29 @@ Under consideration
 - Typescript
 - TSLint
 
+## Requirements
+
+- Node (v8 or v10)
+
 ## Installation
 
-`npm install`
+### Install dependencies
+
+`npm i`
+
+### Prepare HTTPS certificates
+
+`cd certificates`
+
+`cp server.example.crt server.crt && cp server.example.csr server.csr && cp server.example.key server.key`
+
+## Build production bundle
+
+`npm run build`
+
+## Run production server
+
+`npm run server`
 
 ## Run Unit Tests
 
